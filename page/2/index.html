@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo - 心海厨</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="none">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="none">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg">
+<meta property="article:author" content="sagonimikakokomi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hexo","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-10-06 21:08:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://ooo.0x0.ooo/2023/10/02/OnIbYi.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2023/10/02/python%E5%BA%93%E6%96%87%E6%A1%A3/" title="python库文档"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHJBSb.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python库文档"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/python%E5%BA%93%E6%96%87%E6%A1%A3/" title="python库文档">python库文档</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">pypipypi库
+keras深度学习相关。
+numpy数据清洗相关，python基础库。
+sklearn使用最广泛的python机器学习库，此为中文社区，知识量不如英文社区。
+en.sklearn机器学习的python库，图解与代码并存，需要英语基础。
+pandas数据清洗python基础库。
+pyquery爬虫相关jquery库，内容很少。
+wechatyWechaty 是一个开源聊天机器人框架SDK，具有高度封装、高可用的特性，支持NodeJs, Python, Go 和Java 等多语言版本。
+pycryptodome爬虫相关。
+playwright自动化相关库。
+Statsmodels统计相关库。
+pytorch深度学习。
+en.matplotlibpython绘图。
+matplotlib绘图。
+opencv计算机视觉，许久未更新。
+pypsa电力系统分析。
+pandapower电力系统分析。
+scrapy爬虫相关。
+selenium自动化，用处不大。
+python文档一切的根。
+tensorflow深度学习相关。
+beautifulsoup爬虫相关。
+seaborn基于ma ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/02/web%E6%A1%86%E6%9E%B6/" title="web框架"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHEjMT.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="web框架"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/web%E6%A1%86%E6%9E%B6/" title="web框架">web框架</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">flask等pythonvue框架</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/10/02/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87%E7%BD%91%E7%AB%99/" title="二次元图片网站"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHJjfM.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二次元图片网站"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87%E7%BD%91%E7%AB%99/" title="二次元图片网站">二次元图片网站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">图库网站
+图库safebooru比较好用的booru图集网站，只有safe分级的图片，原图一般指向外网的图床或外网的源文件，高清图收集爱好者酌情选择，访问速度一般。
+anime-pictures访问速度缓慢的booru图集网站，排版low，页面也不够简洁，搜索具备较为全面的safe分级。
+yande需要科学上网的booru图集网站，质量一般，速度一般。
+zerochan需要会员才能浏览特定内容的booru图集网站，访问速度一般，图片质量也良莠不齐，存储量相对而言的较少。
+eshuushuu十分老式的booru图集网站，乏擅其词，除了简洁之外几乎一无是处，访问速度较慢。
+gelbooru.wjcodeskonachan镜像，相较于国内版内容涉及到了explicit内容，访问速度较慢，索引也较为一般。访问的来源也是基于konachan的，可想而知其速度。
+danbooru用了六年的booru图库，市面上较为全面的图库，索引建立的也较为完善。访问速度一般，偶尔被墙，需要注意在进入后调节为safe模式。
+konachanbooru图库，只提供壁纸方向图片，国内版只能访问safe内容，速度较慢， ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/02/%E4%BB%A5%E4%B8%8D%E5%B9%B8%E4%B9%8B%E5%90%8D%E3%80%82%20%E3%80%90%E8%94%9A%E8%93%9D%E6%A1%A3%E6%A1%88%E5%90%8C%E4%BA%BA%E3%80%91/" title="以不幸之名。 【蔚蓝档案同人】"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHxy0g.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="以不幸之名。 【蔚蓝档案同人】"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E4%BB%A5%E4%B8%8D%E5%B9%B8%E4%B9%8B%E5%90%8D%E3%80%82%20%E3%80%90%E8%94%9A%E8%93%9D%E6%A1%A3%E6%A1%88%E5%90%8C%E4%BA%BA%E3%80%91/" title="以不幸之名。 【蔚蓝档案同人】">以不幸之名。 【蔚蓝档案同人】</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90/">好文推荐</a></span></div><div class="content">“狐坂大人会带来不幸，狐坂大人会带来灾难，狐坂大人会带来死亡。”不幸的，和带来不幸的孩子。
+若藻不明白… PID: 98627593人称混乱警告⚠️
+流水账警告⚠️
+这是若藻？！警告⚠️
+不幸警告⚠️
+　　“啊啦啦~总是有些缠人的猫咪陪在大人您身边呢…”
+　　单膝跪坐于夏莱周边不起眼的高楼之上，我静悄悄地等待时机。
+　　烦人的黑猫正趴在老师的桌子上，和认真工作的老师说着我不知道的话，如果可以的话，真希望你能离老师远一点，手可以往桌子外边稍微放一点哦，如果不需要那对猫爪的话我就切掉吧，啊，真是肮脏啊，那对耳朵毫无廉耻地令人恶心地做作地摆动，毫不掩饰想要更亲近，想要和老师更接近，呵呵，有什么事值得露出那样愚蠢的笑容吗，老师凭借伟大的慈悲自降身份和你讲话，难道不应该低头叩首，把僭越可耻的笑收起来吗？啊啊，夏莱的一体化监视系统正扫视着周围，这正是保卫老师不被你们这些黏人的学生骚扰，但你却随身带着武器，大咧咧地在房间里晃来晃去，没有谦逊之心，也没有自知之明。你可是黑猫，自称黑见芹香的黑猫，以辟邪之名接近人类，但只要背对着就会带来厄运，由恶魔化身的黑猫，黑猫拿起挂在武器架上的武器，造作地回头造作地 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/10/02/%E5%8A%9E%E5%85%AC/" title="办公"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHEVcc.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="办公"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E5%8A%9E%E5%85%AC/" title="办公">办公</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">超级pdf在线免费PDF转Word等主要将pdf进行处理的功能网站。
+pdf在线工具集在线免费PDF转Word等主要将pdf进行处理的功能网站。
+笔记类石墨文档感觉被过度神话了。
+notesnookgithub开源笔记软件。
+极简插件不得不用的google插件。
+qgis基于github的开源gis软件。
+favicon输入网站地址即可获取favicon的网站。
+意见将txt文件进行排版美化阅读的网站，功能单一但简约。
+web check分析网站数据的网站，为github开源项目。
+fantia日本爱发电。
+vcbvcb字幕组官网。
+bangumi全球知名动漫站，一个专注于动漫、音乐、游戏领域，帮助你分享、发现与结识同好的ACG网络。
+书签地球分享收藏书签的网站。
+image-to-latexAboutConvert images of LaTex math equations into LaTex code.
+LaTeX公式编辑器在线LaTeX公式编辑器，输出包括数学公式与对应latex代码。
+法律时代·导航相关法律网站的较完备导航。
+downkyigithub开源。哔哩下载姬dow ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/02/%E5%8D%A2%E5%8D%A1%E5%BA%93/" title="卢卡库：外公，我信守了诺言，我把妈妈照顾得很好"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHx4tg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="卢卡库：外公，我信守了诺言，我把妈妈照顾得很好"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E5%8D%A2%E5%8D%A1%E5%BA%93/" title="卢卡库：外公，我信守了诺言，我把妈妈照顾得很好">卢卡库：外公，我信守了诺言，我把妈妈照顾得很好</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90/">好文推荐</a></span></div><div class="content">我依旧清楚记得家里破产的那个时刻。我依旧记得我的母亲在冰箱旁惆怅的那幅画面，当时她脸上的表情我忘不了。
+我当时只有 6 岁，每天中午学校休息的时候，我都会回到家里吃中饭。基本上每一天，我的母亲都会为我准备相同的食谱：牛奶和面包。当你还是个孩子的时候，你甚至不会去想这是为什么。现在回想起来，也许那就是我们家当时唯一能负担得起的事物了。
+之后有一天我回到家里，像往常一样走进了厨房，我看到了母亲如往常那个一样，从冰箱里拿出一盒牛奶。但是这一次，她好像把什么东西混了进去。她用力地摇了一摇，你们懂吗？我不明白当时发生了什么事情。随后她把我的午饭递到我手里。她微笑着，装作一切都很好的样子。但我立刻意识到事情有哪里不太对劲。
+她把水混到了牛奶里。我们家没有足够的钱来承担一整周的生活了。我们破产了。不仅仅是贫穷，我们已经到了那种身无分文的程度。
+我的父亲是一名职业足球运动员，但当他结束自己职业生涯的时候，钱却也消失不见了。首先消失的东西是有线电视。随后家里没有球了。没有《Match of the Day》（BBC 直播节目）了，家里的信号被掐断了。
+之后我晚上回到家里的时候，我发现家里的灯也不亮了。我 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/10/02/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" title="图像处理工具"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHJHiA.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图像处理工具"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" title="图像处理工具">图像处理工具</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">remove利用ai快速抠图
+tinypng免费的图片压缩网站
+waifu利用卷积放大图片。
+squoosh图片放大缩小处理网站。
+bigAI人工智能图片放大
+Danbooru 标签超市这是一个用于构建 Danbooru 标签组合的网站。
+301jsd模型库。
+stable-diffusion-book开源文档教程。
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/02/%E5%9B%BE%E5%BA%8A/" title="图床网站"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHJ2sm.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图床网站"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E5%9B%BE%E5%BA%8A/" title="图床网站">图床网站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">z4a最大64MB 图片大小. 直接的源图片链接，储存图片超过2000张（暂定）的用户，商业用户需进行赞助。
+jsdelivr外网的cdn,知名度较高，比较有保障。
+hello图床最大 20 MB 图片大小. 直接的源图片，速度很快，需要实名注册，一直在用，运行时间已经超过1000天。
+微博图床真的好用，微博的速度是真的不错，不愧是大网站。
+图床集合（转载知乎）十分不错的图床总集推荐，比较全面。
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/10/02/%E5%9C%A8%E5%86%B0%E5%86%B7%E9%9B%A8%E5%A4%9C/" title="在冰冷雨夜"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHx4tg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在冰冷雨夜"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E5%9C%A8%E5%86%B0%E5%86%B7%E9%9B%A8%E5%A4%9C/" title="在冰冷雨夜">在冰冷雨夜</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90/">好文推荐</a></span></div><div class="content">我依旧记得当我收到皇家马德里来信的时候，我还没有打开就直接把它撕碎了。
+那是2014年世界杯决赛的早上，我看过时间，正好是11:00整。我当时坐在训练师旁边的一张台子上，并且给自己的腿注射了一针止痛针。在四分之一淘汰赛的时候，我的大腿肌肉拉伤了，但用了止痛药，我就可以毫无痛感地继续奔跑。我非常确定地跟训练师们说：“如果我腿断了，那就让它去吧，我不在乎。我只是希望可以出战这场比赛。”
+正当我在对自己的腿进行冰敷的时候，我们的队医推门进来了，丹尼尔-马丁内斯，他拿来了一封皇家马德里的信件，告诉我：“看，迪马利亚，有一封来自于皇家马德里的信。”
+我说：“你在说什么？”
+他说：“好吧，他们说你根本没办法出场比赛，所以皇马要求我们今天的比赛不要派你们出场。”
+我立刻就知道会发生什么事情。所有人都听说了皇马会在世界杯之后会签下哈梅斯-罗德里格斯，而我也清楚他们会把我卖掉，为J罗腾出空间。所以他们不希望自己的‘资产’受到损害，就是这么简单。这就是足球生意，我觉得人们不总是会看到这样的事情。
+我告诉丹尼尔把信给我。我甚至没有打开那封信。我直接把它撕成了碎片，我说：“扔了它吧，在这里做决定的那个人是我。 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/02/%E5%A3%81%E7%BA%B8/" title="壁纸"><img class="post-bg" src="https://www.helloimg.com/images/2023/10/03/oHEh3r.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="壁纸"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/02/%E5%A3%81%E7%BA%B8/" title="壁纸">壁纸</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/">网站推荐</a></span></div><div class="content">日式jk一个小清新日式壁纸网站，滤镜大多采用暖色。
+pinterest知名壁纸设计类网站，存货足，有保障，需要翻墙。天空之城摄影师壁纸类网站，图库储存量一般。yituyu人像类壁纸网站，部分图片需要付费，质量一般。gamewallpapers游戏壁纸网站，多为美式游戏的cg图，质量不错，建站时间有保障。cgwallpapers与gamewallpapers内容几乎一致。wallpapercave索引建立的较为全面，质量略有不足，以数量取胜的壁纸设计网站。必应壁纸数量稀少，大多为风景图，适合设置为浏览器壁纸。wallhaven质量良莠不齐，数量居多。unsplash知名网站，图片质量高，才有瀑布流。极简壁纸偏向动漫壁纸，索引快，比较简约，数量与质量略低。图虫几乎是国内最好的相关网站，质量数量都较为优秀，就是蛮贵的。pexels与unsplash类似。新桌布网各方面都很垃圾的网站。阴阳师官方的壁纸网站，简洁明了。freestocks质量数量一般，无需登录的广告网站。pixabay瀑布流布局，加载速度略慢。rawpixel类似图虫网，不如图虫网。foodiesfeed只有食物的壁纸设计类网站 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/03/ai%E7%BB%98%E7%94%BB/" title="ai绘画"><img src="https://www.helloimg.com/images/2023/10/03/oHJeoE.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ai绘画"/></a><div class="content"><a class="title" href="/2023/10/03/ai%E7%BB%98%E7%94%BB/" title="ai绘画">ai绘画</a><time datetime="2023-10-02T16:00:00.000Z" title="发表于 2023-10-03 00:00:00">2023-10-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/03/%E5%BD%B1%E8%A7%86%E5%8A%A8%E6%BC%AB/" title="影视动漫"><img src="https://www.helloimg.com/images/2023/10/03/oHJsdM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="影视动漫"/></a><div class="content"><a class="title" href="/2023/10/03/%E5%BD%B1%E8%A7%86%E5%8A%A8%E6%BC%AB/" title="影视动漫">影视动漫</a><time datetime="2023-10-02T16:00:00.000Z" title="发表于 2023-10-03 00:00:00">2023-10-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/03/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化"><img src="https://www.helloimg.com/images/2023/10/03/oHJ6eQ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据可视化"/></a><div class="content"><a class="title" href="/2023/10/03/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="数据可视化">数据可视化</a><time datetime="2023-10-02T16:00:00.000Z" title="发表于 2023-10-03 00:00:00">2023-10-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/02/ai%E5%B7%A5%E5%85%B7/" title="ai工具"><img src="https://www.helloimg.com/images/2023/10/03/oHJqSY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ai工具"/></a><div class="content"><a class="title" href="/2023/10/02/ai%E5%B7%A5%E5%85%B7/" title="ai工具">ai工具</a><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/02/ai%E6%95%99%E7%A8%8B/" title="ai教程"><img src="https://www.helloimg.com/images/2023/10/03/oHJ38v.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ai教程"/></a><div class="content"><a class="title" href="/2023/10/02/ai%E6%95%99%E7%A8%8B/" title="ai教程">ai教程</a><time datetime="2023-10-01T16:00:00.000Z" title="发表于 2023-10-02 00:00:00">2023-10-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8E%A8%E8%8D%90/"><span class="card-category-list-name">推荐</span><span class="card-category-list-count">50</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/" style="font-size: 1.5em; color: #99a9bf">网站推荐</a> <a href="/tags/%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90/" style="font-size: 1.1em; color: #999">好文推荐</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">50</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-10-06T13:08:43.800Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>

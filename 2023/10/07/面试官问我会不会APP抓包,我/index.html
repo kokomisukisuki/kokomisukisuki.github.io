@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>面试官问我会不会APP抓包,我.. | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="面试官问我会不会APP抓包,我..原创 煌金的咸鱼 咸鱼学Python 2019-04-08 10:18  客户端向服务器发起HTTPS请求 抓包工具拦截客户端的请求，伪装成客户端向服务器进行请求 服务器向客户端（实际上是抓包工具）返回服务器的CA证书 抓包工具拦截服务器的响应，获取服务器证书公钥，然后自己制作一张证书，将服务器证书替换后发送给客户端。（这一步，抓包工具拿到了服务器证书的公钥） 客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试官问我会不会APP抓包,我..">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/07/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E6%88%91%E4%BC%9A%E4%B8%8D%E4%BC%9AAPP%E6%8A%93%E5%8C%85,%E6%88%91/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="面试官问我会不会APP抓包,我..原创 煌金的咸鱼 咸鱼学Python 2019-04-08 10:18  客户端向服务器发起HTTPS请求 抓包工具拦截客户端的请求，伪装成客户端向服务器进行请求 服务器向客户端（实际上是抓包工具）返回服务器的CA证书 抓包工具拦截服务器的响应，获取服务器证书公钥，然后自己制作一张证书，将服务器证书替换后发送给客户端。（这一步，抓包工具拿到了服务器证书的公钥） 客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg">
+<meta property="article:published_time" content="2023-10-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-08T10:51:23.579Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta property="article:tag" content="逆向">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/10/07/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E6%88%91%E4%BC%9A%E4%B8%8D%E4%BC%9AAPP%E6%8A%93%E5%8C%85,%E6%88%91/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '面试官问我会不会APP抓包,我..',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-08 18:51:23'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/images/2023/10/04/oHLHir.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">面试官问我会不会APP抓包,我..</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-06T16:00:00.000Z" title="发表于 2023-10-07 00:00:00">2023-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-08T10:51:23.579Z" title="更新于 2023-10-08 18:51:23">2023-10-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BA%8F/">程序</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="面试官问我会不会APP抓包-我"><a href="#面试官问我会不会APP抓包-我" class="headerlink" title="面试官问我会不会APP抓包,我.."></a>面试官问我会不会APP抓包,我..</h1><p>原创 煌金的咸鱼 <a href="javascript:void(0);">咸鱼学Python</a> <em>2019-04-08 10:18</em></p>
+<ol>
+<li>客户端向服务器发起HTTPS请求</li>
+<li>抓包工具拦截客户端的请求，伪装成客户端向服务器进行请求</li>
+<li>服务器向客户端（实际上是抓包工具）返回服务器的CA证书</li>
+<li>抓包工具拦截服务器的响应，获取服务器证书公钥，然后自己制作一张证书，<br>将服务器证书替换后发送给客户端。（这一步，抓包工具拿到了服务器证书的公钥）</li>
+<li>客户端接收到服务器（实际上是抓包工具）的证书后，生成一个对称密钥，<br>用抓包工具的公钥加密，发送给“服务器”（抓包工具）</li>
+<li>抓包工具拦截客户端的响应，用自己的私钥解密对称密钥，然后用服务器证书公钥加密，<br>发送给服务器。（这一步，抓包工具拿到了对称密钥）</li>
+<li>服务器用自己的私钥解密对称密钥，向客户端（抓包工具）发送响应</li>
+<li>抓包工具拦截服务器的响应，替换成自己的证书后发送给客户端</li>
+</ol>
+<p>爬虫的本质就是「骗」过服务器,各种反反爬手段就是增强信任的过程,不停的让服务器相信你是自己人<br>如果你被反爬了,就是你骗术不精,被发现了。</p>
+<h4 id="App数据好抓吗？"><a href="#App数据好抓吗？" class="headerlink" title="App数据好抓吗？"></a>App数据好抓吗？</h4><p>App数据有易有难,目前我还是停留在简单的部分,这里简单说下我理解的(如果说错求放过):</p>
+<p>简单:</p>
+<p>app的数据比web端数据更容易抓取，基本都是http、https协议，返回的数据格式也相对规整,<br>大多是json格式</p>
+<p>困难:</p>
+<p>1.需要反编译的知识,需要分析加密算法</p>
+<p>2.需要脱壳+反编译</p>
+<p>3.需要破解各式各类的签名,证书。。</p>
+<p>所以一个爬虫工程师慢慢就需要掌握以下技能:</p>
+<p>java编程基础</p>
+<p>android编程基础</p>
+<p>app逆向</p>
+<p>app脱壳</p>
+<p>破解加密</p>
+<p>…</p>
+<p>从入门到全栈<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/common/emotion_panel/emoji_wx/2_05.png?wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="常用抓包工具"><a href="#常用抓包工具" class="headerlink" title="常用抓包工具"></a>常用抓包工具</h4><p>fiddler</p>
+<p>mitmproxy</p>
+<p>Charles</p>
+<h4 id="fiddler安装和使用"><a href="#fiddler安装和使用" class="headerlink" title="fiddler安装和使用"></a>fiddler安装和使用</h4><p>下载:</p>
+<p><a target="_blank" rel="noopener" href="https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe">https://telerik-fiddler.s3.amazonaws.com/fiddler/FiddlerSetup.exe</a></p>
+<p>安装:一路Next</p>
+<h5 id="主要界面介绍"><a href="#主要界面介绍" class="headerlink" title="主要界面介绍:"></a>主要界面介绍:</h5><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jqCHqBaKLl2qrUexZdHj4KOSNBicibbGaer5OCzZAlySwWp0ibRP9sdVrvRxAGUrk4FCv9nIqmvywcCY4B2y2eIxg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>会话列表界面:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jqCHqBaKLl2qrUexZdHj4KOSNBicibbGaeUsNevRtsB6IEPaibR1ZNsXCMuKWusdPlekK6DjjQz4wibGnqibYibTFVOA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>监控面板在点击会话列表界面的某个请求后会出现下面两个界面:</p>
+<p>请求面板:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jqCHqBaKLl2qrUexZdHj4KOSNBicibbGaemqDDdsW9waJmmprjYYDhzwibQ18xwuPMk6mlXWB3HJfqUmmslyosmhA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>响应面板:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jqCHqBaKLl2qrUexZdHj4KOSNBicibbGaeYMZXjxsSiaExJIsFWwM2UYCEWyHsqx7r717EWhByugdeofVYmcJ2icmA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h5 id="本地CA证书安装"><a href="#本地CA证书安装" class="headerlink" title="本地CA证书安装"></a>本地CA证书安装</h5><ul>
+<li>点击 Tools - Options - HTTPS - 勾选勾选 Capture HTTPS CONNECTs，勾选 Decrypt HTTPS trafic，会弹出安装证书的提示。一路点是或确定安装即可。</li>
+<li>重启fiddler，点击右侧Actions，能看一个下拉菜单，点击 Export Root Certificate to Desktop，此时证书会生成到桌面上，名为 FiddlerRoot.cer，点OK保存</li>
+<li>点击安装</li>
+</ul>
+<h5 id="连接手机抓包需要的配置"><a href="#连接手机抓包需要的配置" class="headerlink" title="连接手机抓包需要的配置"></a>连接手机抓包需要的配置</h5><p>先设置PC端fiddler:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jqCHqBaKLl2qrUexZdHj4KOSNBicibbGaeCwBceGicctSXBpCiasmTIy52NO5P9er0DlrdwO3Mdia9IEW0LTk7uj3Xg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>之后手机需要访问 本地主机IP + 设置的端口，安装证书，证书安装成功后即可抓包。</p>
+<p>以上就是关于Fiddler的安装和简单使用,进阶使用还有很多骚操作,</p>
+<h4 id="mitmproxy安装和使用"><a href="#mitmproxy安装和使用" class="headerlink" title="mitmproxy安装和使用"></a>mitmproxy安装和使用</h4><p>mitmproxy在linux版本下和windows版本下略有不同。</p>
+<p>linux下借助pip,可以一键安装:pip install mitmproxy</p>
+<p>windows 下需要安装Microsoft Visual C++ V14.0以上,之后再使用pip install mitmproxy安装</p>
+<p>mitmproxy有三大组件:</p>
+<p>mitmproxy - linux下的抓包组件</p>
+<p>mitmdump - python交互</p>
+<p>mitmweb - windows下的可视化界面工具</p>
+<p>在windows下仅支持后两种组件的使用。</p>
+<h5 id="证书配置"><a href="#证书配置" class="headerlink" title="证书配置"></a>证书配置</h5><p>在安装目录下可以看到以下这些文件:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jqCHqBaKLl2qrUexZdHj4KOSNBicibbGaezICfHqS27VuUSeWTtple8uBXxCic7tgINJ1xUMY4fylmXUExf7CMfMw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>mitmproxy-ca.pem</th>
+<th>PEM格式的证书私钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mitmproxy-ca-cert.pem</td>
+<td>PEM格式证书，适用于大多数非Windows平台</td>
+</tr>
+<tr>
+<td>mitmproxy-ca-cert.p12</td>
+<td>PKCS12格式的证书，适用于Windows平台</td>
+</tr>
+<tr>
+<td>mitmproxy-ca-cert.cer</td>
+<td>与mitmproxy-ca-cert.pem相同，只是改变了后缀，适用于部分Android平台</td>
+</tr>
+<tr>
+<td>mitmproxy-dhparam.pem</td>
+<td>PEM格式的秘钥文件，用于增强SSL安全性</td>
+</tr>
+</tbody></table>
+<h5 id="window安装证书"><a href="#window安装证书" class="headerlink" title="window安装证书"></a>window安装证书</h5><p>双击mitmproxy-ca.p12,一路确定直至结束。期间会弹出警告点击“确认”即可。</p>
+<h5 id="Mac安装证书"><a href="#Mac安装证书" class="headerlink" title="Mac安装证书"></a>Mac安装证书</h5><p>Mac下双击mitmproxy-ca-cert.pem即可弹出钥匙串管理页面，然后找到mitmproxy证书，打开其设置选项，选择“始终信任”即可</p>
+<h5 id="Android-iPhone安装证书"><a href="#Android-iPhone安装证书" class="headerlink" title="Android&#x2F;iPhone安装证书"></a>Android&#x2F;iPhone安装证书</h5><p>方法一: 将mitmproxy-ca-cert.pem发送到手机上点击安装就可以了,苹果手机点击安装描述文件即可。</p>
+<p>方法二: 在linux下启动 mitmproxy,命令为<code>mitmproxy -p 8889</code>,同时将手机代理设置为linux的IP地址与端口后访问<code>mitm.it</code>安装证书。</p>
+<h5 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h5><p>mitmproxy过滤功能的使用举例:</p>
+<h2 id=""><a href="#" class="headerlink" title="- "></a>- </h2><h2 id="-1"><a href="#-1" class="headerlink" title="- "></a>- </h2><h2 id="-2"><a href="#-2" class="headerlink" title="- "></a>- </h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入z,清除屏幕上全部的包输入f,进入编辑模式,可在最下面编辑条件,ESC或Enter退出编辑!(~c 200) #显示所有返回不是200的请求!(~c 200) &amp; ~d baidu.com #显示域名包含baidu.com,返回不是200的请求~m post &amp; ~u baidu #显示请求的链接里面包含baidu的post请求~d baidu.com (http://baidu.com) 过滤所有域名包含baidu.com (http://baidu.com)的包</span><br></pre></td></tr></table></figure>
+
+<p>mitmproxy断点功能的使用举例:</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title="- "></a>- </h2><h2 id="-4"><a href="#-4" class="headerlink" title="- "></a>- </h2><h2 id="-5"><a href="#-5" class="headerlink" title="- "></a>- </h2><h2 id="-6"><a href="#-6" class="headerlink" title="- "></a>- </h2><p>- </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入i,进入编辑模式,可在最下面编辑条件,ESC或Enter退出编辑断点的条件和过滤是一样的,符合条件的链接会被拦截~d baidu.com &amp; ~m get域名包含baidu.com的get 请求会被拦截按Enter进入详情页,在详情页输入e进入模式,可以修改各项数据完成后,回到请求显示列表,输入a,将请求放行.1.请求重放2.选中需要重放的请求,输入r可以重放请求,也可以先编辑后再重放3.输入Q可退出程序</span><br></pre></td></tr></table></figure>
+
+<p>mitmproxy经常配合appium使用:</p>
+<p>首先我们需要写一个抓包的脚本,类似下面这个:</p>
+<h2 id="-7"><a href="#-7" class="headerlink" title="- "></a>- </h2><h2 id="-8"><a href="#-8" class="headerlink" title="- "></a>- </h2><h2 id="-9"><a href="#-9" class="headerlink" title="- "></a>- </h2><h2 id="-10"><a href="#-10" class="headerlink" title="- "></a>- </h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import jsondef response(flow):    if &#x27;aweme/v1/user/follower/list/&#x27; in flow.request.url:        for user in json.loads(flow.response.text)[&#x27;followers&#x27;]:            info = &#123;&#125;            nfo[&#x27;share_id&#x27;] = user[&#x27;uid&#x27;]            info[&#x27;_id&#x27;] = user[&#x27;short_id&#x27;]            save_task(info)</span><br></pre></td></tr></table></figure>
+
+<p>注意:这里的方法名必须使用response</p>
+<p>编写完抓包的脚本后,使用 <code>mitmdump -p [port] -s [脚本文件]</code> 启动,配合appium自动化脚本即可实现app自动化抓取。</p>
+<h5 id="Charles的使用"><a href="#Charles的使用" class="headerlink" title="Charles的使用"></a>Charles的使用</h5><p>之前写过了相关的实战,可以直接看下面的文章:</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwNDI1NjUxMg==&mid=2651260945&idx=1&sn=850633023fa6cdb43ec53c3de11db42c&chksm=8d314c7eba46c5681b6320964da0bf8ece2895e688e43334746fe2eea254151fd447d4729173&scene=21#wechat_redirect">10行代码实现自动参与抽奖助手抽奖(上)</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIwNDI1NjUxMg==&mid=2651260953&idx=1&sn=18a331c4091c28167711d2683d45f0e7&chksm=8d314c76ba46c560dfcc411c14c7d864e7e3c4cea4dc076eb402d4839585bbeac8429c51c5ae&scene=21#wechat_redirect">10行代码实现自动参与抽奖助手抽奖(下)</a></p>
+<p>以上是我面试后的部分总结,希望对你有所帮助~</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/10/07/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E6%88%91%E4%BC%9A%E4%B8%8D%E4%BC%9AAPP%E6%8A%93%E5%8C%85,%E6%88%91/">https://kokomisukisuki.github.io/2023/10/07/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E6%88%91%E4%BC%9A%E4%B8%8D%E4%BC%9AAPP%E6%8A%93%E5%8C%85,%E6%88%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%80%86%E5%90%91/">逆向</a></div><div class="post_share"><div class="social-share" data-image="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/07/%E8%B0%83%E7%94%A8api/" title="调用api"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHXlPb.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">调用api</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/03/ai%E7%BB%98%E7%94%BB/" title="ai绘画"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJeoE.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ai绘画</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E6%88%91%E4%BC%9A%E4%B8%8D%E4%BC%9AAPP%E6%8A%93%E5%8C%85-%E6%88%91"><span class="toc-text">面试官问我会不会APP抓包,我..</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#App%E6%95%B0%E6%8D%AE%E5%A5%BD%E6%8A%93%E5%90%97%EF%BC%9F"><span class="toc-text">App数据好抓吗？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7"><span class="toc-text">常用抓包工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fiddler%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="toc-text">fiddler安装和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D"><span class="toc-text">主要界面介绍:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0CA%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85"><span class="toc-text">本地CA证书安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85%E9%9C%80%E8%A6%81%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">连接手机抓包需要的配置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mitmproxy%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="toc-text">mitmproxy安装和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE"><span class="toc-text">证书配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#window%E5%AE%89%E8%A3%85%E8%AF%81%E4%B9%A6"><span class="toc-text">window安装证书</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Mac%E5%AE%89%E8%A3%85%E8%AF%81%E4%B9%A6"><span class="toc-text">Mac安装证书</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Android-iPhone%E5%AE%89%E8%A3%85%E8%AF%81%E4%B9%A6"><span class="toc-text">Android&#x2F;iPhone安装证书</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-text">简单使用</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-2"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-3"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-4"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-5"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-6"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-7"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-8"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-9"><span class="toc-text">- </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-10"><span class="toc-text">- </span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Charles%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">Charles的使用</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E5%B8%B8%E7%94%A8/" title="日常主流常用网站集合"><img src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="日常主流常用网站集合"/></a><div class="content"><a class="title" href="/2023/10/10/%E5%B8%B8%E7%94%A8/" title="日常主流常用网站集合">日常主流常用网站集合</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%20%20Numpy%E5%AE%9E%E6%88%98(%E4%B8%80)%20-%20%E5%88%86%E6%9E%90%E6%9F%90%E5%8D%95%E8%BD%A6%E9%AA%91%E8%A1%8C%E6%97%B6%E9%97%B4/" title="数据分析 | Numpy实战(一) - 分析某单车骑行时间"><img src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析 | Numpy实战(一) - 分析某单车骑行时间"/></a><div class="content"><a class="title" href="/2023/10/10/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%20%20Numpy%E5%AE%9E%E6%88%98(%E4%B8%80)%20-%20%E5%88%86%E6%9E%90%E6%9F%90%E5%8D%95%E8%BD%A6%E9%AA%91%E8%A1%8C%E6%97%B6%E9%97%B4/" title="数据分析 | Numpy实战(一) - 分析某单车骑行时间">数据分析 | Numpy实战(一) - 分析某单车骑行时间</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E7%BE%8E%E4%B9%8B%E5%9B%BEjs%E9%80%86%E5%90%91/" title="美之图js逆向"><img src="https://www.helloimg.com/images/2023/10/03/oHxqUv.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="美之图js逆向"/></a><div class="content"><a class="title" href="/2023/10/10/%E7%BE%8E%E4%B9%8B%E5%9B%BEjs%E9%80%86%E5%90%91/" title="美之图js逆向">美之图js逆向</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/09/2023%E5%88%B02024%E8%B5%9B%E5%AD%A3%E6%9B%BC%E5%9F%8E%E5%AE%A2%E5%9C%BA%E5%AF%B9%E9%98%B5%E9%98%BF%E6%A3%AE%E7%BA%B3%E6%9C%89%E6%84%9F/" title="2023到2024赛季曼城客场对阵阿森纳有感"><img src="https://www.helloimg.com/images/2023/10/03/oHxJnY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023到2024赛季曼城客场对阵阿森纳有感"/></a><div class="content"><a class="title" href="/2023/10/09/2023%E5%88%B02024%E8%B5%9B%E5%AD%A3%E6%9B%BC%E5%9F%8E%E5%AE%A2%E5%9C%BA%E5%AF%B9%E9%98%B5%E9%98%BF%E6%A3%AE%E7%BA%B3%E6%9C%89%E6%84%9F/" title="2023到2024赛季曼城客场对阵阿森纳有感">2023到2024赛季曼城客场对阵阿森纳有感</a><time datetime="2023-10-08T16:00:00.000Z" title="发表于 2023-10-09 00:00:00">2023-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/08/Android%E9%80%86%E5%90%91%20%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87%20-%2001/" title="Android逆向 | 基础知识篇 - 01"><img src="https://www.helloimg.com/images/2023/10/03/oHxGFK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android逆向 | 基础知识篇 - 01"/></a><div class="content"><a class="title" href="/2023/10/08/Android%E9%80%86%E5%90%91%20%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87%20-%2001/" title="Android逆向 | 基础知识篇 - 01">Android逆向 | 基础知识篇 - 01</a><time datetime="2023-10-07T16:00:00.000Z" title="发表于 2023-10-08 00:00:00">2023-10-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

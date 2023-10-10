@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于Requests与Json的使用小结 | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python | 关于Requests与Json的使用小结原创 煌金的咸鱼 咸鱼学Python 2018-08-01 12:10 requests小结requestse基本使用 关于requests基本使用方法参照中文版参考文档：http:&#x2F;&#x2F;docs.python-requests.org&#x2F;zh_CN&#x2F;latest&#x2F;index.html  response.text 和response.cont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Requests与Json的使用小结">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/07/Python%20%20%E5%85%B3%E4%BA%8ERequests%E4%B8%8EJson%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="Python | 关于Requests与Json的使用小结原创 煌金的咸鱼 咸鱼学Python 2018-08-01 12:10 requests小结requestse基本使用 关于requests基本使用方法参照中文版参考文档：http:&#x2F;&#x2F;docs.python-requests.org&#x2F;zh_CN&#x2F;latest&#x2F;index.html  response.text 和response.cont">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHEpr6.jpg">
+<meta property="article:published_time" content="2023-10-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-08T10:58:53.553Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2023/10/03/oHEpr6.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/10/07/Python%20%20%E5%85%B3%E4%BA%8ERequests%E4%B8%8EJson%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于Requests与Json的使用小结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-08 18:58:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/images/2023/10/04/oHL3KP.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">关于Requests与Json的使用小结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-06T16:00:00.000Z" title="发表于 2023-10-07 00:00:00">2023-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-08T10:58:53.553Z" title="更新于 2023-10-08 18:58:53">2023-10-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BA%8F/">程序</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Python-关于Requests与Json的使用小结"><a href="#Python-关于Requests与Json的使用小结" class="headerlink" title="Python | 关于Requests与Json的使用小结"></a>Python | 关于Requests与Json的使用小结</h1><p>原创 煌金的咸鱼 <a href="javascript:void(0);">咸鱼学Python</a> <em>2018-08-01 12:10</em></p>
+<h3 id="requests小结"><a href="#requests小结" class="headerlink" title="requests小结"></a>requests小结</h3><h4 id="requestse基本使用"><a href="#requestse基本使用" class="headerlink" title="requestse基本使用"></a>requestse基本使用</h4><blockquote>
+<p>关于requests基本使用方法参照中文版参考文档：<br><a target="_blank" rel="noopener" href="http://docs.python-requests.org/zh_CN/latest/index.html">http://docs.python-requests.org/zh_CN/latest/index.html</a></p>
+</blockquote>
+<h4 id="response-text-和response-content的区别"><a href="#response-text-和response-content的区别" class="headerlink" title="response.text 和response.content的区别"></a>response.text 和response.content的区别</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">response.text</span><br><span class="line">类型：str</span><br><span class="line">解码类型： 根据HTTP 头部对响应的编码作出有根据的推测，推测的文本编码</span><br><span class="line">如何修改编码方式：response.encoding=”gbk”</span><br><span class="line"></span><br><span class="line">response.content</span><br><span class="line">类型：bytes</span><br><span class="line">解码类型：没有指定</span><br><span class="line">如何修改编码方式：response.content.deocde(“utf8”)</span><br><span class="line"></span><br><span class="line">更推荐使用response.content.deocde()的方式获取响应的html页面</span><br></pre></td></tr></table></figure>
+
+<h4 id="requests使用代理"><a href="#requests使用代理" class="headerlink" title="requests使用代理"></a>requests使用代理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">requests.get(&quot;http://www.baidu.com&quot;, proxies = proxies)</span><br><span class="line">proxies = &#123; </span><br><span class="line">    &quot;http&quot;: &quot;http://12.34.56.79:9527&quot;, </span><br><span class="line">    &quot;https&quot;: &quot;https://12.34.56.79:9527&quot;, </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="代理的基本原理"><a href="#代理的基本原理" class="headerlink" title="代理的基本原理"></a>代理的基本原理</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_png/jqCHqBaKLl0wMVbOMibibpiaPRbuypw6YMQXoLa52hUGzRcuK8XTDvCf5hAWgC3ibe0tiatbxw4SdbCXPx0wqoh8Hvg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">代理的基本原理</p>
+<h4 id="正向代理与反向代理"><a href="#正向代理与反向代理" class="headerlink" title="正向代理与反向代理"></a>正向代理与反向代理</h4><p>正向代理：浏览器明确知道要访问的是什么服务器，只不过目前无法达到，需要通过代理来帮助完成这个请求操作。</p>
+<p>反向代理：浏览器不知道任何关于要请求的服务器的信息，需要通过Nginx请求。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/jqCHqBaKLl0wMVbOMibibpiaPRbuypw6YMQu9azB8ibA4krSEryJSDoNIpOzdTATlwYK3VzGg1bd4icgqM7jJmjsNyw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="requests模拟登录的3种方法"><a href="#requests模拟登录的3种方法" class="headerlink" title="requests模拟登录的3种方法"></a>requests模拟登录的3种方法</h4><ol>
+<li>实例化session，使用session发送post&#x2F;get请求登录后的页面</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session = requests.session()</span><br><span class="line">response = session.get(url,headers)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在headers中添加cookie键，值为cookie字符串</li>
+<li>在请求方法中添加cookie参数，接收字典形式的cookie</li>
+</ol>
+<h4 id="cookie和session区别"><a href="#cookie和session区别" class="headerlink" title="cookie和session区别"></a>cookie和session区别</h4><ol>
+<li>cookie数据存放在客户的浏览器上，session数据放在服务器上</li>
+<li>cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗</li>
+<li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能</li>
+<li>单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie</li>
+</ol>
+<h4 id="requests的几个小技巧-我认为的"><a href="#requests的几个小技巧-我认为的" class="headerlink" title="requests的几个小技巧(我认为的)"></a>requests的几个小技巧(我认为的)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#把cookie对象转化为字典</span><br><span class="line">reqeusts.util.dict_from_cookiejar  </span><br><span class="line">#把字典转化为cookie对象</span><br><span class="line">reqeusts.util.cookiejar_from_dict</span><br><span class="line">#url解码</span><br><span class="line">reqeusts.util.unquote() </span><br><span class="line">#url编码</span><br><span class="line">reqeusts.util.quote()  </span><br><span class="line">#忽略SSL证书验证</span><br><span class="line">response = requests.get(&quot;https://www.12306.cn/mormhweb/ &quot;, verify=False)  </span><br><span class="line">#请求https的网站忽略SSL证书验证之后还是会出现警告信息，在请求前加上下面这句就可以禁用安全请求警告</span><br><span class="line">#InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings InsecureRequestWarning）</span><br><span class="line">requests.packages.urllib3.disable_warnings()</span><br></pre></td></tr></table></figure>
+
+<h3 id="json小结"><a href="#json小结" class="headerlink" title="json小结"></a>json小结</h3><h4 id="json的基本使用"><a href="#json的基本使用" class="headerlink" title="json的基本使用"></a>json的基本使用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json.loads() #json字符串转化为python数据类型</span><br><span class="line">json.dumps() #python数据类型转化为json字符串</span><br><span class="line">json.load()  #包含json的类文件对象转化为python数据类型</span><br><span class="line">json.dump()  #python数据类型转化为包含json的类文件对象</span><br></pre></td></tr></table></figure>
+
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="什么是类文件对象？"><a href="#什么是类文件对象？" class="headerlink" title="什么是类文件对象？"></a>什么是类文件对象？</h4><p>具有read()或者write()方法的对象就是类文件对象，<code>f =open(‘a.txt’,‘r’) f</code>就是类文件对象</p>
+<h4 id="如何优雅的查看json"><a href="#如何优雅的查看json" class="headerlink" title="如何优雅的查看json?"></a>如何优雅的查看json?</h4><p>json文件出现中文乱码：<code>ensure_ascii=False</code><br>json、字典格式化输出： <code>indent=2</code><br>json格式化打印： <code>使用pprint</code>使用前需要<code>pip install pprint</code>安装</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/jqCHqBaKLl0wMVbOMibibpiaPRbuypw6YMQS2msibibyKYZyc82FibKbM4m1MIxulEgYKibrKCRSjRa2us6x5XTm8uG1Q/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">pprint效果图</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/10/07/Python%20%20%E5%85%B3%E4%BA%8ERequests%E4%B8%8EJson%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/">https://kokomisukisuki.github.io/2023/10/07/Python%20%20%E5%85%B3%E4%BA%8ERequests%E4%B8%8EJson%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></div><div class="post_share"><div class="social-share" data-image="https://www.helloimg.com/images/2023/10/03/oHEpr6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/07/Python%20%20asyncio%EF%BC%9A%E4%BB%8E%E5%8E%9F%E7%90%86%E3%80%81%E6%BA%90%E7%A0%81%E5%88%B0%E5%AE%9E%E7%8E%B0/" title="asyncio：从原理、源码到实现"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEpr6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">asyncio：从原理、源码到实现</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/07/Python%20%20%E7%94%A8%20Hypothesis%20%E5%BF%AB%E9%80%9F%E6%B5%8B%E8%AF%95%E4%BD%A0%E7%9A%84%20Python%20%E4%BB%A3%E7%A0%81/" title="Python | 用 Hypothesis 快速测试你的 Python 代码"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHqdKE.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python | 用 Hypothesis 快速测试你的 Python 代码</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/10/07/Python%20%20Python%E5%AD%A6%E4%B9%A0%E4%B9%8Bmysql%E4%BA%A4%E4%BA%92%E8%AF%A6%E8%A7%A3/" title="Python学习之mysql交互详解"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEKS5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python学习之mysql交互详解</div></div></a></div><div><a href="/2023/10/07/Python%20%20Python%E5%AD%A6%E4%B9%A0%E4%B9%8Bunicode%E5%92%8Cutf8/" title="Python学习之unicode和utf8"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEUQ0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python学习之unicode和utf8</div></div></a></div><div><a href="/2023/10/07/Python%20%20Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/" title="Python学习之多线程详解"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python学习之多线程详解</div></div></a></div><div><a href="/2023/10/07/Python%20%20Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B%E8%AF%A6%E8%A7%A3/" title="Python学习之多进程详解"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEI6z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python学习之多进程详解</div></div></a></div><div><a href="/2023/10/07/Python%20%20asyncio%EF%BC%9A%E4%BB%8E%E5%8E%9F%E7%90%86%E3%80%81%E6%BA%90%E7%A0%81%E5%88%B0%E5%AE%9E%E7%8E%B0/" title="asyncio：从原理、源码到实现"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEpr6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">asyncio：从原理、源码到实现</div></div></a></div><div><a href="/2023/10/07/Python%20%20%E7%94%A8%20Hypothesis%20%E5%BF%AB%E9%80%9F%E6%B5%8B%E8%AF%95%E4%BD%A0%E7%9A%84%20Python%20%E4%BB%A3%E7%A0%81/" title="Python | 用 Hypothesis 快速测试你的 Python 代码"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHqdKE.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python | 用 Hypothesis 快速测试你的 Python 代码</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-%E5%85%B3%E4%BA%8ERequests%E4%B8%8EJson%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93"><span class="toc-text">Python | 关于Requests与Json的使用小结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#requests%E5%B0%8F%E7%BB%93"><span class="toc-text">requests小结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#requestse%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">requestse基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-text-%E5%92%8Cresponse-content%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">response.text 和response.content的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#requests%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86"><span class="toc-text">requests使用代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">代理的基本原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">正向代理与反向代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#requests%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-text">requests模拟登录的3种方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cookie%E5%92%8Csession%E5%8C%BA%E5%88%AB"><span class="toc-text">cookie和session区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#requests%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%8A%80%E5%B7%A7-%E6%88%91%E8%AE%A4%E4%B8%BA%E7%9A%84"><span class="toc-text">requests的几个小技巧(我认为的)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json%E5%B0%8F%E7%BB%93"><span class="toc-text">json小结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#json%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">json的基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%EF%BC%9F"><span class="toc-text">什么是类文件对象？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E6%9F%A5%E7%9C%8Bjson"><span class="toc-text">如何优雅的查看json?</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E5%B8%B8%E7%94%A8/" title="日常主流常用网站集合"><img src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="日常主流常用网站集合"/></a><div class="content"><a class="title" href="/2023/10/10/%E5%B8%B8%E7%94%A8/" title="日常主流常用网站集合">日常主流常用网站集合</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%20%20Numpy%E5%AE%9E%E6%88%98(%E4%B8%80)%20-%20%E5%88%86%E6%9E%90%E6%9F%90%E5%8D%95%E8%BD%A6%E9%AA%91%E8%A1%8C%E6%97%B6%E9%97%B4/" title="数据分析 | Numpy实战(一) - 分析某单车骑行时间"><img src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析 | Numpy实战(一) - 分析某单车骑行时间"/></a><div class="content"><a class="title" href="/2023/10/10/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%20%20Numpy%E5%AE%9E%E6%88%98(%E4%B8%80)%20-%20%E5%88%86%E6%9E%90%E6%9F%90%E5%8D%95%E8%BD%A6%E9%AA%91%E8%A1%8C%E6%97%B6%E9%97%B4/" title="数据分析 | Numpy实战(一) - 分析某单车骑行时间">数据分析 | Numpy实战(一) - 分析某单车骑行时间</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E7%BE%8E%E4%B9%8B%E5%9B%BEjs%E9%80%86%E5%90%91/" title="美之图js逆向"><img src="https://www.helloimg.com/images/2023/10/03/oHxqUv.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="美之图js逆向"/></a><div class="content"><a class="title" href="/2023/10/10/%E7%BE%8E%E4%B9%8B%E5%9B%BEjs%E9%80%86%E5%90%91/" title="美之图js逆向">美之图js逆向</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/09/2023%E5%88%B02024%E8%B5%9B%E5%AD%A3%E6%9B%BC%E5%9F%8E%E5%AE%A2%E5%9C%BA%E5%AF%B9%E9%98%B5%E9%98%BF%E6%A3%AE%E7%BA%B3%E6%9C%89%E6%84%9F/" title="2023到2024赛季曼城客场对阵阿森纳有感"><img src="https://www.helloimg.com/images/2023/10/03/oHxJnY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023到2024赛季曼城客场对阵阿森纳有感"/></a><div class="content"><a class="title" href="/2023/10/09/2023%E5%88%B02024%E8%B5%9B%E5%AD%A3%E6%9B%BC%E5%9F%8E%E5%AE%A2%E5%9C%BA%E5%AF%B9%E9%98%B5%E9%98%BF%E6%A3%AE%E7%BA%B3%E6%9C%89%E6%84%9F/" title="2023到2024赛季曼城客场对阵阿森纳有感">2023到2024赛季曼城客场对阵阿森纳有感</a><time datetime="2023-10-08T16:00:00.000Z" title="发表于 2023-10-09 00:00:00">2023-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/08/Android%E9%80%86%E5%90%91%20%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87%20-%2001/" title="Android逆向 | 基础知识篇 - 01"><img src="https://www.helloimg.com/images/2023/10/03/oHxGFK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android逆向 | 基础知识篇 - 01"/></a><div class="content"><a class="title" href="/2023/10/08/Android%E9%80%86%E5%90%91%20%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87%20-%2001/" title="Android逆向 | 基础知识篇 - 01">Android逆向 | 基础知识篇 - 01</a><time datetime="2023-10-07T16:00:00.000Z" title="发表于 2023-10-08 00:00:00">2023-10-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

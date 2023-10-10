@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>扫码登陆原理解析 | 二维码扫码登录是什么原理？ | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="扫码登陆原理解析 | 二维码扫码登录是什么原理？咸鱼学Python 2021-07-08 18:38 在日常生活中，二维码出现在很多场景，比如超市支付、系统登录、应用下载等等。了解二维码的原理，可以为技术人员在技术选型时提供新的思路。 对于安全人员也可以从开发角度提升逆向思维 在扫码的过程中，大家可能会有疑问：这二维码安全吗？会不会泄漏我的个人信息？更深度的用户还会考虑：我的系统是不是也可以搞一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扫码登陆原理解析 | 二维码扫码登录是什么原理？">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/07/%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%20%20%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="扫码登陆原理解析 | 二维码扫码登录是什么原理？咸鱼学Python 2021-07-08 18:38 在日常生活中，二维码出现在很多场景，比如超市支付、系统登录、应用下载等等。了解二维码的原理，可以为技术人员在技术选型时提供新的思路。 对于安全人员也可以从开发角度提升逆向思维 在扫码的过程中，大家可能会有疑问：这二维码安全吗？会不会泄漏我的个人信息？更深度的用户还会考虑：我的系统是不是也可以搞一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHXwWv.jpg">
+<meta property="article:published_time" content="2023-10-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-10T13:04:56.697Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta property="article:tag" content="js逆向">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2023/10/03/oHXwWv.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/10/07/%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%20%20%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '扫码登陆原理解析 | 二维码扫码登录是什么原理？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-10 21:04:56'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/images/2023/10/03/oHXg9R.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">扫码登陆原理解析 | 二维码扫码登录是什么原理？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-06T16:00:00.000Z" title="发表于 2023-10-07 00:00:00">2023-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-10T13:04:56.697Z" title="更新于 2023-10-10 21:04:56">2023-10-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BA%8F/">程序</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="扫码登陆原理解析-二维码扫码登录是什么原理？"><a href="#扫码登陆原理解析-二维码扫码登录是什么原理？" class="headerlink" title="扫码登陆原理解析 | 二维码扫码登录是什么原理？"></a>扫码登陆原理解析 | 二维码扫码登录是什么原理？</h1><p><a href="javascript:void(0);">咸鱼学Python</a> <em>2021-07-08 18:38</em></p>
+<p>在日常生活中，二维码出现在很多场景，比如超市支付、系统登录、应用下载等等。了解二维码的原理，可以为技术人员在技术选型时提供新的思路。</p>
+<p>对于安全人员也可以从开发角度提升逆向思维</p>
+<p>在扫码的过程中，大家可能会有疑问：这二维码安全吗？会不会泄漏我的个人信息？更深度的用户还会考虑：我的系统是不是也可以搞一个二维码来推广呢？</p>
+<p>这时候就需要了解一下二维码背后的技术和逻辑了！</p>
+<p>二维码最常用的场景之一就是通过手机端应用扫描PC或者WEB端的二维码，来登录同一个系统。比如手机微信扫码登录PC端微信，手机淘宝扫码登录PC端淘宝。那么就让我们来看一下，二维码登录是怎么操作的！</p>
+<h2 id="二维码登录的本质"><a href="#二维码登录的本质" class="headerlink" title="二维码登录的本质"></a>二维码登录的本质</h2><p>二维码登录本质上也是一种登录认证方式。既然是登录认证，要做的也就两件事情！</p>
+<ol>
+<li>告诉系统我是谁</li>
+<li>向系统证明我是谁</li>
+</ol>
+<p>比如账号密码登录，账号就是告诉系统我是谁， 密码就是向系统证明我是谁; 比如手机验证码登录，手机号就是告诉系统我是谁，验证码就是向系统证明我是谁;</p>
+<p>那么扫码登录是怎么做到这两件事情的呢？我们一起来考虑一下</p>
+<p>手机端应用扫PC端二维码，手机端确认后，账号就在PC端登录成功了！这里，PC端登录的账号肯定与手机端是同一个账号。不可能手机端登录的是账号A，而扫码登录以后，PC端登录的是账号B。</p>
+<p>所以，第一件事情，告诉系统我是谁，是比较清楚的！</p>
+<p>通过扫描二维码，把手机端的账号信息传递到PC端，至于是怎么传的，我们后面再说</p>
+<p>第二件事情，向系统证明我是谁。扫码登录过程中，用户并没有去输入密码，也没有输入验证码，或者其他什么码。那是怎么证明的呢？</p>
+<p>有些同学会想到，是不是扫码过程中，把密码传到了PC端呢？但这是不可能的。因为那样太不安全的，客户端也根本不会去存储密码。我们仔细想一下，其实手机端APP它是已经登录过的，就是说手机端是已经通过登录认证。所说只要<strong>扫码确认是这个手机且是这个账号操作的，其实就能间接证明我谁。</strong></p>
+<h2 id="认识二维码"><a href="#认识二维码" class="headerlink" title="认识二维码"></a>认识二维码</h2><p>那么如何做确认呢？我们后面会详细说明，在这之前我们需要先认识一下二维码！在认识二维码之前我们先看一下一维码！</p>
+<p><img src="C:\Users\kokomisu'k'i\Desktop\20191013123705657.png" alt="1"></p>
+<p>所谓一维码，也就是条形码，超市里的条形码–这个相信大家都非常熟悉，条形码实际上就是一串数字，它上面存储了商品的序列号。</p>
+<p>二维码其实与条形码类似，只不过它存储的不一定是数字，还可以是任何的字符串，你可以认为，它就是字符串的另外一种表现形式，</p>
+<p>在搜索引擎中搜索二维码，你可以找到很多在线生成二维码的工具网站，这些网站可以提供字符串与二维码之间相互转换的功能.</p>
+<p>在左边的输入框就可以输入你的内容，它可以是文本、网址，文件……..。然后就可以生成代表它们的二维码</p>
+<p>你也可以把二维码上传，进行”解码“，然后就可以解析出二维码代表的含义</p>
+<h2 id="系统认证机制"><a href="#系统认证机制" class="headerlink" title="系统认证机制"></a>系统认证机制</h2><p>认识了二维码，我们了解一下移动互联网下的系统认证机制。</p>
+<p>前面我们说过，为了安全，手机端它是不会存储你的登录密码的。但是在日常使用过程中，我们应该会注意到，只有在你的应用下载下来后，第一次登录的时候，才需要进行一个账号密码的登录， 那之后呢 即使这个应用进程被杀掉，或者手机重启，都是不需要再次输入账号密码的，它可以自动登录。</p>
+<p>其实这背后就是一套基于token的认证机制，我们来看一下这套机制是怎么运行的。</p>
+<p><img src="C:\Users\kokomisu'k'i\Desktop\R-C.png"></p>
+<ol>
+<li><pre><code>账号密码登录时，客户端会将设备信息一起传递给服务端，
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```</span><br><span class="line">   如果账号密码校验通过，服务端会把账号与设备进行一个绑定，存在一个数据结构中，这个数据结构中包含了账号ID，设备ID，设备类型等等</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const token = &#123;</span><br><span class="line">  acountid:&#x27;账号ID&#x27;,</span><br><span class="line">  deviceid:&#x27;登录的设备ID&#x27;,</span><br><span class="line">  deviceType:&#x27;设备类型，如 iso,android,pc......&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后服务端会生成一个token，用它来映射数据结构，这个token其实就是一串有着特殊意义的字符串，它的意义就在于，通过它可以找到对应的账号与设备信息，</p>
+<ol>
+<li>客户端得到这个token后，需要进行一个本地保存，每次访问系统API都携带上token与设备信息。</li>
+<li>服务端就可以通过token找到与它绑定的账号与设备信息，然后把绑定的设备信息与客户端每次传来的设备信息进行比较， 如果相同，那么校验通过，返回AP接口响应数据， 如果不同，那就是校验不通过拒绝访问</li>
+</ol>
+<p>从前面这个流程，我们可以看到，客户端不会也没必要保存你的密码，相反，它是保存了token。可能有些同学会想，这个token这么重要，万一被别人知道了怎么办。实际上，知道了也没有影响， 因为设备信息是唯一的，只要你的设备信息别人不知道， 别人拿其他设备来访问，验证也是不通过的。</p>
+<p>可以说，客户端登录的目的，就是获得属于自己的token。</p>
+<p>那么在扫码登录过程中，PC端是怎么获得属于自己的token呢？不可能手机端直接把自己的token给PC端用！token只能属于某个客户端私有，其他人或者是其他客户端是用不了的。在分析这个问题之前，我们有必要先梳理一下，扫描二维码登录的一般步骤是什么样的。这可以帮助我们梳理清楚整个过程，</p>
+<h2 id="扫描二维码登录的一般步骤"><a href="#扫描二维码登录的一般步骤" class="headerlink" title="扫描二维码登录的一般步骤"></a>扫描二维码登录的一般步骤</h2><p><img src="C:\Users\kokomisu'k'i\Desktop\v2-ffb1f2b5bafd5196fb74c287c3e52024_1440w.webp"></p>
+<h3 id="大概流程："><a href="#大概流程：" class="headerlink" title="大概流程："></a>大概流程：</h3><ol>
+<li>扫码前，手机端应用是已登录状态，PC端显示一个二维码，等待扫描</li>
+<li>手机端打开应用，扫描PC端的二维码，扫描后，会提示”已扫描，请在手机端点击确认”</li>
+<li>用户在手机端点击确认，确认后PC端登录就成功了</li>
+</ol>
+<h3 id="同时："><a href="#同时：" class="headerlink" title="同时："></a>同时：</h3><ol>
+<li>二维码的背后它一定存在一个唯一性的ID，当二维码生成时，这个ID也一起生成，并且绑定了PC端的设备信息</li>
+<li>手机去扫描这个二维码</li>
+<li>二维码切换为 已扫描待确认状态， 此时就会将账号信息与这个ID绑定</li>
+<li>当手机端确认登录时，它就会生成PC端用于登录的token，并返回给PC端</li>
+</ol>
+<p>好了，到这里，基本思路就已经清晰了，接下来我们把整个过程再具体化一下</p>
+<h3 id="二维码准备"><a href="#二维码准备" class="headerlink" title="二维码准备"></a>二维码准备</h3><p>按二维码不同状态来看， 首先是等待扫描状态，用户打开PC端，切换到二维码登录界面时。</p>
+<p><img src="C:\Users\kokomisu'k'i\Desktop\640.jpg"></p>
+<ol>
+<li>PC端向服务端发起请求，告诉服务端，我要生成用户登录的二维码，并且把PC端设备信息也传递给服务端</li>
+<li>服务端收到请求后，它生成二维码ID，并将二维码ID与PC端设备信息进行绑定</li>
+<li>然后把二维码ID返回给PC端</li>
+<li>PC端收到二维码ID后，生成二维码(二维码中肯定包含了ID)</li>
+<li>为了及时知道二维码的状态，客户端在展现二维码后，PC端不断的轮询服务端，比如每隔一秒就轮询一次，请求服务端告诉当前二维码的状态及相关信息</li>
+</ol>
+<p>二维码已经准好了，接下来就是扫描状态</p>
+<h3 id="扫描状态切换"><a href="#扫描状态切换" class="headerlink" title="扫描状态切换"></a>扫描状态切换</h3><p>![](C:\Users\kokomisu’k’i\Desktop\640 (1).jpg)</p>
+<ol>
+<li>用户用手机去扫描PC端的二维码，通过二维码内容取到其中的二维码ID</li>
+<li>再调用服务端API将移动端的身份信息与二维码ID一起发送给服务端</li>
+<li>服务端接收到后，它可以将身份信息与二维码ID进行绑定，生成临时token。然后返回给手机端</li>
+<li>因为PC端一直在轮询二维码状态，所以这时候二维码状态发生了改变，它就可以在界面上把二维码状态更新为已扫描</li>
+</ol>
+<p>那么为什么需要返回给手机端一个临时token呢？临时token与token一样，它也是一种身份凭证，不同的地方在于它只能用一次，用过就失效。</p>
+<p>在第三步骤中返回临时token，为的就是手机端在下一步操作时，可以用它作为凭证。以此确保扫码，登录两步操作是同一部手机端发出的，</p>
+<h3 id="状态确认"><a href="#状态确认" class="headerlink" title="状态确认"></a>状态确认</h3><p>最后就是状态的确认了。</p>
+<p>![](C:\Users\kokomisu’k’i\Desktop\640 (2).jpg)</p>
+<ol>
+<li>手机端在接收到临时token后会弹出确认登录界面，用户点击确认时，手机端携带临时token用来调用服务端的接口，告诉服务端，我已经确认</li>
+<li>服务端收到确认后，根据二维码ID绑定的设备信息与账号信息，生成用户PC端登录的token</li>
+<li>这时候PC端的轮询接口，它就可以得知二维码的状态已经变成了”已确认”。并且从服务端可以获取到用户登录的token</li>
+<li>到这里，登录就成功了，后端PC端就可以用token去访问服务端的资源了</li>
+</ol>
+<p>扫码动作的基础流程都讲完了，有些细节还没有深入介绍，</p>
+<p>比如二维码的内容是什么？</p>
+<ul>
+<li>可以是二维码ID</li>
+<li>可以是包含二维码ID的一个url地址</li>
+</ul>
+<p>在扫码确认这一步，用户取消了怎么处理？这些细节都留给大家思考</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>![](C:\Users\kokomisu’k’i\Desktop\640 (3).jpg)</p>
+<p>我们从登陆的本质触发，探索二维码扫码登录是如何做到的</p>
+<ol>
+<li>告诉系统我是谁</li>
+<li>向系统证明我谁</li>
+</ol>
+<p>在这个过程中，我们先简单讲了两个前提知识，</p>
+<ul>
+<li>一个是二维码原理，</li>
+<li>一个是基于token的认证机制。</li>
+</ul>
+<p>然后我们以二维码状态为轴，分析了这背后的逻辑: 通过token认证机制与二维码状态变化来实现扫码登录.</p>
+<p>需要指出的是，前面的讲的登录流程，它适用于同一个系统的PC端，WEB端，移动端。</p>
+<p>平时我们还有另外一种场景也比较常见，那就是通过第三方应用来扫码登录，那么这种通过第三方应用扫码登录又是什么原理呢？</p>
+<p>感兴趣的同学可以思考研究一下，欢迎在评论区留下你的见解。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/10/07/%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%20%20%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F/">https://kokomisukisuki.github.io/2023/10/07/%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%20%20%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/js%E9%80%86%E5%90%91/">js逆向</a></div><div class="post_share"><div class="social-share" data-image="https://www.helloimg.com/images/2023/10/03/oHXwWv.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/07/%E6%80%BC%E5%B0%B1%E5%AE%8C%E4%BA%8B%E4%BA%86%EF%BC%8C%E6%80%BB%E7%BB%93%E5%87%A0%E7%A7%8D%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="怼就完事了，总结几种验证码的解决方案"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHX0gE.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">怼就完事了，总结几种验证码的解决方案</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/07/%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90%20%20APP%20%E6%8A%93%E4%B8%8D%E5%88%B0%E5%8C%85%E6%80%8E%E4%B9%88%E5%8A%9E/" title="抓包分析 | APP 抓不到包怎么办?"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">抓包分析 | APP 抓不到包怎么办?</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/10/07/Crack%20Captcha%20%20%E6%9F%90%E6%8B%9B%E6%8A%95%E6%A0%87%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%99%E6%BB%91%E5%9D%97%E9%AA%8C%E8%AF%81%E7%A0%81%E5%88%86%E6%9E%90/" title="Crack Captcha | 某招投标信息查询网站滑块验证码分析"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Crack Captcha | 某招投标信息查询网站滑块验证码分析</div></div></a></div><div><a href="/2023/10/07/JS%E9%80%86%E5%90%91%20%20%E5%8A%A9%E5%8A%9B%E6%96%B0%E6%89%8B%20,%20%E5%86%8D%E6%9D%A5%E4%B8%80%E5%A5%97%E5%96%82%E9%A5%AD%E6%95%99%E7%A8%8B%EF%BC%81/" title="JS逆向 | 助力新手 , 再来一套喂饭教程！"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">JS逆向 | 助力新手 , 再来一套喂饭教程！</div></div></a></div><div><a href="/2023/10/07/JS%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91AST%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" title="JS抽象语法树AST基础学习"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHqrz0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">JS抽象语法树AST基础学习</div></div></a></div><div><a href="/2023/10/07/JS%E9%80%86%E5%90%91%20%20%E6%97%A0%E9%99%90Debugger%E4%B9%8B%E6%B7%98%E5%A4%A7%E8%B1%A1/" title="无限Debugger之淘大象"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">无限Debugger之淘大象</div></div></a></div><div><a href="/2023/10/07/JS%20%E9%80%86%E5%90%91%E9%AB%98%E9%98%B6%20%20JavaScript%E6%B7%B7%E6%B7%86%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/" title="JS 逆向高阶 | JavaScript混淆安全加固"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">JS 逆向高阶 | JavaScript混淆安全加固</div></div></a></div><div><a href="/2023/10/07/JS%E9%80%86%E5%90%91%E4%B9%8B%E6%BC%AB%E7%94%BB%E6%9F%9C/" title="JS逆向之漫画柜"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxLhP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">JS逆向之漫画柜</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90-%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">扫码登陆原理解析 | 二维码扫码登录是什么原理？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%99%BB%E5%BD%95%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-text">二维码登录的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E4%BA%8C%E7%BB%B4%E7%A0%81"><span class="toc-text">认识二维码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6"><span class="toc-text">系统认证机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%99%BB%E5%BD%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4"><span class="toc-text">扫描二维码登录的一般步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%A6%82%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-text">大概流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%97%B6%EF%BC%9A"><span class="toc-text">同时：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%87%86%E5%A4%87"><span class="toc-text">二维码准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2"><span class="toc-text">扫描状态切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A1%AE%E8%AE%A4"><span class="toc-text">状态确认</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E5%B8%B8%E7%94%A8/" title="日常主流常用网站集合"><img src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="日常主流常用网站集合"/></a><div class="content"><a class="title" href="/2023/10/10/%E5%B8%B8%E7%94%A8/" title="日常主流常用网站集合">日常主流常用网站集合</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%20%20Numpy%E5%AE%9E%E6%88%98(%E4%B8%80)%20-%20%E5%88%86%E6%9E%90%E6%9F%90%E5%8D%95%E8%BD%A6%E9%AA%91%E8%A1%8C%E6%97%B6%E9%97%B4/" title="数据分析 | Numpy实战(一) - 分析某单车骑行时间"><img src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析 | Numpy实战(一) - 分析某单车骑行时间"/></a><div class="content"><a class="title" href="/2023/10/10/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%20%20Numpy%E5%AE%9E%E6%88%98(%E4%B8%80)%20-%20%E5%88%86%E6%9E%90%E6%9F%90%E5%8D%95%E8%BD%A6%E9%AA%91%E8%A1%8C%E6%97%B6%E9%97%B4/" title="数据分析 | Numpy实战(一) - 分析某单车骑行时间">数据分析 | Numpy实战(一) - 分析某单车骑行时间</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E7%BE%8E%E4%B9%8B%E5%9B%BEjs%E9%80%86%E5%90%91/" title="美之图js逆向"><img src="https://www.helloimg.com/images/2023/10/03/oHxqUv.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="美之图js逆向"/></a><div class="content"><a class="title" href="/2023/10/10/%E7%BE%8E%E4%B9%8B%E5%9B%BEjs%E9%80%86%E5%90%91/" title="美之图js逆向">美之图js逆向</a><time datetime="2023-10-09T16:00:00.000Z" title="发表于 2023-10-10 00:00:00">2023-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/09/2023%E5%88%B02024%E8%B5%9B%E5%AD%A3%E6%9B%BC%E5%9F%8E%E5%AE%A2%E5%9C%BA%E5%AF%B9%E9%98%B5%E9%98%BF%E6%A3%AE%E7%BA%B3%E6%9C%89%E6%84%9F/" title="2023到2024赛季曼城客场对阵阿森纳有感"><img src="https://www.helloimg.com/images/2023/10/03/oHxJnY.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023到2024赛季曼城客场对阵阿森纳有感"/></a><div class="content"><a class="title" href="/2023/10/09/2023%E5%88%B02024%E8%B5%9B%E5%AD%A3%E6%9B%BC%E5%9F%8E%E5%AE%A2%E5%9C%BA%E5%AF%B9%E9%98%B5%E9%98%BF%E6%A3%AE%E7%BA%B3%E6%9C%89%E6%84%9F/" title="2023到2024赛季曼城客场对阵阿森纳有感">2023到2024赛季曼城客场对阵阿森纳有感</a><time datetime="2023-10-08T16:00:00.000Z" title="发表于 2023-10-09 00:00:00">2023-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/08/Android%E9%80%86%E5%90%91%20%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87%20-%2001/" title="Android逆向 | 基础知识篇 - 01"><img src="https://www.helloimg.com/images/2023/10/03/oHxGFK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android逆向 | 基础知识篇 - 01"/></a><div class="content"><a class="title" href="/2023/10/08/Android%E9%80%86%E5%90%91%20%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87%20-%2001/" title="Android逆向 | 基础知识篇 - 01">Android逆向 | 基础知识篇 - 01</a><time datetime="2023-10-07T16:00:00.000Z" title="发表于 2023-10-08 00:00:00">2023-10-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

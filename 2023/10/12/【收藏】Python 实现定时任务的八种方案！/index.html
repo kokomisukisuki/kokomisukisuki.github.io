@@ -1,0 +1,533 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hello | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【收藏】Python 实现定时任务的八种方案！作者丨钱魏Way https:&#x2F;&#x2F;www.biaodianfu.com&#x2F;python-schedule.html 目录 利用while True: + sleep()实现定时任务  使用Timeloop库运行定时任务  利用threading.Timer实现定时任务  利用内置模块sched实现定时任务  利用调度模块schedule实现定时任务  利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/12/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="【收藏】Python 实现定时任务的八种方案！作者丨钱魏Way https:&#x2F;&#x2F;www.biaodianfu.com&#x2F;python-schedule.html 目录 利用while True: + sleep()实现定时任务  使用Timeloop库运行定时任务  利用threading.Timer实现定时任务  利用内置模块sched实现定时任务  利用调度模块schedule实现定时任务  利">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2023-10-12T09:28:10.054Z">
+<meta property="article:modified_time" content="2023-10-12T09:28:10.219Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/10/12/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hello',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-12 17:28:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">124</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-12T09:28:10.054Z" title="发表于 2023-10-12 17:28:10">2023-10-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-12T09:28:10.219Z" title="更新于 2023-10-12 17:28:10">2023-10-12</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="【收藏】Python-实现定时任务的八种方案！"><a href="#【收藏】Python-实现定时任务的八种方案！" class="headerlink" title="【收藏】Python 实现定时任务的八种方案！"></a>【收藏】Python 实现定时任务的八种方案！</h1><p>作者丨钱魏Way</p>
+<p><a target="_blank" rel="noopener" href="https://www.biaodianfu.com/python-schedule.html">https://www.biaodianfu.com/python-schedule.html</a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><p>利用while True: + sleep()实现定时任务</p>
+</li>
+<li><p>使用Timeloop库运行定时任务</p>
+</li>
+<li><p>利用threading.Timer实现定时任务</p>
+</li>
+<li><p>利用内置模块sched实现定时任务</p>
+</li>
+<li><p>利用调度模块schedule实现定时任务</p>
+</li>
+<li><p>利用任务框架APScheduler实现定时任务</p>
+</li>
+<li><ul>
+<li>Job 作业</li>
+<li>Trigger 触发器</li>
+<li>Executor 执行器</li>
+<li>Jobstore 作业存储</li>
+<li>Event 事件</li>
+<li>调度器</li>
+<li>APScheduler中的重要概念</li>
+<li>Scheduler的工作流程</li>
+</ul>
+</li>
+<li><p>使用分布式消息系统Celery实现定时任务</p>
+</li>
+<li><p>使用数据流工具Apache Airflow实现定时任务</p>
+</li>
+<li><ul>
+<li>Airflow 产生的背景</li>
+<li>Airflow 核心概念</li>
+<li>Airflow 的架构</li>
+</ul>
+</li>
+</ul>
+<h2 id="利用while-True-sleep-实现定时任务"><a href="#利用while-True-sleep-实现定时任务" class="headerlink" title="利用while True: + sleep()实现定时任务"></a>利用while True: + sleep()实现定时任务</h2><p>位于 time 模块中的 sleep(secs) 函数，可以实现令当前执行的线程暂停 secs 秒后再继续执行。所谓暂停，即令当前线程进入阻塞状态，当达到 sleep() 函数规定的时间后，再由阻塞状态转为就绪状态，等待 CPU 调度。</p>
+<p>基于这样的特性我们可以通过while死循环+sleep()的方式实现简单的定时任务。</p>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import datetime</span><br><span class="line">import time</span><br><span class="line">def time_printer():</span><br><span class="line">    now = datetime.datetime.now()</span><br><span class="line">    ts = now.strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)</span><br><span class="line">    print(&#x27;do func time :&#x27;, ts)</span><br><span class="line">def loop_monitor():</span><br><span class="line">    while True:</span><br><span class="line">        time_printer()</span><br><span class="line">        time.sleep(5)  # 暂停5秒</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    loop_monitor()</span><br></pre></td></tr></table></figure>
+
+<p>主要缺点：</p>
+<ul>
+<li>只能设定间隔，不能指定具体的时间，比如每天早上8:00</li>
+<li>sleep 是一个阻塞函数，也就是说 sleep 这一段时间，程序什么也不能操作。</li>
+</ul>
+<h2 id="使用Timeloop库运行定时任务"><a href="#使用Timeloop库运行定时任务" class="headerlink" title="使用Timeloop库运行定时任务"></a>使用Timeloop库运行定时任务</h2><p>Timeloop是一个库，可用于运行多周期任务。这是一个简单的库，它使用decorator模式在线程中运行标记函数。</p>
+<p>示例代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from timeloop import Timeloop</span><br><span class="line">from datetime import timedelta</span><br><span class="line">tl = Timeloop()</span><br><span class="line">@tl.job(interval=timedelta(seconds=2))</span><br><span class="line">def sample_job_every_2s():</span><br><span class="line">    print &quot;2s job current time : &#123;&#125;&quot;.format(time.ctime())</span><br><span class="line">@tl.job(interval=timedelta(seconds=5))</span><br><span class="line">def sample_job_every_5s():</span><br><span class="line">    print &quot;5s job current time : &#123;&#125;&quot;.format(time.ctime())</span><br><span class="line">@tl.job(interval=timedelta(seconds=10))</span><br><span class="line">def sample_job_every_10s():</span><br><span class="line">    print &quot;10s job current time : &#123;&#125;&quot;.format(time.ctime())</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用threading-Timer实现定时任务"><a href="#利用threading-Timer实现定时任务" class="headerlink" title="利用threading.Timer实现定时任务"></a>利用threading.Timer实现定时任务</h2><p>threading 模块中的 Timer 是一个非阻塞函数，比 sleep 稍好一点，timer最基本理解就是定时器，我们可以启动多个定时任务，这些定时器任务是异步执行，所以不存在等待顺序执行问题。</p>
+<p>Timer(interval, function, args&#x3D;[ ], kwargs&#x3D;{ })</p>
+<ul>
+<li>interval: 指定的时间</li>
+<li>function: 要执行的方法</li>
+<li>args&#x2F;kwargs: 方法的参数</li>
+</ul>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>备注：Timer只能执行一次，这里需要循环调用，否则只能执行一次</p>
+<h2 id="利用内置模块sched实现定时任务"><a href="#利用内置模块sched实现定时任务" class="headerlink" title="利用内置模块sched实现定时任务"></a>利用内置模块sched实现定时任务</h2><p>sched模块实现了一个通用事件调度器，在调度器类使用一个延迟函数等待特定的时间，执行任务。同时支持多线程应用程序，在每个任务执行后会立刻调用延时函数，以确保其他线程也能执行。</p>
+<p>class sched.scheduler(timefunc, delayfunc)这个类定义了调度事件的通用接口，它需要外部传入两个参数，timefunc是一个没有参数的返回时间类型数字的函数(常用使用的如time模块里面的time)，delayfunc应该是一个需要一个参数来调用、与timefunc的输出兼容、并且作用为延迟多个时间单位的函数(常用的如time模块的sleep)。</p>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import datetime</span><br><span class="line">import time</span><br><span class="line">import sched</span><br><span class="line">def time_printer():</span><br><span class="line">    now = datetime.datetime.now()</span><br><span class="line">    ts = now.strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)</span><br><span class="line">    print(&#x27;do func time :&#x27;, ts)</span><br><span class="line">    loop_monitor()</span><br><span class="line">def loop_monitor():</span><br><span class="line">    s = sched.scheduler(time.time, time.sleep)  # 生成调度器</span><br><span class="line">    s.enter(5, 1, time_printer, ())</span><br><span class="line">    s.run()</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    loop_monitor()</span><br></pre></td></tr></table></figure>
+
+<p>scheduler对象主要方法:</p>
+<ul>
+<li>enter(delay, priority, action, argument)，安排一个事件来延迟delay个时间单位。</li>
+<li>cancel(event)：从队列中删除事件。如果事件不是当前队列中的事件，则该方法将跑出一个ValueError。</li>
+<li>run()：运行所有预定的事件。这个函数将等待(使用传递给构造函数的delayfunc()函数)，然后执行事件，直到不再有预定的事件。</li>
+</ul>
+<p>个人点评：比threading.Timer更好，不需要循环调用。</p>
+<h2 id="利用调度模块schedule实现定时任务"><a href="#利用调度模块schedule实现定时任务" class="headerlink" title="利用调度模块schedule实现定时任务"></a>利用调度模块schedule实现定时任务</h2><p>schedule是一个第三方轻量级的任务调度模块，可以按照秒，分，小时，日期或者自定义事件执行时间。schedule允许用户使用简单、人性化的语法以预定的时间间隔定期运行Python函数(或其它可调用函数)。</p>
+<p>先来看代码，是不是不看文档就能明白什么意思？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import schedule</span><br><span class="line">import time</span><br><span class="line">def job():</span><br><span class="line">    print(&quot;I&#x27;m working...&quot;)</span><br><span class="line">schedule.every(10).seconds.do(job)</span><br><span class="line">schedule.every(10).minutes.do(job)</span><br><span class="line">schedule.every().hour.do(job)</span><br><span class="line">schedule.every().day.at(&quot;10:30&quot;).do(job)</span><br><span class="line">schedule.every(5).to(10).minutes.do(job)</span><br><span class="line">schedule.every().monday.do(job)</span><br><span class="line">schedule.every().wednesday.at(&quot;13:15&quot;).do(job)</span><br><span class="line">schedule.every().minute.at(&quot;:17&quot;).do(job)</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br><span class="line">    time.sleep(1)</span><br></pre></td></tr></table></figure>
+
+<p>装饰器：通过 @repeat() 装饰静态方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from schedule import every, repeat, run_pending</span><br><span class="line">@repeat(every().second)</span><br><span class="line">def job():</span><br><span class="line">    print(&#x27;working...&#x27;)</span><br><span class="line">while True:</span><br><span class="line">    run_pending()</span><br><span class="line">    time.sleep(1)</span><br></pre></td></tr></table></figure>
+
+<p>传递参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import schedule</span><br><span class="line">def greet(name):</span><br><span class="line">    print(&#x27;Hello&#x27;, name)</span><br><span class="line">schedule.every(2).seconds.do(greet, name=&#x27;Alice&#x27;)</span><br><span class="line">schedule.every(4).seconds.do(greet, name=&#x27;Bob&#x27;)</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br></pre></td></tr></table></figure>
+
+<p>装饰器同样能传递参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from schedule import every, repeat, run_pending</span><br><span class="line">@repeat(every().second, &#x27;World&#x27;)</span><br><span class="line">@repeat(every().minute, &#x27;Mars&#x27;)</span><br><span class="line">def hello(planet):</span><br><span class="line">    print(&#x27;Hello&#x27;, planet)</span><br><span class="line">while True:</span><br><span class="line">    run_pending()</span><br></pre></td></tr></table></figure>
+
+<p>取消任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import schedule</span><br><span class="line">i = 0</span><br><span class="line">def some_task():</span><br><span class="line">    global i</span><br><span class="line">    i += 1</span><br><span class="line">    print(i)</span><br><span class="line">    if i == 10:</span><br><span class="line">        schedule.cancel_job(job)</span><br><span class="line">        print(&#x27;cancel job&#x27;)</span><br><span class="line">        exit(0)</span><br><span class="line">job = schedule.every().second.do(some_task)</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br></pre></td></tr></table></figure>
+
+<p>运行一次任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">import schedule</span><br><span class="line">def job_that_executes_once():</span><br><span class="line">    print(&#x27;Hello&#x27;)</span><br><span class="line">    return schedule.CancelJob</span><br><span class="line">schedule.every().minute.at(&#x27;:34&#x27;).do(job_that_executes_once)</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br><span class="line">    time.sleep(1)</span><br></pre></td></tr></table></figure>
+
+<p>根据标签检索任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 检索所有任务：schedule.get_jobs()</span><br><span class="line">import schedule</span><br><span class="line">def greet(name):</span><br><span class="line">    print(&#x27;Hello &#123;&#125;&#x27;.format(name))</span><br><span class="line">schedule.every().day.do(greet, &#x27;Andrea&#x27;).tag(&#x27;daily-tasks&#x27;, &#x27;friend&#x27;)</span><br><span class="line">schedule.every().hour.do(greet, &#x27;John&#x27;).tag(&#x27;hourly-tasks&#x27;, &#x27;friend&#x27;)</span><br><span class="line">schedule.every().hour.do(greet, &#x27;Monica&#x27;).tag(&#x27;hourly-tasks&#x27;, &#x27;customer&#x27;)</span><br><span class="line">schedule.every().day.do(greet, &#x27;Derek&#x27;).tag(&#x27;daily-tasks&#x27;, &#x27;guest&#x27;)</span><br><span class="line">friends = schedule.get_jobs(&#x27;friend&#x27;)</span><br><span class="line">print(friends)</span><br></pre></td></tr></table></figure>
+
+<p>根据标签取消任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 取消所有任务：schedule.clear()</span><br><span class="line">import schedule</span><br><span class="line">def greet(name):</span><br><span class="line">    print(&#x27;Hello &#123;&#125;&#x27;.format(name))</span><br><span class="line">    if name == &#x27;Cancel&#x27;:</span><br><span class="line">        schedule.clear(&#x27;second-tasks&#x27;)</span><br><span class="line">        print(&#x27;cancel second-tasks&#x27;)</span><br><span class="line">schedule.every().second.do(greet, &#x27;Andrea&#x27;).tag(&#x27;second-tasks&#x27;, &#x27;friend&#x27;)</span><br><span class="line">schedule.every().second.do(greet, &#x27;John&#x27;).tag(&#x27;second-tasks&#x27;, &#x27;friend&#x27;)</span><br><span class="line">schedule.every().hour.do(greet, &#x27;Monica&#x27;).tag(&#x27;hourly-tasks&#x27;, &#x27;customer&#x27;)</span><br><span class="line">schedule.every(5).seconds.do(greet, &#x27;Cancel&#x27;).tag(&#x27;daily-tasks&#x27;, &#x27;guest&#x27;)</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br></pre></td></tr></table></figure>
+
+<p>运行任务到某时间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import schedule</span><br><span class="line">from datetime import datetime, timedelta, time</span><br><span class="line">def job():</span><br><span class="line">    print(&#x27;working...&#x27;)</span><br><span class="line">schedule.every().second.until(&#x27;23:59&#x27;).do(job)  # 今天23:59停止</span><br><span class="line">schedule.every().second.until(&#x27;2030-01-01 18:30&#x27;).do(job)  # 2030-01-01 18:30停止</span><br><span class="line">schedule.every().second.until(timedelta(hours=8)).do(job)  # 8小时后停止</span><br><span class="line">schedule.every().second.until(time(23, 59, 59)).do(job)  # 今天23:59:59停止</span><br><span class="line">schedule.every().second.until(datetime(2030, 1, 1, 18, 30, 0)).do(job)  # 2030-01-01 18:30停止</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br></pre></td></tr></table></figure>
+
+<p>马上运行所有任务（主要用于测试）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import schedule</span><br><span class="line">def job():</span><br><span class="line">    print(&#x27;working...&#x27;)</span><br><span class="line">def job1():</span><br><span class="line">    print(&#x27;Hello...&#x27;)</span><br><span class="line">schedule.every().monday.at(&#x27;12:40&#x27;).do(job)</span><br><span class="line">schedule.every().tuesday.at(&#x27;16:40&#x27;).do(job1)</span><br><span class="line">schedule.run_all()</span><br><span class="line">schedule.run_all(delay_seconds=3)  # 任务间延迟3秒</span><br></pre></td></tr></table></figure>
+
+<p>并行运行：使用 Python 内置队列实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line">import schedule</span><br><span class="line">def job1():</span><br><span class="line">    print(&quot;I&#x27;m running on thread %s&quot; % threading.current_thread())</span><br><span class="line">def job2():</span><br><span class="line">    print(&quot;I&#x27;m running on thread %s&quot; % threading.current_thread())</span><br><span class="line">def job3():</span><br><span class="line">    print(&quot;I&#x27;m running on thread %s&quot; % threading.current_thread())</span><br><span class="line">def run_threaded(job_func):</span><br><span class="line">    job_thread = threading.Thread(target=job_func)</span><br><span class="line">    job_thread.start()</span><br><span class="line">schedule.every(10).seconds.do(run_threaded, job1)</span><br><span class="line">schedule.every(10).seconds.do(run_threaded, job2)</span><br><span class="line">schedule.every(10).seconds.do(run_threaded, job3)</span><br><span class="line">while True:</span><br><span class="line">    schedule.run_pending()</span><br><span class="line">    time.sleep(1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用任务框架APScheduler实现定时任务"><a href="#利用任务框架APScheduler实现定时任务" class="headerlink" title="利用任务框架APScheduler实现定时任务"></a>利用任务框架APScheduler实现定时任务</h2><p>APScheduler（advanceded python scheduler）基于Quartz的一个Python定时任务框架，实现了Quartz的所有功能，使用起来十分方便。提供了基于日期、固定时间间隔以及crontab类型的任务，并且可以持久化任务。基于这些功能，我们可以很方便的实现一个Python定时任务系统。</p>
+<p>它有以下三个特点：</p>
+<ul>
+<li>类似于 Liunx Cron 的调度程序(可选的开始&#x2F;结束时间)</li>
+<li>基于时间间隔的执行调度(周期性调度，可选的开始&#x2F;结束时间)</li>
+<li>一次性执行任务(在设定的日期&#x2F;时间运行一次任务)</li>
+</ul>
+<p>APScheduler有四种组成部分：</p>
+<ul>
+<li><strong>触发器(trigger)</strong> 包含调度逻辑，每一个作业有它自己的触发器，用于决定接下来哪一个作业会运行。除了他们自己初始配置意外，触发器完全是无状态的。</li>
+<li><strong>作业存储(job store)</strong> 存储被调度的作业，默认的作业存储是简单地把作业保存在内存中，其他的作业存储是将作业保存在数据库中。一个作业的数据讲在保存在持久化作业存储时被序列化，并在加载时被反序列化。调度器不能分享同一个作业存储。</li>
+<li><strong>执行器(executor)</strong> 处理作业的运行，他们通常通过在作业中提交制定的可调用对象到一个线程或者进城池来进行。当作业完成时，执行器将会通知调度器。</li>
+<li><strong>调度器(scheduler)</strong> 是其他的组成部分。你通常在应用只有一个调度器，应用的开发者通常不会直接处理作业存储、调度器和触发器，相反，调度器提供了处理这些的合适的接口。配置作业存储和执行器可以在调度器中完成，例如添加、修改和移除作业。通过配置executor、jobstore、trigger，使用线程池(ThreadPoolExecutor默认值20)或进程池(ProcessPoolExecutor 默认值5)并且默认最多3个(max_instances)任务实例同时运行，实现对job的增删改查等调度控制</li>
+</ul>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>示例代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from apscheduler.schedulers.blocking import BlockingScheduler</span><br><span class="line">from datetime import datetime</span><br><span class="line"># 输出时间</span><br><span class="line">def job():</span><br><span class="line">    print(datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;))</span><br><span class="line"># BlockingScheduler</span><br><span class="line">sched = BlockingScheduler()</span><br><span class="line">sched.add_job(my_job, &#x27;interval&#x27;, seconds=5, id=&#x27;my_job_id&#x27;)</span><br><span class="line">sched.start()</span><br></pre></td></tr></table></figure>
+
+<h3 id="APScheduler中的重要概念"><a href="#APScheduler中的重要概念" class="headerlink" title="APScheduler中的重要概念"></a>APScheduler中的重要概念</h3><h4 id="Job-作业"><a href="#Job-作业" class="headerlink" title="Job 作业"></a>Job 作业</h4><p>Job作为APScheduler最小执行单位。创建Job时指定执行的函数，函数中所需参数，Job执行时的一些设置信息。</p>
+<p>构建说明：</p>
+<ul>
+<li>id：指定作业的唯一ID</li>
+<li>name：指定作业的名字</li>
+<li>trigger：apscheduler定义的触发器，用于确定Job的执行时间，根据设置的trigger规则，计算得到下次执行此job的时间， 满足时将会执行</li>
+<li>executor：apscheduler定义的执行器，job创建时设置执行器的名字，根据字符串你名字到scheduler获取到执行此job的 执行器，执行job指定的函数</li>
+<li>max_instances：执行此job的最大实例数，executor执行job时，根据job的id来计算执行次数，根据设置的最大实例数来确定是否可执行</li>
+<li>next_run_time：Job下次的执行时间，创建Job时可以指定一个时间[datetime],不指定的话则默认根据trigger获取触发时间</li>
+<li>misfire_grace_time：Job的延迟执行时间，例如Job的计划执行时间是21:00:00，但因服务重启或其他原因导致21:00:31才执行，如果设置此key为40,则该job会继续执行，否则将会丢弃此job</li>
+<li>coalesce：Job是否合并执行，是一个bool值。例如scheduler停止20s后重启启动，而job的触发器设置为5s执行一次，因此此job错过了4个执行时间，如果设置为是，则会合并到一次执行，否则会逐个执行</li>
+<li>func：Job执行的函数</li>
+<li>args：Job执行函数需要的位置参数</li>
+<li>kwargs：Job执行函数需要的关键字参数</li>
+</ul>
+<h4 id="Trigger-触发器"><a href="#Trigger-触发器" class="headerlink" title="Trigger 触发器"></a>Trigger 触发器</h4><p>Trigger绑定到Job，在scheduler调度筛选Job时，根据触发器的规则计算出Job的触发时间，然后与当前时间比较确定此Job是否会被执行，总之就是根据trigger规则计算出下一个执行时间。</p>
+<p>目前APScheduler支持触发器：</p>
+<ul>
+<li>指定时间的DateTrigger</li>
+<li>指定间隔时间的IntervalTrigger</li>
+<li>像Linux的crontab一样的CronTrigger。</li>
+</ul>
+<p><strong>触发器参数：date</strong></p>
+<p>date定时，作业只执行一次。</p>
+<ul>
+<li>run_date (datetime|str) – the date&#x2F;time to run the job at</li>
+<li>timezone (datetime.tzinfo|str) – time zone for run_date if it doesn’t have one already</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sched.add_job(my_job, &#x27;date&#x27;, run_date=date(2009, 11, 6), args=[&#x27;text&#x27;])</span><br><span class="line">sched.add_job(my_job, &#x27;date&#x27;, run_date=datetime(2019, 7, 6, 16, 30, 5), args=[&#x27;text&#x27;])</span><br></pre></td></tr></table></figure>
+
+<p><strong>触发器参数：interval</strong></p>
+<p>interval间隔调度</p>
+<ul>
+<li>weeks (int) –  间隔几周</li>
+<li>days (int) –  间隔几天</li>
+<li>hours (int) –  间隔几小时</li>
+<li>minutes (int) –  间隔几分钟</li>
+<li>seconds (int) –  间隔多少秒</li>
+<li>start_date (datetime|str) –  开始日期</li>
+<li>end_date (datetime|str) –  结束日期</li>
+<li>timezone (datetime.tzinfo|str) –  时区</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sched.add_job(job_function, &#x27;interval&#x27;, hours=2)</span><br></pre></td></tr></table></figure>
+
+<p><strong>触发器参数：cron</strong></p>
+<p>cron调度</p>
+<ul>
+<li>(int|str) 表示参数既可以是int类型，也可以是str类型</li>
+<li>(datetime | str) 表示参数既可以是datetime类型，也可以是str类型</li>
+<li>year (int|str) – 4-digit year -（表示四位数的年份，如2008年）</li>
+<li>month (int|str) – month (1-12) -（表示取值范围为1-12月）</li>
+<li>day (int|str) – day of the (1-31) -（表示取值范围为1-31日）</li>
+<li>week (int|str) – ISO week (1-53) -（格里历2006年12月31日可以写成2006年-W52-7（扩展形式）或2006W527（紧凑形式））</li>
+<li>day_of_week (int|str) – number or name of weekday (0-6 or mon,tue,wed,thu,fri,sat,sun) – （表示一周中的第几天，既可以用0-6表示也可以用其英语缩写表示）</li>
+<li>hour (int|str) – hour (0-23) – （表示取值范围为0-23时）</li>
+<li>minute (int|str) – minute (0-59) – （表示取值范围为0-59分）</li>
+<li>second (int|str) – second (0-59) – （表示取值范围为0-59秒）</li>
+<li>start_date (datetime|str) – earliest possible date&#x2F;time to trigger on (inclusive) – （表示开始时间）</li>
+<li>end_date (datetime|str) – latest possible date&#x2F;time to trigger on (inclusive) – （表示结束时间）</li>
+<li>timezone (datetime.tzinfo|str) – time zone to use for the date&#x2F;time calculations (defaults to scheduler timezone) -（表示时区取值）</li>
+</ul>
+<p>CronTrigger可用的表达式：</p>
+<table>
+<thead>
+<tr>
+<th align="center">表达式</th>
+<th align="center">参数类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center">所有</td>
+<td align="center">通配符。例：minutes&#x3D;*即每分钟触发</td>
+</tr>
+<tr>
+<td align="center">* &#x2F; a</td>
+<td align="center">所有</td>
+<td align="center">每隔时长a执行一次。例：minutes&#x3D;”* &#x2F; 3″ 即每隔3分钟执行一次</td>
+</tr>
+<tr>
+<td align="center">a – b</td>
+<td align="center">所有</td>
+<td align="center">a – b的范围内触发。例：minutes&#x3D;“2-5”。即2到5分钟内每分钟执行一次</td>
+</tr>
+<tr>
+<td align="center">a – b &#x2F; c</td>
+<td align="center">所有</td>
+<td align="center">a – b范围内，每隔时长c执行一次。</td>
+</tr>
+<tr>
+<td align="center">xth y</td>
+<td align="center">日</td>
+<td align="center">第几个星期几触发。x为第几个，y为星期几</td>
+</tr>
+<tr>
+<td align="center">last x</td>
+<td align="center">日</td>
+<td align="center">一个月中，最后一个星期的星期几触发</td>
+</tr>
+<tr>
+<td align="center">last</td>
+<td align="center">日</td>
+<td align="center">一个月中的最后一天触发</td>
+</tr>
+<tr>
+<td align="center">x, y, z</td>
+<td align="center">所有</td>
+<td align="center">组合表达式，可以组合确定值或上述表达式</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 6-8,11-12月第三个周五 00:00, 01:00, 02:00, 03:00运行</span><br><span class="line">sched.add_job(job_function, &#x27;cron&#x27;, month=&#x27;6-8,11-12&#x27;, day=&#x27;3rd fri&#x27;, hour=&#x27;0-3&#x27;)</span><br><span class="line"># 每周一到周五运行 直到2024-05-30 00:00:00</span><br><span class="line">sched.add_job(job_function, &#x27;cron&#x27;, day_of_week=&#x27;mon-fri&#x27;, hour=5, minute=30, end_date=&#x27;2024-05-30&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Executor-执行器"><a href="#Executor-执行器" class="headerlink" title="Executor 执行器"></a>Executor 执行器</h4><p>Executor在scheduler中初始化，另外也可通过scheduler的add_executor动态添加Executor。每个executor都会绑定一个alias，这个作为唯一标识绑定到Job，在实际执行时会根据Job绑定的executor找到实际的执行器对象，然后根据执行器对象执行Job。</p>
+<p>Executor的种类会根据不同的调度来选择，如果选择AsyncIO作为调度的库，那么选择AsyncIOExecutor，如果选择tornado作为调度的库，选择TornadoExecutor，如果选择启动进程作为调度，选择ThreadPoolExecutor或者ProcessPoolExecutor都可以。</p>
+<p>Executor的选择需要根据实际的scheduler来选择不同的执行器。目前APScheduler支持的Executor：</p>
+<ul>
+<li>executors.asyncio：同步io，阻塞</li>
+<li>executors.gevent：io多路复用，非阻塞</li>
+<li>executors.pool: 线程ThreadPoolExecutor和进程ProcessPoolExecutor</li>
+<li>executors.twisted：基于事件驱动</li>
+</ul>
+<h4 id="Jobstore-作业存储"><a href="#Jobstore-作业存储" class="headerlink" title="Jobstore 作业存储"></a>Jobstore 作业存储</h4><p>Jobstore在scheduler中初始化，另外也可通过scheduler的add_jobstore动态添加Jobstore。每个jobstore都会绑定一个alias，scheduler在Add Job时，根据指定的jobstore在scheduler中找到相应的jobstore，并将job添加到jobstore中。作业存储器决定任务的保存方式， 默认存储在内存中（MemoryJobStore），重启后就没有了。APScheduler支持的任务存储器有：</p>
+<ul>
+<li>jobstores.memory：内存</li>
+<li>jobstores.mongodb：存储在mongodb</li>
+<li>jobstores.redis：存储在redis</li>
+<li>jobstores.rethinkdb：存储在rethinkdb</li>
+<li>jobstores.sqlalchemy：支持sqlalchemy的数据库如mysql，sqlite等</li>
+<li>jobstores.zookeeper：zookeeper</li>
+</ul>
+<p>不同的任务存储器可以在调度器的配置中进行配置（见调度器）</p>
+<h4 id="Event-事件"><a href="#Event-事件" class="headerlink" title="Event 事件"></a>Event 事件</h4><p>Event是APScheduler在进行某些操作时触发相应的事件，用户可以自定义一些函数来监听这些事件，当触发某些Event时，做一些具体的操作。常见的比如。Job执行异常事件 EVENT_JOB_ERROR。Job执行时间错过事件 EVENT_JOB_MISSED。</p>
+<p>目前APScheduler定义的Event：</p>
+<ul>
+<li>EVENT_SCHEDULER_STARTED</li>
+<li>EVENT_SCHEDULER_START</li>
+<li>EVENT_SCHEDULER_SHUTDOWN</li>
+<li>EVENT_SCHEDULER_PAUSED</li>
+<li>EVENT_SCHEDULER_RESUMED</li>
+<li>EVENT_EXECUTOR_ADDED</li>
+<li>EVENT_EXECUTOR_REMOVED</li>
+<li>EVENT_JOBSTORE_ADDED</li>
+<li>EVENT_JOBSTORE_REMOVED</li>
+<li>EVENT_ALL_JOBS_REMOVED</li>
+<li>EVENT_JOB_ADDED</li>
+<li>EVENT_JOB_REMOVED</li>
+<li>EVENT_JOB_MODIFIED</li>
+<li>EVENT_JOB_EXECUTED</li>
+<li>EVENT_JOB_ERROR</li>
+<li>EVENT_JOB_MISSED</li>
+<li>EVENT_JOB_SUBMITTED</li>
+<li>EVENT_JOB_MAX_INSTANCES</li>
+</ul>
+<p>Listener表示用户自定义监听的一些Event，比如当Job触发了EVENT_JOB_MISSED事件时可以根据需求做一些其他处理。</p>
+<h4 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h4><p>Scheduler是APScheduler的核心，所有相关组件通过其定义。scheduler启动之后，将开始按照配置的任务进行调度。除了依据所有定义Job的trigger生成的将要调度时间唤醒调度之外。当发生Job信息变更时也会触发调度。</p>
+<p>APScheduler支持的调度器方式如下，比较常用的为BlockingScheduler和BackgroundScheduler</p>
+<ul>
+<li>BlockingScheduler：适用于调度程序是进程中唯一运行的进程，调用start函数会阻塞当前线程，不能立即返回。</li>
+<li>BackgroundScheduler：适用于调度程序在应用程序的后台运行，调用start后主线程不会阻塞。</li>
+<li>AsyncIOScheduler：适用于使用了asyncio模块的应用程序。</li>
+<li>GeventScheduler：适用于使用gevent模块的应用程序。</li>
+<li>TwistedScheduler：适用于构建Twisted的应用程序。</li>
+<li>QtScheduler：适用于构建Qt的应用程序。</li>
+</ul>
+<h3 id="Scheduler的工作流程"><a href="#Scheduler的工作流程" class="headerlink" title="Scheduler的工作流程"></a>Scheduler的工作流程</h3><p>Scheduler添加job流程：</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>Scheduler调度流程：</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<h2 id="使用分布式消息系统Celery实现定时任务"><a href="#使用分布式消息系统Celery实现定时任务" class="headerlink" title="使用分布式消息系统Celery实现定时任务"></a>使用分布式消息系统Celery实现定时任务</h2><p>Celery是一个简单，灵活，可靠的分布式系统，用于处理大量消息，同时为操作提供维护此类系统所需的工具, 也可用于任务调度。Celery 的配置比较麻烦，如果你只是需要一个轻量级的调度工具，Celery 不会是一个好选择。</p>
+<p>Celery 是一个强大的分布式任务队列，它可以让任务的执行完全脱离主程序，甚至可以被分配到其他主机上运行。我们通常使用它来实现异步任务（async task）和定时任务（crontab）。异步任务比如是发送邮件、或者文件上传, 图像处理等等一些比较耗时的操作 ，定时任务是需要在特定时间执行的任务。</p>
+<p>需要注意，celery本身并不具备任务的存储功能，在调度任务的时候肯定是要把任务存起来的，因此在使用celery的时候还需要搭配一些具备存储、访问功能的工具，比如：消息队列、Redis缓存、数据库等。官方推荐的是消息队列RabbitMQ，有些时候使用Redis也是不错的选择。</p>
+<p>它的架构组成如下图：</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>Celery架构，它采用典型的生产者-消费者模式，主要由以下部分组成：</p>
+<ul>
+<li>Celery Beat，任务调度器，Beat进程会读取配置文件的内容，周期性地将配置中到期需要执行的任务发送给任务队列。</li>
+<li>Producer：需要在队列中进行的任务，一般由用户、触发器或其他操作将任务入队，然后交由workers进行处理。调用了Celery提供的API、函数或者装饰器而产生任务并交给任务队列处理的都是任务生产者。</li>
+<li>Broker，即消息中间件，在这指任务队列本身，Celery扮演生产者和消费者的角色，brokers就是生产者和消费者存放&#x2F;获取产品的地方(队列)。</li>
+<li>Celery Worker，执行任务的消费者，从队列中取出任务并执行。通常会在多台服务器运行多个消费者来提高执行效率。</li>
+<li>Result Backend：任务处理完后保存状态信息和结果，以供查询。Celery默认已支持Redis、RabbitMQ、MongoDB、Django ORM、SQLAlchemy等方式。</li>
+</ul>
+<p>实际应用中，用户从Web前端发起一个请求，我们只需要将请求所要处理的任务丢入任务队列broker中，由空闲的worker去处理任务即可，处理的结果会暂存在后台数据库backend中。我们可以在一台机器或多台机器上同时起多个worker进程来实现分布式地并行处理任务。</p>
+<p>Celery定时任务实例：</p>
+<ul>
+<li>Python Celery &amp; RabbitMQ Tutorial</li>
+<li>Celery 配置实践笔记</li>
+</ul>
+<h2 id="使用数据流工具Apache-Airflow实现定时任务"><a href="#使用数据流工具Apache-Airflow实现定时任务" class="headerlink" title="使用数据流工具Apache Airflow实现定时任务"></a>使用数据流工具Apache Airflow实现定时任务</h2><p>Apache Airflow 是Airbnb开源的一款数据流程工具，目前是Apache孵化项目。以非常灵活的方式来支持数据的ETL过程，同时还支持非常多的插件来完成诸如HDFS监控、邮件通知等功能。Airflow支持单机和分布式两种模式，支持Master-Slave模式，支持Mesos等资源调度，有非常好的扩展性。被大量公司采用。</p>
+<p>Airflow使用Python开发，它通过DAGs(Directed Acyclic Graph, 有向无环图)来表达一个工作流中所要执行的任务，以及任务之间的关系和依赖。比如，如下的工作流中，任务T1执行完成，T2和T3才能开始执行，T2和T3都执行完成，T4才能开始执行。</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>Airflow提供了各种Operator实现，可以完成各种任务实现：</p>
+<ul>
+<li>BashOperator – 执行 bash 命令或脚本。</li>
+<li>SSHOperator – 执行远程 bash 命令或脚本（原理同 paramiko 模块）。</li>
+<li>PythonOperator – 执行 Python 函数。</li>
+<li>EmailOperator – 发送 Email。</li>
+<li>HTTPOperator – 发送一个 HTTP 请求。</li>
+<li>MySqlOperator, SqliteOperator, PostgresOperator, MsSqlOperator, OracleOperator, JdbcOperator, 等，执行 SQL 任务。</li>
+<li>DockerOperator, HiveOperator, S3FileTransferOperator, PrestoToMysqlOperator, SlackOperator…</li>
+</ul>
+<p>除了以上这些 Operators 还可以方便的自定义 Operators 满足个性化的任务需求。</p>
+<p>一些情况下，我们需要根据执行结果执行不同的任务，这样工作流会产生分支。如:</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>这种需求可以使用BranchPythonOperator来实现。</p>
+<h3 id="Airflow-产生的背景"><a href="#Airflow-产生的背景" class="headerlink" title="Airflow 产生的背景"></a>Airflow 产生的背景</h3><p>通常，在一个运维系统，数据分析系统，或测试系统等大型系统中，我们会有各种各样的依赖需求。包括但不限于：</p>
+<ul>
+<li>时间依赖：任务需要等待某一个时间点触发。</li>
+<li>外部系统依赖：任务依赖外部系统需要调用接口去访问。</li>
+<li>任务间依赖：任务 A 需要在任务 B 完成后启动，两个任务互相间会产生影响。</li>
+<li>资源环境依赖：任务消耗资源非常多， 或者只能在特定的机器上执行。</li>
+</ul>
+<p>crontab 可以很好地处理定时执行任务的需求，但仅能管理时间上的依赖。Airflow 的核心概念 DAG（有向无环图）—— 来表现工作流。</p>
+<ul>
+<li>Airflow 是一种 WMS，即：它将任务以及它们的依赖看作代码，按照那些计划规范任务执行，并在实际工作进程之间分发需执行的任务。</li>
+<li>Airflow 提供了一个用于显示当前活动任务和过去任务状态的优秀 UI，并允许用户手动管理任务的执行和状态。</li>
+<li>Airflow 中的工作流是具有方向性依赖的任务集合。</li>
+<li>DAG 中的每个节点都是一个任务，DAG 中的边表示的是任务之间的依赖（强制为有向无环，因此不会出现循环依赖，从而导致无限执行循环）。</li>
+</ul>
+<h3 id="Airflow-核心概念"><a href="#Airflow-核心概念" class="headerlink" title="Airflow 核心概念"></a>Airflow 核心概念</h3><ul>
+<li>DAGs：即有向无环图(Directed Acyclic Graph)，将所有需要运行的tasks按照依赖关系组织起来，描述的是所有tasks执行顺序。</li>
+<li>Operators：可以简单理解为一个class，描述了DAG中某个的task具体要做的事。其中，airflow内置了很多operators，如BashOperator 执行一个bash 命令，PythonOperator 调用任意的Python 函数，EmailOperator 用于发送邮件，HTTPOperator 用于发送HTTP请求， SqlOperator 用于执行SQL命令等等，同时，用户可以自定义Operator，这给用户提供了极大的便利性。</li>
+<li>Tasks：Task 是 Operator的一个实例，也就是DAGs中的一个node。</li>
+<li>Task Instance：task的一次运行。Web 界面中可以看到task instance 有自己的状态，包括”running”, “success”, “failed”, “skipped”, “up for retry”等。</li>
+<li>Task Relationships：DAGs中的不同Tasks之间可以有依赖关系，如 Task1 &gt;&gt; Task2，表明Task2依赖于Task2了。通过将DAGs和Operators结合起来，用户就可以创建各种复杂的 工作流（workflow）。</li>
+</ul>
+<h3 id="Airflow-的架构"><a href="#Airflow-的架构" class="headerlink" title="Airflow 的架构"></a>Airflow 的架构</h3><p>在一个可扩展的生产环境中，Airflow 含有以下组件：</p>
+<ul>
+<li><strong>元数据库</strong>：这个数据库存储有关任务状态的信息。</li>
+<li><strong>调度器</strong>：Scheduler 是一种使用 DAG 定义结合元数据中的任务状态来决定哪些任务需要被执行以及任务执行优先级的过程。调度器通常作为服务运行。</li>
+<li><strong>执行器</strong>：Executor 是一个消息队列进程，它被绑定到调度器中，用于确定实际执行每个任务计划的工作进程。有不同类型的执行器，每个执行器都使用一个指定工作进程的类来执行任务。例如，LocalExecutor 使用与调度器进程在同一台机器上运行的并行进程执行任务。其他像 CeleryExecutor 的执行器使用存在于独立的工作机器集群中的工作进程执行任务。</li>
+<li><strong>Workers</strong>：这些是实际执行任务逻辑的进程，由正在使用的执行器确定。</li>
+</ul>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>Worker的具体实现由配置文件中的executor来指定，airflow支持多种Executor:</p>
+<ul>
+<li>SequentialExecutor: 单进程顺序执行，一般只用来测试</li>
+<li>LocalExecutor: 本地多进程执行</li>
+<li>CeleryExecutor: 使用Celery进行分布式任务调度</li>
+<li>DaskExecutor：使用Dask进行分布式任务调度</li>
+<li>KubernetesExecutor: 1.10.0新增, 创建临时POD执行每次任务</li>
+</ul>
+<p>生产环境一般使用CeleryExecutor和KubernetesExecutor。</p>
+<p>使用CeleryExecutor的架构如图:</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>使用KubernetesExecutor的架构如图:</p>
+<p>![图片](data:image&#x2F;svg+xml,%3C%3Fxml version&#x3D;’1.0’ encoding&#x3D;’UTF-8’%3F%3E%3Csvg width&#x3D;’1px’ height&#x3D;’1px’ viewBox&#x3D;’0 0 1 1’ version&#x3D;’1.1’ xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ xmlns:xlink&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg">http://www.w3.org/1999/xlink&#39;%3E%3Ctitle%3E%3C/title%3E%3Cg</a> stroke&#x3D;’none’ stroke-width&#x3D;’1’ fill&#x3D;’none’ fill-rule&#x3D;’evenodd’ fill-opacity&#x3D;’0’%3E%3Cg transform&#x3D;’translate(-249.000000, -126.000000)’ fill&#x3D;’%23FFFFFF’%3E%3Crect x&#x3D;’249’ y&#x3D;’126’ width&#x3D;’1’ height&#x3D;’1’%3E%3C&#x2F;rect%3E%3C&#x2F;g%3E%3C&#x2F;g%3E%3C&#x2F;svg%3E)</p>
+<p>其它参考：</p>
+<ul>
+<li>Getting started with Apache Airflow</li>
+<li>Understanding Apache Airflow’s key concepts</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/10/12/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/">https://kokomisukisuki.github.io/2023/10/12/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/12/%E7%A7%92%E6%87%82Python%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84if%20name%20==%20'main'%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%81/" title=""><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2023/10/12/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title=""><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">124</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python-%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">【收藏】Python 实现定时任务的八种方案！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8while-True-sleep-%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.2.</span> <span class="toc-text">利用while True: + sleep()实现定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Timeloop%E5%BA%93%E8%BF%90%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.3.</span> <span class="toc-text">使用Timeloop库运行定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8threading-Timer%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.4.</span> <span class="toc-text">利用threading.Timer实现定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97sched%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.5.</span> <span class="toc-text">利用内置模块sched实现定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9D%97schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.6.</span> <span class="toc-text">利用调度模块schedule实现定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6APScheduler%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.7.</span> <span class="toc-text">利用任务框架APScheduler实现定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#APScheduler%E4%B8%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="toc-number">1.7.1.</span> <span class="toc-text">APScheduler中的重要概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Job-%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.7.1.1.</span> <span class="toc-text">Job 作业</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trigger-%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-number">1.7.1.2.</span> <span class="toc-text">Trigger 触发器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Executor-%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="toc-number">1.7.1.3.</span> <span class="toc-text">Executor 执行器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Jobstore-%E4%BD%9C%E4%B8%9A%E5%AD%98%E5%82%A8"><span class="toc-number">1.7.1.4.</span> <span class="toc-text">Jobstore 作业存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.7.1.5.</span> <span class="toc-text">Event 事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">1.7.1.6.</span> <span class="toc-text">调度器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scheduler%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.7.2.</span> <span class="toc-text">Scheduler的工作流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9FCelery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.8.</span> <span class="toc-text">使用分布式消息系统Celery实现定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E6%B5%81%E5%B7%A5%E5%85%B7Apache-Airflow%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.9.</span> <span class="toc-text">使用数据流工具Apache Airflow实现定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Airflow-%E4%BA%A7%E7%94%9F%E7%9A%84%E8%83%8C%E6%99%AF"><span class="toc-number">1.9.1.</span> <span class="toc-text">Airflow 产生的背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Airflow-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.9.2.</span> <span class="toc-text">Airflow 核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Airflow-%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">1.9.3.</span> <span class="toc-text">Airflow 的架构</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Python%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%81/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/10/12/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Python%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%81/" title="无题">无题</a><time datetime="2023-10-12T09:43:32.772Z" title="发表于 2023-10-12 17:43:32">2023-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/12/%E7%A7%92%E6%87%82Python%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84if%20name%20==%20'main'%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%81/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/10/12/%E7%A7%92%E6%87%82Python%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84if%20name%20==%20'main'%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%81/" title="无题">无题</a><time datetime="2023-10-12T09:41:46.741Z" title="发表于 2023-10-12 17:41:46">2023-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/12/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/10/12/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/" title="无题">无题</a><time datetime="2023-10-12T09:28:10.054Z" title="发表于 2023-10-12 17:28:10">2023-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/12/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/10/12/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title="无题">无题</a><time datetime="2023-10-12T09:24:41.638Z" title="发表于 2023-10-12 17:24:41">2023-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/12/PyStata%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0.%E5%9F%8E%E5%B8%82%E7%BE%A4%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E4%BA%A7%E4%B8%9A%E5%85%B1%E8%81%9A%E4%B8%8E%E4%BA%A7%E4%B8%9A%E7%A9%BA%E9%97%B4%E6%B2%BB%E7%90%86%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E6%B5%8B%E5%BA%A6/" title="PyStata论文复现|.城市群视角下的产业共聚与产业空间治理：机器学习算法的测度"><img src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PyStata论文复现|.城市群视角下的产业共聚与产业空间治理：机器学习算法的测度"/></a><div class="content"><a class="title" href="/2023/10/12/PyStata%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0.%E5%9F%8E%E5%B8%82%E7%BE%A4%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E4%BA%A7%E4%B8%9A%E5%85%B1%E8%81%9A%E4%B8%8E%E4%BA%A7%E4%B8%9A%E7%A9%BA%E9%97%B4%E6%B2%BB%E7%90%86%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E6%B5%8B%E5%BA%A6/" title="PyStata论文复现|.城市群视角下的产业共聚与产业空间治理：机器学习算法的测度">PyStata论文复现|.城市群视角下的产业共聚与产业空间治理：机器学习算法的测度</a><time datetime="2023-10-11T16:00:00.000Z" title="发表于 2023-10-12 00:00:00">2023-10-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

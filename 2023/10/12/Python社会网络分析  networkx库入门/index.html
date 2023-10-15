@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python社会网络分析 | networkx库入门 | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python社会网络分析 | networkx库入门 Python for Finance  本文目录  创建空图  节点  边  绘图  向图、节点和边添加属性   图属性 节点属性 边属性     Python提供社会网络分析的专用包NetworkX，NetworkX是一个用Python语言开发的图论于复杂网络建模工具，内置了常用的图与复杂网络分析方法，可以方便地进行复杂网络数据分析和仿真建模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python社会网络分析 | networkx库入门">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/12/Python%E7%A4%BE%E4%BC%9A%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%20%20networkx%E5%BA%93%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="Python社会网络分析 | networkx库入门 Python for Finance  本文目录  创建空图  节点  边  绘图  向图、节点和边添加属性   图属性 节点属性 边属性     Python提供社会网络分析的专用包NetworkX，NetworkX是一个用Python语言开发的图论于复杂网络建模工具，内置了常用的图与复杂网络分析方法，可以方便地进行复杂网络数据分析和仿真建模">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg">
+<meta property="article:published_time" content="2023-10-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-15T11:14:03.351Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/10/12/Python%E7%A4%BE%E4%BC%9A%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%20%20networkx%E5%BA%93%E5%85%A5%E9%97%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python社会网络分析 | networkx库入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-15 19:14:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">130</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/images/2023/10/04/oHLaXg.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python社会网络分析 | networkx库入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T16:00:00.000Z" title="发表于 2023-10-12 00:00:00">2023-10-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-15T11:14:03.351Z" title="更新于 2023-10-15 19:14:03">2023-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Python社会网络分析-networkx库入门"><a href="#Python社会网络分析-networkx库入门" class="headerlink" title="Python社会网络分析 | networkx库入门"></a>Python社会网络分析 | networkx库入门</h1><p> <a href="javascript:void(0);">Python for Finance</a> </p>
+<p>本文目录</p>
+<ul>
+<li><p>创建空图</p>
+</li>
+<li><p>节点</p>
+</li>
+<li><p>边</p>
+</li>
+<li><p>绘图</p>
+</li>
+<li><p>向图、节点和边添加属性</p>
+</li>
+<li><ul>
+<li>图属性</li>
+<li>节点属性</li>
+<li>边属性</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>Python提供社会网络分析的专用包NetworkX，NetworkX是一个用Python语言开发的图论于复杂网络建模工具，内置了常用的图与复杂网络分析方法，可以方便地进行复杂网络数据分析和仿真建模等工作。NetworkX支持创建无向图、有向图和多重图；内置许多标准的图论算法，节点可以为任意可哈希数据；支持任意的边值维度。</p>
+<p>安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install networkx</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Gm2Gib6XsE8z4EoRAoTfLxuqYY9WoD9D2zWmML0w5Oo9hsSTYbIU4foUhYLYkFGAswF71VEfXWSysiargEOb9Fxw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>升级</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade networkx</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Gm2Gib6XsE8z4EoRAoTfLxuqYY9WoD9D2QfJEe3FiaeV7NQ6f49qp2E0u97Iia3Y6VBCUb2YUyPQHzVor9sibVIhzg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="创建空图"><a href="#创建空图" class="headerlink" title="创建空图"></a>创建空图</h2><p>创建一个没有边（edge）和节点（node）的空图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import networkx as nx</span><br><span class="line">G = nx.Graph()</span><br></pre></td></tr></table></figure>
+
+<p>根据定义，图形是节点（顶点）以及已识别的节点对（称为边，链接等）的集合。在</p>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>图可以以多种形式扩张。NetworkX包括许多图生成函数和工具，用于读取和写入多种格式的图。</p>
+<p><code>Graph.add_node()</code>函数一次只能添加一个节点，<code>Graph.add_nodes_from()</code>函数从可迭代容器（如列表）中添加多个节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G.add_node(1)   # 添加一个节点</span><br><span class="line">G.add_nodes_from([2, 3, 4, 5 ,6 ,7])   # 添加多个节点</span><br></pre></td></tr></table></figure>
+
+<p><code>Graph.remove_node()</code> 函数一次只能删除一个节点， <code>Graph.remove_nodes_from()</code>函数从可迭代容器（如列表）中删除多个节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G.remove_node(5)   # 删除一个节点</span><br><span class="line">G.remove_nodes_from([6,7])   # 删除多个节点</span><br></pre></td></tr></table></figure>
+
+<p><code>Graph.nodes()</code>获取节点信息、<code>Graph.number_of_nodes()</code>获取节点数量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G.nodes()  # 返回网络中的节点信息，输出结果：NodeView((1, 2, 3, 4))</span><br><span class="line">G.number_of_nodes()   # 返回节点数量，输出结果：4</span><br></pre></td></tr></table></figure>
+
+<h2 id="边"><a href="#边" class="headerlink" title="边"></a>边</h2><p><code>Graph.add_edge()</code>函数一次只能添加一条边，<code>Graph.add_edges_from()</code>函数从可迭代容器（如列表）中添加多条边。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G.add_edge(1, 2)    # 添加一条边</span><br><span class="line">G.add_edges_from([(1, 3),(1, 4), (2,3),(2,4),(3,4)])    # 添加多条边</span><br></pre></td></tr></table></figure>
+
+<p><code>Graph.remove_edge()</code> 函数一次只能删除一条边， <code>Graph.remove_edges_from()</code>函数从可迭代容器（如列表）中删除多条边。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G.remove_edge(1, 2)    # 删除一条边</span><br><span class="line">G.remove_edges_from([(1, 2),(3,4)])    # 删除多条边</span><br></pre></td></tr></table></figure>
+
+<p><code>Graph.edges()</code>获取边信息、<code>Graph.number_of_edges()</code>获取边数量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G.edges()  # 返回网络中的边信息，输出结果：EdgeView([(1, 3), (1, 4), (2, 3), (2, 4)])</span><br><span class="line">G.number_of_edges()   # 返回边数量，输出结果：4</span><br></pre></td></tr></table></figure>
+
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">nx.draw(G,with_labels=True)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Gm2Gib6XsE8z4EoRAoTfLxuqYY9WoD9D2QBfiavkzib1aIFDTQzlAceUmZc5WfVuP9zwOvVYNwrd37jicQ1dD5WdOQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>可以看到，4个节点被创建，节点(1, 3), (1, 4), (2, 3), (2, 4)之间有一条边。这就是networkx中最简单的图，无向单图。</p>
+<h2 id="向图、节点和边添加属性"><a href="#向图、节点和边添加属性" class="headerlink" title="向图、节点和边添加属性"></a>向图、节点和边添加属性</h2><p>每个图、节点和边都可以在关联的<strong>属性字典</strong>中保存键&#x2F;值属性对。 可以使用 <code>add_edge</code>、<code>add_node</code> 或直接操作名为<code> G.graph</code>、<code>G.nodes</code> 和 <code>G.edges</code> 的属性字典来添加或更改属性。</p>
+<h3 id="图属性"><a href="#图属性" class="headerlink" title="图属性"></a>图属性</h3><p>创建新图形时分配图形属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">G = nx.Graph(day=&quot;Friday&quot;)</span><br><span class="line">G.graph</span><br><span class="line">#&#123;&#x27;day&#x27;: &#x27;Friday&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者直接操作<code> G.graph</code> 的属性字典来添加或更改属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">G = nx.Graph()</span><br><span class="line">G.graph[&#x27;day&#x27;] = &quot;Monday&quot;</span><br><span class="line">G.graph</span><br><span class="line">#&#123;&#x27;day&#x27;: &#x27;Monday&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h3><p>使用 <code>Graph.add_node()</code>, <code>Graph.add_nodes_from()</code>添加节点属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">G.add_node(1, time=&#x27;5pm&#x27;)</span><br><span class="line">G.add_nodes_from([3], time=&#x27;2pm&#x27;)</span><br><span class="line">G.nodes[1]</span><br><span class="line"># 输出结果：&#123;&#x27;time&#x27;: &#x27;5pm&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>Graph.nodes</code> 添加节点属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">G.nodes[1][&#x27;room&#x27;] = 714</span><br><span class="line">G.nodes.data()</span><br><span class="line"># 输出结果：NodeDataView(&#123;1: &#123;&#x27;time&#x27;: &#x27;5pm&#x27;, &#x27;room&#x27;: 714&#125;, 3: &#123;&#x27;time&#x27;: &#x27;2pm&#x27;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="边属性"><a href="#边属性" class="headerlink" title="边属性"></a>边属性</h3><p>使用 <code>Graph.add_edge()</code>、<code>Graph.add_edges_from()</code> 或下标表示法添加&#x2F;更改边缘属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">G.add_edge(1, 2, weight=4.7 )</span><br><span class="line">G.add_edges_from([(3, 4), (4, 5)], color=&#x27;red&#x27;)</span><br><span class="line">G.add_edges_from([(1, 2, &#123;&#x27;color&#x27;: &#x27;blue&#x27;&#125;), (2, 3, &#123;&#x27;weight&#x27;: 8&#125;)])</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>Graph.edges</code> 添加节点属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G[1][2][&#x27;weight&#x27;] = 4.7</span><br><span class="line">G.edges[3, 4][&#x27;weight&#x27;] = 4.2</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/10/12/Python%E7%A4%BE%E4%BC%9A%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%20%20networkx%E5%BA%93%E5%85%A5%E9%97%A8/">https://kokomisukisuki.github.io/2023/10/12/Python%E7%A4%BE%E4%BC%9A%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%20%20networkx%E5%BA%93%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/12/PyStata%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0.%E5%9F%8E%E5%B8%82%E7%BE%A4%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E4%BA%A7%E4%B8%9A%E5%85%B1%E8%81%9A%E4%B8%8E%E4%BA%A7%E4%B8%9A%E7%A9%BA%E9%97%B4%E6%B2%BB%E7%90%86%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E6%B5%8B%E5%BA%A6/" title="PyStata论文复现|.城市群视角下的产业共聚与产业空间治理：机器学习算法的测度"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PyStata论文复现|.城市群视角下的产业共聚与产业空间治理：机器学习算法的测度</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/12/Python%E9%87%8F%E5%8C%96%20%20%E6%9E%84%E5%BB%BA%E9%A9%AC%E7%A7%91%E7%BB%B4%E8%8C%A8%E6%9C%89%E6%95%88%E8%BE%B9%E7%95%8C/" title="Python量化 | 构建马科维茨有效边界"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python量化 | 构建马科维茨有效边界</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/10/12/streamlit%E5%BA%93%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" title="streamlit库使用方法"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHxEPE.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-12</div><div class="title">streamlit库使用方法</div></div></a></div><div><a href="/2023/10/15/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title="一文详解Python多线程、多进程！"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">一文详解Python多线程、多进程！</div></div></a></div><div><a href="/2023/10/15/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/" title="Python 实现定时任务的八种方案！"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">Python 实现定时任务的八种方案！</div></div></a></div><div><a href="/2023/10/15/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Python%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%81/" title="【源码】史上最全 Python 面向对象编程！"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">【源码】史上最全 Python 面向对象编程！</div></div></a></div><div><a href="/2023/10/15/%E7%A7%92%E6%87%82Python%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84if%20name%20==%20'main'%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%81/" title="秒懂Python编程中的if __name__ &#x3D;&#x3D; &#39;main&#39; 的作用和原理！"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJftX.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">秒懂Python编程中的if __name__ &#x3D;&#x3D; &#39;main&#39; 的作用和原理！</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">130</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E7%A4%BE%E4%BC%9A%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90-networkx%E5%BA%93%E5%85%A5%E9%97%A8"><span class="toc-text">Python社会网络分析 | networkx库入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%9B%BE"><span class="toc-text">创建空图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9"><span class="toc-text">边</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%9B%BE"><span class="toc-text">绘图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E5%9B%BE%E3%80%81%E8%8A%82%E7%82%B9%E5%92%8C%E8%BE%B9%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7"><span class="toc-text">向图、节点和边添加属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%B1%9E%E6%80%A7"><span class="toc-text">图属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E5%B1%9E%E6%80%A7"><span class="toc-text">节点属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E5%B1%9E%E6%80%A7"><span class="toc-text">边属性</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/15/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title="一文详解Python多线程、多进程！"><img src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一文详解Python多线程、多进程！"/></a><div class="content"><a class="title" href="/2023/10/15/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title="一文详解Python多线程、多进程！">一文详解Python多线程、多进程！</a><time datetime="2023-10-14T16:00:00.000Z" title="发表于 2023-10-15 00:00:00">2023-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/15/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/" title="Python 实现定时任务的八种方案！"><img src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 实现定时任务的八种方案！"/></a><div class="content"><a class="title" href="/2023/10/15/%E3%80%90%E6%94%B6%E8%97%8F%E3%80%91Python%20%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%81/" title="Python 实现定时任务的八种方案！">Python 实现定时任务的八种方案！</a><time datetime="2023-10-14T16:00:00.000Z" title="发表于 2023-10-15 00:00:00">2023-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/15/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Python%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%81/" title="【源码】史上最全 Python 面向对象编程！"><img src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【源码】史上最全 Python 面向对象编程！"/></a><div class="content"><a class="title" href="/2023/10/15/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Python%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%81/" title="【源码】史上最全 Python 面向对象编程！">【源码】史上最全 Python 面向对象编程！</a><time datetime="2023-10-14T16:00:00.000Z" title="发表于 2023-10-15 00:00:00">2023-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-k%E6%9C%80%E8%BF%91%E9%82%BB/" title="机器学习笔记-k最近邻"><img src="https://www.helloimg.com/images/2023/10/03/oHJftX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机器学习笔记-k最近邻"/></a><div class="content"><a class="title" href="/2023/10/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-k%E6%9C%80%E8%BF%91%E9%82%BB/" title="机器学习笔记-k最近邻">机器学习笔记-k最近邻</a><time datetime="2023-10-14T16:00:00.000Z" title="发表于 2023-10-15 00:00:00">2023-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/15/%E7%A7%92%E6%87%82Python%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84if%20name%20==%20'main'%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%81/" title="秒懂Python编程中的if __name__ == 'main' 的作用和原理！"><img src="https://www.helloimg.com/images/2023/10/03/oHJftX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="秒懂Python编程中的if __name__ == 'main' 的作用和原理！"/></a><div class="content"><a class="title" href="/2023/10/15/%E7%A7%92%E6%87%82Python%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84if%20name%20==%20'main'%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%81/" title="秒懂Python编程中的if __name__ == 'main' 的作用和原理！">秒懂Python编程中的if __name__ == 'main' 的作用和原理！</a><time datetime="2023-10-14T16:00:00.000Z" title="发表于 2023-10-15 00:00:00">2023-10-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

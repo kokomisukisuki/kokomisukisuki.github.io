@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>cookie详解 | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="cookie详解转自《《《《 [cookie的由来，组成，以及原理-阿里云开发者社区 (aliyun.com)](https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;1138640#:~:text&#x3D;cookie的组成 1 key：键，比如「身份编号」 2 value：值，比如小明的身份编号「14563D1550F2F76D69ECBF4DD54ABC95」，这有点像卡片的条形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookie详解">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/17/cookie%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="cookie详解转自《《《《 [cookie的由来，组成，以及原理-阿里云开发者社区 (aliyun.com)](https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;1138640#:~:text&#x3D;cookie的组成 1 key：键，比如「身份编号」 2 value：值，比如小明的身份编号「14563D1550F2F76D69ECBF4DD54ABC95」，这有点像卡片的条形">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg">
+<meta property="article:published_time" content="2023-10-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-17T09:56:29.278Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta property="article:tag" content="python基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/10/17/cookie%E8%AF%A6%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":20},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'cookie详解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-17 17:56:29'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">142</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/images/2023/10/04/oHLqin.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">cookie详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-16T16:00:00.000Z" title="发表于 2023-10-17 00:00:00">2023-10-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-17T09:56:29.278Z" title="更新于 2023-10-17 17:56:29">2023-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/">python</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="cookie详解"><a href="#cookie详解" class="headerlink" title="cookie详解"></a>cookie详解</h1><p>转自《《《《</p>
+<p>[cookie的由来，组成，以及原理-阿里云开发者社区 (aliyun.com)](<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1138640#:~:text=cookie%E7%9A%84%E7%BB%84%E6%88%90">https://developer.aliyun.com/article/1138640#:~:text=cookie的组成</a> 1 key：键，比如「身份编号」 2 value：值，比如小明的身份编号「14563D1550F2F76D69ECBF4DD54ABC95」，这有点像卡片的条形码，当然，它可以是任何信息 3 domain：域，表达这个cookie是属于哪个网站的，比如baidu.com，表示这个cookie是属于baidu.com这个网站的,4 path：路径，表达这个cookie是属于该网站的哪个基路径的，就好比是同一家公司不同部门会颁发不同的出入证。 比如%2Fnews，表示这个cookie属于%2Fnews这个路径的。 （后续详细解释） 5 secure：是否使用安全传输（后续详细解释） 6 expire：过期时间，表示该cookie在什么时候过期)</p>
+<p>假设服务器有一个接口，通过请求这个接口，可以添加一个管理员</p>
+<p>但是，不是任何人都有权力做这种操作的</p>
+<p>那么服务器如何知道请求接口的人是有权力的呢？</p>
+<p>答案是：只有登录过的管理员才能做这种操作</p>
+<p>可问题是，客户端和服务器的传输使用的是http协议，http协议是无状态的，什么叫无状态，就是服务器不知道这一次请求的人，跟之前登录请求成功的人是不是同一个人</p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/ruqdfvh2iuyqc_3cd85136a92b4be8bbd8beffa517c635.png" alt="2020122109084691.png"></p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/ruqdfvh2iuyqc_f51b8d4bb95c4015817af9a162c47da7.png" alt="20201221090858748.png"></p>
+<p>由于http协议的无状态，服务器忘记了之前的所有请求，它无法确定这一次请求的客户端，就是之前登录成功的那个客户端。</p>
+<p>你可以把服务器想象成有着严重脸盲症的人，他没有办法分清楚跟他说话的人之前做过什么</p>
+<p>于是，服务器想了一个办法</p>
+<p>它按照下面的流程来认证客户端的身份</p>
+<p>1.客户端登录成功后，服务器会给客户端一个出入证（令牌 token）</p>
+<p>2.后续客户端的每次请求，都必须要附带这个出入证（令牌 token）</p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/ruqdfvh2iuyqc_f43e142442d64f8b9ff150e8394dfd12.png" alt="2020122109090976.png"></p>
+<p>服务器发扬了认证不认人的优良传统，就可以很轻松的识别身份了。</p>
+<p>但是，用户不可能只在一个网站登录，于是客户端会收到来自各个网站的出入证，因此，就要求客户端要有一个类似于卡包的东西，能够具备下面的功能：</p>
+<p>1.能够存放多个出入证。这些出入证来自不同的网站，也可能是一个网站有多个出入证，分别用于出入不同的地方</p>
+<p>2.能够自动出示出入证。客户端在访问不同的网站时，能够自动的把对应的出入证附带请求发送出去。</p>
+<p>3.正确的出示出入证。客户端不能将肯德基的出入证发送给麦当劳。</p>
+<p>4.管理出入证的有效期。客户端要能够自动的发现那些已经过期的出入证，并把它从卡包内移除。</p>
+<p>能够满足上面所有要求的，就是cookie</p>
+<p>cookie类似于一个卡包，专门用于存放各种出入证，并有着一套机制来自动管理这些证件。</p>
+<p>卡包内的每一张卡片，称之为一个cookie。</p>
+<h1 id="cookie的组成"><a href="#cookie的组成" class="headerlink" title="cookie的组成"></a>cookie的组成</h1><p>cookie是浏览器中特有的一个概念，它就像浏览器的专属卡包，管理着各个网站的身份信息。</p>
+<p>每个cookie就相当于是属于某个网站的一个卡片，它记录了下面的信息：</p>
+<ul>
+<li>key：键，比如「身份编号」</li>
+<li>value：值，比如小明的身份编号「14563D1550F2F76D69ECBF4DD54ABC95」，这有点像卡片的条形码，当然，它可以是任何信息</li>
+<li>domain：域，表达这个cookie是属于哪个网站的，比如baidu.com，表示这个cookie是属于baidu.com这个网站的</li>
+<li>path：路径，表达这个cookie是属于该网站的哪个基路径的，就好比是同一家公司不同部门会颁发不同的出入证。比如&#x2F;news，表示这个cookie属于&#x2F;news这个路径的。（后续详细解释）</li>
+<li>secure：是否使用安全传输（后续详细解释）</li>
+<li>expire：过期时间，表示该cookie在什么时候过期</li>
+</ul>
+<p>当浏览器向服务器发送一个请求的时候，它会瞄一眼自己的卡包，看看哪些卡片适合附带捎给服务器</p>
+<p>如果一个cookie同时满足以下条件，则这个cookie会被附带到请求中</p>
+<ul>
+<li>cookie没有过期</li>
+<li>cookie中的域和这次请求的域是匹配的</li>
+</ul>
+<p>。比如cookie中的域是baidu.com（基域，也叫一级域名），则可以匹配的请求域是baidu.com、<a target="_blank" rel="noopener" href="http://www.baidu.com、blogs.baidu.com等等/">www.baidu.com、blogs.baidu.com等等</a></p>
+<p>。比如cookie中的域是<a target="_blank" rel="noopener" href="http://www.baidu.com(一个二级域名),则只能匹配www.baidu.com这样的请求域/">www.baidu.com（一个二级域名），则只能匹配www.baidu.com这样的请求域</a></p>
+<p>。cookie是不在乎端口的，只要域匹配即可</p>
+<ul>
+<li>cookie中的path和这次请求的path是匹配的</li>
+</ul>
+<p>。比如cookie中的path是&#x2F;news，则可以匹配的请求路径可以是&#x2F;news、&#x2F;news&#x2F;detail、&#x2F;news&#x2F;a&#x2F;b&#x2F;c等等，但不能匹配&#x2F;blogs</p>
+<p>。如果cookie的path是&#x2F;，可以想象，能够匹配所有的路径</p>
+<ul>
+<li>验证cookie的安全传输</li>
+</ul>
+<p>。如果cookie的secure属性是true，则请求协议必须是https，否则不会发送该cookie</p>
+<p>。如果cookie的secure属性是false，则请求协议可以是http，也可以是https</p>
+<p>如果一个cookie满足了上述的所有条件，则浏览器会把它自动加入到这次请求中</p>
+<p>具体加入的方式是，浏览器会将符合条件的cookie，自动放置到请求头中，例如，当我在浏览器中访问百度的时候，它在请求头中附带了下面的cookie：</p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/ruqdfvh2iuyqc_7090fd09394c4da3bd07031f58708705.png" alt="2020122109093899.png"></p>
+<p>看到打马赛克的地方了吗？这部分就是通过请求头cookie发送到服务器的，它的格式是键&#x3D;值; 键&#x3D;值; 键&#x3D;值; …，每一个键值对就是一个符合条件的cookie。</p>
+<p><strong>cookie中包含了重要的身份信息，永远不要把你的cookie泄露给别人！！！</strong>否则，他人就拿到了你的证件，有了证件，就具备了为所欲为的可能性。</p>
+<h1 id="如何设置cookie"><a href="#如何设置cookie" class="headerlink" title="如何设置cookie"></a>如何设置cookie</h1><p>由于cookie是保存在浏览器端的，同时，很多证件又是服务器颁发的</p>
+<p>所以，cookie的设置有两种模式：</p>
+<ul>
+<li>服务器响应：这种模式是非常普遍的，当服务器决定给客户端颁发一个证件时，它会在响应的消息中包含cookie，浏览器会自动的把cookie保存到卡包中</li>
+<li>客户端自行设置：这种模式少见一些，不过也有可能会发生，比如用户关闭了某个广告，并选择了「以后不要再弹出」，此时就可以把这种小信息直接通过浏览器的JS代码保存到cookie中。后续请求服务器时，服务器会看到客户端不想要再次弹出广告的cookie，于是就不会再发送广告过来了。</li>
+</ul>
+<h2 id="服务器端设置cookie"><a href="#服务器端设置cookie" class="headerlink" title="服务器端设置cookie"></a>服务器端设置cookie</h2><p>服务器可以通过设置响应头，来告诉浏览器应该如何设置cookie</p>
+<p>响应头按照下面的格式设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set-cookie: cookie1</span><br><span class="line">set-cookie: cookie2</span><br><span class="line">set-cookie: cookie3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过这种模式，就可以在一次响应中设置多个cookie了，具体设置多少个cookie，设置什么cookie，根据你的需要自行处理</p>
+<p>其中，每个cookie的格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">键=值; path=?; domain=?; expire=?; max-age=?; secure; httponly</span><br></pre></td></tr></table></figure>
+
+
+
+<p>每个cookie除了键值对是必须要设置的，其他的属性都是可选的，并且顺序不限</p>
+<p>当这样的响应头到达客户端后，浏览器会自动的将cookie保存到卡包中，如果卡包中已经存在一模一样的卡片（其他key、path、domain相同），则会自动的覆盖之前的设置。</p>
+<p>下面，依次说明每个属性值：</p>
+<ul>
+<li>path：设置cookie的路径。如果不设置，浏览器会将其自动设置为当前请求的路径。比如，浏览器请求的地址是&#x2F;login，服务器响应了一个set-cookie: a&#x3D;1，浏览器会将该cookie的path设置为请求的路径&#x2F;login</li>
+<li>domain：设置cookie的域。如果不设置，浏览器会自动将其设置为当前的请求域，比如，浏览器请求的地址是<a target="_blank" rel="noopener" href="http://www.baidu.com,服务器响应了一个set-cookie/">http://www.baidu.com，服务器响应了一个set-cookie</a>: a&#x3D;1，浏览器会将该cookie的domain设置为请求的域<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></li>
+</ul>
+<p>。这里值得注意的是，如果服务器响应了一个无效的域，浏览器是不认的</p>
+<p>。什么是无效的域？就是响应的域连根域都不一样。比如，浏览器请求的域是baidu.com，服务器响应的cookie是set-cookie: a&#x3D;1; domain&#x3D;taobao.com，这样的域浏览器是不认的。</p>
+<p>。如果浏览器连这样的情况都允许，就意味着张三的服务器，有权利给用户一个cookie，用于访问李四的服务器，这会造成很多安全性的问题</p>
+<ul>
+<li>expire：设置cookie的过期时间。这里必须是一个有效的GMT时间，即格林威治标准时间字符串，比如Fri, 17 Apr 2020 09:35:59 GMT，表示格林威治时间的2020-04-17 09:35:59，即北京时间的2020-04-17 17:35:59。当客户端的时间达到这个时间点后，会自动销毁该cookie。</li>
+<li>max-age：设置cookie的相对有效期。expire和max-age通常仅设置一个即可。比如设置max-age为1000，浏览器在添加cookie时，会自动设置它的expire为当前时间加上1000秒，作为过期时间。</li>
+</ul>
+<p>。如果不设置expire，又没有设置max-age，则表示会话结束后过期。</p>
+<p>。对于大部分浏览器而言，关闭所有浏览器窗口意味着会话结束。</p>
+<ul>
+<li>secure：设置cookie是否是安全连接。如果设置了该值，则表示该cookie后续只能随着https请求发送。如果不设置，则表示该cookie会随着所有请求发送。</li>
+<li>httponly：设置cookie是否仅能用于传输。如果设置了该值，表示该cookie仅能用于传输，而不允许在客户端通过JS获取，这对防止跨站脚本攻击（XSS）会很有用。</li>
+</ul>
+<p>。关于如何通过JS获取，后续会讲解</p>
+<p>。关于什么是XSS，不在本文讨论范围</p>
+<p>下面来一个例子，客户端通过post请求服务器<a target="_blank" rel="noopener" href="http://www.baidu.com/login%EF%BC%8C%E5%B9%B6%E5%9C%A8%E6%B6%88%E6%81%AF%E4%BD%93%E4%B8%AD%E7%BB%99%E4%BA%88%E4%BA%86%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81%EF%BC%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E5%90%8E%EF%BC%8C%E5%9C%A8%E5%93%8D%E5%BA%94%E5%A4%B4%E4%B8%AD%E5%8A%A0%E5%85%A5%E4%BA%86%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9%EF%BC%9A">http://www.baidu.com/login，并在消息体中给予了账号和密码，服务器验证登录成功后，在响应头中加入了以下内容：</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set-cookie: token=123456; path=/; max-age=3600; httponly</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当该响应到达浏览器后，浏览器会创建下面的cookie：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">key: token</span><br><span class="line">value: 123456</span><br><span class="line">domain: baidu.com</span><br><span class="line">path: /</span><br><span class="line">expire: 2020-04-17 18:55:00 #假设当前时间是2020-04-17 17:55:00</span><br><span class="line">secure: false  #任何请求都可以附带这个cookie，只要满足其他要求</span><br><span class="line">httponly: true #不允许JS获取该cookie</span><br></pre></td></tr></table></figure>
+
+
+
+<p>于是，随着浏览器后续对服务器的请求，只要满足要求，这个cookie就会被附带到请求头中传给服务器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie: token=123456; 其他cookie...</span><br></pre></td></tr></table></figure>
+
+
+
+<p>现在，还剩下最后一个问题，就是如何删除浏览器的一个cookie呢？</p>
+<p>如果要删除浏览器的cookie，只需要让服务器响应一个同样的域、同样的路径、同样的key，只是时间过期的cookie即可</p>
+<p>**<br>**</p>
+<p>所以，删除cookie其实就是修改cookie</p>
+<p>**<br>**</p>
+<p>下面的响应会让浏览器删除<code>token</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie: token=; domain=yuanjin.tech; path=/; max-age=-1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>浏览器按照要求修改了cookie后，会发现cookie已经过期，于是自然就会删除了。</p>
+<p>无论是修改还是删除，都要注意cookie的域和路径，因为完全可能存在域或路径不同，但key相同的cookie</p>
+<p>因此无法仅通过key确定是哪一个cookie</p>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><p>既然cookie是存放在浏览器端的，所以浏览器向JS公开了接口，让其可以设置cookie</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &quot;键=值; path=?; domain=?; expire=?; max-age=?; secure&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看出，在客户端设置cookie，和服务器设置cookie的格式一样，只是有下面的不同</p>
+<ul>
+<li>没有httponly。因为httponly本来就是为了限制在客户端访问的，既然你是在客户端配置，自然失去了限制的意义。</li>
+<li>path的默认值。在服务器端设置cookie时，如果没有写path，使用的是请求的path。而在客户端设置cookie时，也许根本没有请求发生。因此，path在客户端设置时的默认值是当前网页的path</li>
+<li>domain的默认值。和path同理，客户端设置时的默认值是当前网页的domain</li>
+<li>其他：一样</li>
+<li>删除cookie：和服务器也一样，修改cookie的过期时间即可</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上，就是cookie原理部分的内容。</p>
+<p>如果把它用于登录场景，就是如下的流程：</p>
+<p>登录请求</p>
+<p>1.浏览器发送请求到服务器，附带账号密码</p>
+<p>2.服务器验证账号密码是否正确，如果不正确，响应错误，如果正确，在响应头中设置cookie，附带登录认证信息（至于登录认证信息是设么样的，如何设计，要考虑哪些问题，就是另一个话题了，可以百度 jwt）</p>
+<p>3.客户端收到cookie，浏览器自动记录下来</p>
+<p>后续请求</p>
+<p>1.浏览器发送请求到服务器，希望添加一个管理员，并将cookie自动附带到请求中</p>
+<p>2.服务器先获取cookie，验证cookie中的信息是否正确，如果不正确，不予以操作，如果正确，完成正常的业务流程</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/10/17/cookie%E8%AF%A6%E8%A7%A3/">https://kokomisukisuki.github.io/2023/10/17/cookie%E8%AF%A6%E8%A7%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python%E5%9F%BA%E7%A1%80/">python基础</a></div><div class="post_share"><div class="social-share" data-image="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/17/weibobot%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E4%B9%A0/" title=""><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2023/10/17/algolia%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" title="algolia使用手册"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHqYBm.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">algolia使用手册</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/10/07/Python%20%20Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/" title="Python学习之多线程详解"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python学习之多线程详解</div></div></a></div><div><a href="/2023/10/07/Python%20%20asyncio%EF%BC%9A%E4%BB%8E%E5%8E%9F%E7%90%86%E3%80%81%E6%BA%90%E7%A0%81%E5%88%B0%E5%AE%9E%E7%8E%B0/" title="asyncio：从原理、源码到实现"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEpr6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">asyncio：从原理、源码到实现</div></div></a></div><div><a href="/2023/10/07/Python%20%20Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B%E8%AF%A6%E8%A7%A3/" title="Python学习之多进程详解"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHEI6z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-07</div><div class="title">Python学习之多进程详解</div></div></a></div><div><a href="/2023/10/17/python%E4%B8%AD%20r'',%20b'',%20u'',%20f''%20%E7%9A%84%E5%90%AB%E4%B9%89/" title="python中 r&#39;&#39;, b&#39;&#39;, u&#39;&#39;, f&#39;&#39; 的含义"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-17</div><div class="title">python中 r&#39;&#39;, b&#39;&#39;, u&#39;&#39;, f&#39;&#39; 的含义</div></div></a></div><div><a href="/2023/10/15/%E3%80%90%E5%B9%B2%E8%B4%A7%E3%80%91%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%81/" title="一文详解Python多线程、多进程！"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">一文详解Python多线程、多进程！</div></div></a></div><div><a href="/2023/10/15/%E3%80%90%E6%BA%90%E7%A0%81%E3%80%91%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Python%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%81/" title="史上最全 Python 面向对象编程"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJyqP.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">史上最全 Python 面向对象编程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">sagonimikakokomi</div><div class="author-info__description">none</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">142</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie%E8%AF%A6%E8%A7%A3"><span class="toc-text">cookie详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">cookie的组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AEcookie"><span class="toc-text">如何设置cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%AE%BE%E7%BD%AEcookie"><span class="toc-text">服务器端设置cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E7%BD%AEcookie"><span class="toc-text">客户端设置cookie</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/17/weibobot%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E4%B9%A0/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/10/17/weibobot%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E4%B9%A0/" title="无题">无题</a><time datetime="2023-10-17T09:12:29.224Z" title="发表于 2023-10-17 17:12:29">2023-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/17/cookie%E8%AF%A6%E8%A7%A3/" title="cookie详解"><img src="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="cookie详解"/></a><div class="content"><a class="title" href="/2023/10/17/cookie%E8%AF%A6%E8%A7%A3/" title="cookie详解">cookie详解</a><time datetime="2023-10-16T16:00:00.000Z" title="发表于 2023-10-17 00:00:00">2023-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/17/algolia%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" title="algolia使用手册"><img src="https://www.helloimg.com/images/2023/10/03/oHqYBm.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="algolia使用手册"/></a><div class="content"><a class="title" href="/2023/10/17/algolia%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" title="algolia使用手册">algolia使用手册</a><time datetime="2023-10-16T16:00:00.000Z" title="发表于 2023-10-17 00:00:00">2023-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/17/js%E5%89%8D%E7%AB%AF/" title="js前端"><img src="https://www.helloimg.com/images/2023/10/03/oHJFVQ.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="js前端"/></a><div class="content"><a class="title" href="/2023/10/17/js%E5%89%8D%E7%AB%AF/" title="js前端">js前端</a><time datetime="2023-10-16T16:00:00.000Z" title="发表于 2023-10-17 00:00:00">2023-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/17/python%E4%B8%AD%20r'',%20b'',%20u'',%20f''%20%E7%9A%84%E5%90%AB%E4%B9%89/" title="python中 r'', b'', u'', f'' 的含义"><img src="https://www.helloimg.com/images/2023/10/03/oHE8ZA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python中 r'', b'', u'', f'' 的含义"/></a><div class="content"><a class="title" href="/2023/10/17/python%E4%B8%AD%20r'',%20b'',%20u'',%20f''%20%E7%9A%84%E5%90%AB%E4%B9%89/" title="python中 r'', b'', u'', f'' 的含义">python中 r'', b'', u'', f'' 的含义</a><time datetime="2023-10-16T16:00:00.000Z" title="发表于 2023-10-17 00:00:00">2023-10-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">说点什么</p><div class="bg-ad"><div>（这里的内容随你写，但是不要过长影响整体美观度，具体可根据实现效果修改）随便说点什么说点什么、随便说点什么说点什么随便说点什么说点什么随便说点什么说点什么随便说点什么说。</div><div class="btn-xz-box"><a class="btn-xz" target="_blank" rel="noopener" href="https://fe32.top/">点击跳转到哪儿</a></div></div></div><div class="t-t-r"><p class="ft-t t-l-t">修仙导航</p><ul class="ft-links"><li><a target="_blank" rel="noopener" href="https://fe32.top/articles/hexo1600/">建站指南</a><a target="_blank" rel="noopener" href="https://fe32.top/nav.html">网址导航</a></li><li><a target="_blank" rel="noopener" href="https://fe32.top/sponsorWall/">来杯咖啡</a><a target="_blank" rel="noopener" href="https://fe32.top/comments/">留点什么</a></li><li><a target="_blank" rel="noopener" href="https://fe32.top/about/">关于博主</a><a target="_blank" rel="noopener" href="https://fe32.top/archives/">文章归档</a></li><li><a target="_blank" rel="noopener" href="https://fe32.top/categories/">文章分类</a><a target="_blank" rel="noopener" href="https://fe32.top/tags/">文章标签</a></li><li><a target="_blank" rel="noopener" href="https://fe32.top/gallery/">我的相册</a><a target="_blank" rel="noopener" href="https://fe32.top/bangumis/">我的追番</a></li><li><a target="_blank" rel="noopener" href="https://fe32.top/specialEffects/">一些特效</a><a target="_blank" rel="noopener" href="https://fe32.top/wallpaper/">一些壁纸</a></li></ul></div></div></div><div class="ft-item-2"><p class="ft-t">推荐友链</p><div class="ft-img-group"><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div><div class="img-group-item"><a target="_blank" rel="noopener" href="https://fe32.top/"><img src="https://bu.dusays.com/2022/05/02/626f92e193879.jpg" alt=""/></a></div></div></div></div><div class="copyright">&copy;2022 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

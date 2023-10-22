@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-10-04 13:16:14
  * @LastEditors: kokomisukisuki 3230267087@qq.com
- * @LastEditTime: 2023-10-22 19:14:14
+ * @LastEditTime: 2023-10-22 20:13:38
  * @FilePath: \hexo\source\cover.txt
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -136,10 +136,10 @@ algolia使用手册[![oH36e1.jpg](https://www.helloimg.com/images/2023/10/03/oH3
 电路原理笔记[![oH3WYR.jpg](https://www.helloimg.com/images/2023/10/03/oH3WYR.jpg)](https://www.helloimg.com/image/oH3WYR)
 [双双失业的马娘与训练员的同居生活] 炖肉[![oH3Tdn.jpg](https://www.helloimg.com/images/2023/10/03/oH3Tdn.jpg)](https://www.helloimg.com/image/oH3Tdn)
 [双双失业的马娘与训练员的同居生活] 炖肉[![oH3S89.jpg](https://www.helloimg.com/images/2023/10/03/oH3S89.jpg)](https://www.helloimg.com/image/oH3S89)
-[![oH3mmt.jpg](https://www.helloimg.com/images/2023/10/03/oH3mmt.jpg)](https://www.helloimg.com/image/oH3mmt)
-[![oH3xpC.jpg](https://www.helloimg.com/images/2023/10/03/oH3xpC.jpg)](https://www.helloimg.com/image/oH3xpC)
-[![oH31Mb.jpg](https://www.helloimg.com/images/2023/10/03/oH31Mb.jpg)](https://www.helloimg.com/image/oH31Mb)
-[![oH3Gyq.jpg](https://www.helloimg.com/images/2023/10/03/oH3Gyq.jpg)](https://www.helloimg.com/image/oH3Gyq)
+【碧蓝档案/momotalk/下江小春】单纯与不单纯的思念[![oH3mmt.jpg](https://www.helloimg.com/images/2023/10/03/oH3mmt.jpg)](https://www.helloimg.com/image/oH3mmt)
+【碧蓝档案/猫冢响/长篇momotalk】宇宙、逐星者与望星人[![oH3xpC.jpg](https://www.helloimg.com/images/2023/10/03/oH3xpC.jpg)](https://www.helloimg.com/image/oH3xpC)
+【碧蓝档案/猫冢响/后日谈】星星、裁缝与无浪海[![oH31Mb.jpg](https://www.helloimg.com/images/2023/10/03/oH31Mb.jpg)](https://www.helloimg.com/image/oH31Mb)
+玻璃上的情书【碧蓝档案同人|生盐诺亚】[![oH3Gyq.jpg](https://www.helloimg.com/images/2023/10/03/oH3Gyq.jpg)](https://www.helloimg.com/image/oH3Gyq)
 [![oH3BLh.jpg](https://www.helloimg.com/images/2023/10/03/oH3BLh.jpg)](https://www.helloimg.com/image/oH3BLh)
 [![oH1h3A.jpg](https://www.helloimg.com/images/2023/10/03/oH1h3A.jpg)](https://www.helloimg.com/image/oH1h3A)
 [![oH1VcR.jpg](https://www.helloimg.com/images/2023/10/03/oH1VcR.jpg)](https://www.helloimg.com/image/oH1VcR)

@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-10-04 13:16:14
  * @LastEditors: kokomisukisuki 3230267087@qq.com
- * @LastEditTime: 2023-10-21 22:35:10
+ * @LastEditTime: 2023-10-22 12:43:35
  * @FilePath: \hexo\source\cover.txt
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -133,7 +133,7 @@ algolia使用手册[![oH36e1.jpg](https://www.helloimg.com/images/2023/10/03/oH3
 会长总觉得训练员在勾引她[![oH3zsq.jpg](https://www.helloimg.com/images/2023/10/03/oH3zsq.jpg)](https://www.helloimg.com/image/oH3zsq)
 过把瘾就死[![oH3wo0.jpg](https://www.helloimg.com/images/2023/10/03/oH3wo0.jpg)](https://www.helloimg.com/image/oH3wo0)
 幼稚的坏孩子，渴望着你的目光[![oH3OXz.png](https://www.helloimg.com/images/2023/10/03/oH3OXz.png)](https://www.helloimg.com/image/oH3OXz)
-[![oH3WYR.jpg](https://www.helloimg.com/images/2023/10/03/oH3WYR.jpg)](https://www.helloimg.com/image/oH3WYR)
+电路原理笔记[![oH3WYR.jpg](https://www.helloimg.com/images/2023/10/03/oH3WYR.jpg)](https://www.helloimg.com/image/oH3WYR)
 [![oH3Tdn.jpg](https://www.helloimg.com/images/2023/10/03/oH3Tdn.jpg)](https://www.helloimg.com/image/oH3Tdn)
 [![oH3S89.jpg](https://www.helloimg.com/images/2023/10/03/oH3S89.jpg)](https://www.helloimg.com/image/oH3S89)
 [![oH3mmt.jpg](https://www.helloimg.com/images/2023/10/03/oH3mmt.jpg)](https://www.helloimg.com/image/oH3mmt)

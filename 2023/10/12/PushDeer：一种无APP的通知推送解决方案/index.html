@@ -160,7 +160,7 @@
 
 <h1 id="PushDeer：一种无APP的通知推送解决方案"><a href="#PushDeer：一种无APP的通知推送解决方案" class="headerlink" title="PushDeer：一种无APP的通知推送解决方案"></a>PushDeer：一种无APP的通知推送解决方案</h1><p>转自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/545641082">PushDeer：一种无APP的通知推送解决方案 - 知乎 (zhihu.com)</a></p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a><strong>概述</strong></h2><blockquote>
-<p>去年六月，我曾写下一篇博客介绍如何 <a href="https://link.zhihu.com/?target=https://houkaifa.com/2020/06/21/wechat-notifier/">借助 ServerChan 实现个人微信通知推送</a>，在那篇文章中介绍了 ServerChan 及其使用方法，总的来说，对于简单的通知需求，使用 ServerChan 是非常简单有效的。但是实际使用起来，其仍有一些非常明显的弊端会暴露出来，使得在真实日常场景中只能强差人意。这两天发现了一种更加有效的移动端通知推送方案：PushDeer，在此做简单的记录与分享</p>
+<p>去年六月，我曾写下一篇博客介绍如何 <a href="https://link.zhihu.com/?target=https%3A//houkaifa.com/2020/06/21/wechat-notifier/">借助 ServerChan 实现个人微信通知推送</a>，在那篇文章中介绍了 ServerChan 及其使用方法，总的来说，对于简单的通知需求，使用 ServerChan 是非常简单有效的。但是实际使用起来，其仍有一些非常明显的弊端会暴露出来，使得在真实日常场景中只能强差人意。这两天发现了一种更加有效的移动端通知推送方案：PushDeer，在此做简单的记录与分享</p>
 </blockquote>
 <h2 id="一、什么是-PushDeer"><a href="#一、什么是-PushDeer" class="headerlink" title="一、什么是 PushDeer"></a><strong>一、什么是 PushDeer</strong></h2><p>使用过 ServerChan 的朋友们应该对手机通知推送的需求不陌生。简单来说，我们有一个软件，它可能是监控类型的（如服务器资源监控），可能是计算类型的（如炼丹），我们需要它能够在特定的条件下主动给我们的手机上发送通知，这样就免得我们要 24h 盯着，或者时不时来检查了。PushDeer 就是这一类问题的一项开源解决方案，与 ServerChan 不同的是，ServerChan 借助微信公众号来发送通知提醒，而 PushDeer 是借助专门的手机端 APP 来推送提醒。</p>
 <p><strong>既然都能推送提醒，那么 PushDeer 相比 ServerChan 来讲有什么优势呢？</strong></p>
@@ -169,7 +169,7 @@
 <li>其次，ServerChan 给微信发的通知无法直接显示通知内容，而需要进入微信-&gt;进入公众号，然后才能看见通知内容。而 PushDeer 能够在锁屏界面，或者是手机顶部弹出来的通知栏中直接看到通知内容，一目了然；</li>
 <li>最后，PushDeer 是开源解决方案，支持自架服务器，并且支持 docker compose 快速部署，服务可以掌握在自己手上，而 ServerChan 无法避免地要依赖于方糖的公众号。</li>
 </ul>
-<p>如果访问 <a href="https://link.zhihu.com/?target=https://www.pushdeer.com/">PushDeer 的官网</a>，你会在「什么是 PushDeer」页面看到这样的自述：PushDeer 是一个开源的无 APP 推送解决方案，其<strong>特色</strong>包括：「易用」、「可控」和「渐进」。其中三个关键词的解释在此就不赘述，<strong>那么什么是所谓的无 APP 推送解决方案呢？PushDeer 的逻辑又是什么呢？</strong></p>
+<p>如果访问 <a href="https://link.zhihu.com/?target=https%3A//www.pushdeer.com/">PushDeer 的官网</a>，你会在「什么是 PushDeer」页面看到这样的自述：PushDeer 是一个开源的无 APP 推送解决方案，其<strong>特色</strong>包括：「易用」、「可控」和「渐进」。其中三个关键词的解释在此就不赘述，<strong>那么什么是所谓的无 APP 推送解决方案呢？PushDeer 的逻辑又是什么呢？</strong></p>
 <ul>
 <li>所谓无 APP 并不是说不需要 APP 就能给手机推消息，这是不可能的，这个无 APP 指的是你无需开发自己的 APP，直接用 PushDeer 的 APP 就可以了，并且 PushDeer 的 APP 也是开源的，有需要的话完全可以自己魔改然后上架，但其实直接使用官方上架的 APP 就可以了。</li>
 <li>PushDeer 的推送逻辑我按照个人理解画下了图1-1，供参考。首先在手机上连接 PushDeer 服务端，将本设备绑定到服务端上，然后生成一个或多个用于接收通知的 Key。而在你的程序端，你需要拿着设备上生成的 Key 和要推送的消息内容丢给服务端，服务端找一找这个 Key 是属于哪个设备的，然后将消息推送给相应的设备即可。</li>
@@ -186,11 +186,10 @@
 <li>发送 Markdown：<code>https://api2.pushdeer.com/message/push?pushkey=&lt;key&gt;&amp;text=标题&amp;desp=&lt;markdown&gt;&amp;type=markdown</code></li>
 </ul>
 <blockquote>
-<p>在URL中可以用<code>%0A</code>换行，当参数中有特殊字符时，需要进行 urlencode，因此更建议通过函数或者SDK发送。<br>安卓平台的快应用尚在开发，可下载并安装 Android 测试版 APP (<a href="https://link.zhihu.com/?target=https://github.com/easychen/pushdeer/releases/tag/android1.0alpha">GitHub</a>|<a href="https://link.zhihu.com/?target=https://gitee.com/easychen/pushdeer/releases/android1.0alpha">Gitee</a>)。</p>
+<p>在URL中可以用<code>%0A</code>换行，当参数中有特殊字符时，需要进行 urlencode，因此更建议通过函数或者SDK发送。<br>安卓平台的快应用尚在开发，可下载并安装 Android 测试版 APP (<a href="https://link.zhihu.com/?target=https%3A//github.com/easychen/pushdeer/releases/tag/android1.0alpha">GitHub</a>|<a href="https://link.zhihu.com/?target=https%3A//gitee.com/easychen/pushdeer/releases/android1.0alpha">Gitee</a>)。</p>
 </blockquote>
 <p>对于自架版，首先在服务器上拉取服务端：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://gitee.com/easychen/pushdeer.git</span><br><span class="line">cd pushdeer</span><br><span class="line">sudo docker-compose -f docker-compose.self-hosted.yml up --build -d</span><br></pre></td></tr></table></figure>
-
 <p>完成后访问服务器的 8800 端口（注意记得放行相应端口），能够正常访问则说明服务端部署成功。后面的步骤和官方在线版就几乎一样了，区别仅仅是：</p>
 <ol>
 <li>手机端要使用自架版轻应用或 App；</li>
@@ -201,8 +200,8 @@
 <li>自架服务器端需每年2月拉取一次更新推送证书</li>
 <li>轻应用方式绑定的设备，如果 30 天未使用，轻应用将被 iOS 自动清理，届时设备 id 失效，无法给这个设备推送了。其实也就是图1-1中通过 Key 找到的设备 id 失效了，推不出去，那么需要重新绑定，重新生成 Key，并在程序端更新目标 Key 才能推送。因此其实相比图新鲜使用 App Clip，还是下载下来用更靠谱。</li>
 </ul>
-<p>最后，如果你一点代码都懒得写的话，其实 PushDeer 已经有了一些常用语言的 SDK，包括 <a href="https://link.zhihu.com/?target=https://gitee.com/mrbread/pushdeer_csharp_sdk">C#</a>、<a href="https://link.zhihu.com/?target=https://gitee.com/mrbread/pushdeer-java-sdk">Java</a>、<a href="https://link.zhihu.com/?target=https://github.com/gaoliang/pypushdeer">Python</a>、<a href="https://link.zhihu.com/?target=https://github.com/iepngs/pushdeer-backend-go">Go</a> 和 <a href="https://link.zhihu.com/?target=https://github.com/xkrfer/pushdeer-node">Node</a>，因此如果你的项目是由以上几种语言编写的，那么程序端你只需要导一下热心网友的 SDK 包，然后直接调 API 往里喂参数就完事了。<em>（小声bb：也没必要这么懒吧，有导包的那会儿功夫自己都实现完了</em></p>
-<h2 id="三、实际使用效果"><a href="#三、实际使用效果" class="headerlink" title="三、实际使用效果"></a><strong>三、实际使用效果</strong></h2><p>我使用自架版，将 PushDeer 应用到了我的一个个人开源小工具「<a href="https://link.zhihu.com/?target=https://github.com/Sunwish/TraderHelper">TraderHelper</a>」上，用户只需要扫码使用 App Clip，或者下载自架版 App，绑定设备生成一下 Key，最后把 Key 填入程序中，就可以在手机上收到自己自选股设定的价格预警了。</p>
+<p>最后，如果你一点代码都懒得写的话，其实 PushDeer 已经有了一些常用语言的 SDK，包括 <a href="https://link.zhihu.com/?target=https%3A//gitee.com/mrbread/pushdeer_csharp_sdk">C#</a>、<a href="https://link.zhihu.com/?target=https%3A//gitee.com/mrbread/pushdeer-java-sdk">Java</a>、<a href="https://link.zhihu.com/?target=https%3A//github.com/gaoliang/pypushdeer">Python</a>、<a href="https://link.zhihu.com/?target=https%3A//github.com/iepngs/pushdeer-backend-go">Go</a> 和 <a href="https://link.zhihu.com/?target=https%3A//github.com/xkrfer/pushdeer-node">Node</a>，因此如果你的项目是由以上几种语言编写的，那么程序端你只需要导一下热心网友的 SDK 包，然后直接调 API 往里喂参数就完事了。<em>（小声bb：也没必要这么懒吧，有导包的那会儿功夫自己都实现完了</em></p>
+<h2 id="三、实际使用效果"><a href="#三、实际使用效果" class="headerlink" title="三、实际使用效果"></a><strong>三、实际使用效果</strong></h2><p>我使用自架版，将 PushDeer 应用到了我的一个个人开源小工具「<a href="https://link.zhihu.com/?target=https%3A//github.com/Sunwish/TraderHelper">TraderHelper</a>」上，用户只需要扫码使用 App Clip，或者下载自架版 App，绑定设备生成一下 Key，最后把 Key 填入程序中，就可以在手机上收到自己自选股设定的价格预警了。</p>
 <p>所以说，PushDeer 其实不仅仅能开发者自用（如服务器负载预警、服务器异常推送、定时任务推送等），同时开发者也可以借助 PushDeer，在不额外开发自己软件的移动端的情况下，给用户提供「通知」这一拓展服务，只不过就是需要给用户一些引导，指引其完成设备的绑定、Key 的生成，以及将 Key 提供给程序这三个步骤罢了。</p>
 <hr>
 <p>- </p>

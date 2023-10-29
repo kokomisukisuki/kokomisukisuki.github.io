@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2.6共集组态单管放大电路 | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2.6共集组态单管放大电路一，电路结构 二，静态分析 方法1:直接观察法找到给定电路的输入端和输出端，另外一个没出现的电极就是公共端。 方法2:交流通路观察法交流通路中直流电源相当于接地点，判断交流通路哪个电极是接地的,它就是公共端。  图解转换成直流通路，如图  求解Q点：$$\begin{gathered}V_{CC}&#x3D;I_{BQ}R_{b}+U_{BEQ}+I_{EQ}R_">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2.6共集组态单管放大电路 | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2.6共集组态单管放大电路一，电路结构 二，静态分析 方法1:直接观察法找到给定电路的输入端和输出端，另外一个没出现的电极就是公共端。 方法2:交流通路观察法交流通路中直流电源相当于接地点，判断交流通路哪个电极是接地的,它就是公共端。  图解转换成直流通路，如图  求解Q点：  \begin{gathered} V_{CC}&#x3D;I_{BQ}R_{b}+U_{BEQ}+I_{EQ}R_{e}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.6共集组态单管放大电路">
 <meta property="og:url" content="https://kokomisukisuki.github.io/2023/10/28/2.6%E5%85%B1%E9%9B%86%E7%BB%84%E6%80%81%E5%8D%95%E7%AE%A1%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF/index.html">
 <meta property="og:site_name" content="Hello">
-<meta property="og:description" content="2.6共集组态单管放大电路一，电路结构 二，静态分析 方法1:直接观察法找到给定电路的输入端和输出端，另外一个没出现的电极就是公共端。 方法2:交流通路观察法交流通路中直流电源相当于接地点，判断交流通路哪个电极是接地的,它就是公共端。  图解转换成直流通路，如图  求解Q点：$$\begin{gathered}V_{CC}&#x3D;I_{BQ}R_{b}+U_{BEQ}+I_{EQ}R_">
+<meta property="og:description" content="2.6共集组态单管放大电路一，电路结构 二，静态分析 方法1:直接观察法找到给定电路的输入端和输出端，另外一个没出现的电极就是公共端。 方法2:交流通路观察法交流通路中直流电源相当于接地点，判断交流通路哪个电极是接地的,它就是公共端。  图解转换成直流通路，如图  求解Q点：  \begin{gathered} V_{CC}&#x3D;I_{BQ}R_{b}+U_{BEQ}+I_{EQ}R_{e}">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHEWlv.jpg">
 <meta property="article:published_time" content="2023-10-27T16:00:00.000Z">
@@ -160,32 +160,73 @@
 
 
 
-<h3 id="2-6共集组态单管放大电路"><a href="#2-6共集组态单管放大电路" class="headerlink" title="2.6共集组态单管放大电路"></a>2.6共集组态单管放大电路</h3><h4 id="一，电路结构"><a href="#一，电路结构" class="headerlink" title="一，电路结构"></a>一，电路结构</h4><p><img src="https://vip.helloimg.com/images/2023/10/28/o93LNA.png"></p>
+<h3 id="2-6共集组态单管放大电路"><a href="#2-6共集组态单管放大电路" class="headerlink" title="2.6共集组态单管放大电路"></a>2.6共集组态单管放大电路</h3><h4 id="一，电路结构"><a href="#一，电路结构" class="headerlink" title="一，电路结构"></a>一，电路结构</h4><p><img src="https://vip.helloimg.com/images/2023/10/28/o93LNA.png" alt=""></p>
 <h4 id="二，静态分析"><a href="#二，静态分析" class="headerlink" title="二，静态分析"></a>二，静态分析</h4><ul>
 <li>方法1:直接观察法找到给定电路的输入端和输出端，另外一个没出现的电极就是公共端。</li>
 <li>方法2:交流通路观察法交流通路中直流电源相当于接地点，判断交流通路哪个电极是接地的,它就是公共端。</li>
 </ul>
 <p>图解转换成直流通路，如图</p>
-<p><img src="https://vip.helloimg.com/images/2023/10/28/o93nE0.png"></p>
-<p>求解Q点：<br>$$<br>\begin{gathered}<br>V_{CC}&#x3D;I_{BQ}R_{b}+U_{BEQ}+I_{EQ}R_{e}<br>&#x3D;I_{BQ}R_{b}+U_{BEQ}+(1+\beta)I_{BQ}R_{e} \<br>I_{BQ}&#x3D;\frac{V_{CC}-U_{BEQ}}{R_{b}+(1+\beta)R_{e}} \</p>
-<p>I_{CQ}&#x3D;\beta I_{BQ} \<br>U_{CEQ}&#x3D;V_{CC}-I_{EQ}R_{e}<br>\approx V_{cc}-I_{co}R_{e}<br>\end{gathered}<br>$$</p>
-<h4 id="三，动态分析"><a href="#三，动态分析" class="headerlink" title="三，动态分析"></a>三，动态分析</h4><ol>
+<p><img src="https://vip.helloimg.com/images/2023/10/28/o93nE0.png" alt=""></p>
+<p>求解Q点：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+V_{CC}=I_{BQ}R_{b}+U_{BEQ}+I_{EQ}R_{e}
+=I_{BQ}R_{b}+U_{BEQ}+(1+\beta)I_{BQ}R_{e} \\
+I_{BQ}=\frac{V_{CC}-U_{BEQ}}{R_{b}+(1+\beta)R_{e}} \\
+
+I_{CQ}=\beta I_{BQ} \\
+U_{CEQ}=V_{CC}-I_{EQ}R_{e} 
+\approx V_{cc}-I_{co}R_{e} 
+\end{gathered}</script><h4 id="三，动态分析"><a href="#三，动态分析" class="headerlink" title="三，动态分析"></a>三，动态分析</h4><ol>
 <li><p>画出交流通路</p>
 </li>
 <li><p>微变等效电路</p>
-<p><img src="https://vip.helloimg.com/images/2023/10/28/o932lq.png"></p>
+<p><img src="https://vip.helloimg.com/images/2023/10/28/o932lq.png" alt=""></p>
 </li>
-<li><p>$$<br>\begin{aligned}\textbf{求电压增益 }&amp;\dot{A}_u&#x3D;\frac{\dot{U}_\theta}{\dot{U}_i}\\dot{U}_1&amp;&#x3D;\dot{I}_\mathrm{b}r_\mathrm{be}+\dot{I}_e(R_e&#x2F;&#x2F;R_\mathrm{L})&#x3D;\dot{I}_\mathrm{b}r_\mathrm{be}+(1+\beta)\dot{I}_p(R_e&#x2F;&#x2F;R_\mathrm{L})\&amp;&#x3D;\dot{I}_\mathrm{b}[r_\mathrm{be}+(1+\beta)(R_\mathrm{e}&#x2F;&#x2F;R_\mathrm{L})]\\dot{U}_\mathrm{o}&amp;&#x3D;\dot{I}_s\big(R_s&#x2F;&#x2F;R_L\big)&#x3D;(\mathbf{1}+\beta)\dot{I}_\mathrm{b}(R_\mathrm{e}&#x2F;&#x2F;R_\mathrm{L})\big)\end{aligned}\</p>
-<p>\begin{aligned}<br>\dot{A}<em>{u}&#x3D;&amp; \frac{\dot{U}<em>o}{\dot{U}<em>i}  \<br>&amp;&#x3D;\frac{(1+\beta)(R_e&#x2F;&#x2F;R_L)}{r</em>{be}+(1+\beta)(R_e&#x2F;&#x2F;R_L)} \<br>&amp;\approx\frac{\beta(R</em>{\mathrm{e}}&#x2F;&#x2F;R</em>{\mathrm{L}})}{r_{\mathrm{be}}+\beta(R_{\mathrm{e}}&#x2F;&#x2F;R_{\mathrm{L}})} \<br>&amp;\approx 1(\text{但小于}{1})<br>\end{aligned}<br>$$</p>
-</li>
-<li><p>$$<br>求输入电阻<br>R_i&#x3D;\dot{U}<em>i&#x2F;\dot{I}<em>i\<br>\dot { I }</em>{i}&#x3D;\dot{I}</em>{R_{b}}+\dot{I}<em>{b}\<br>\dot{I}</em>{b}&#x3D;\dot{U}<em>i&#x2F;R_B\<br>\dot{I}</em>{\boldsymbol{b}}\boldsymbol{r}<em>{\boldsymbol{b}\boldsymbol{e}}+(1+\boldsymbol{\beta})\dot{I}</em>{\boldsymbol{b}}(\boldsymbol{R}<em>e&#x2F;&#x2F;\boldsymbol{R}<em>L)&#x3D;\dot{U}<em>i\<br>得\<br>\therefore\dot{I}<em>i&#x3D;\dot{U}<em>i\biggl[\frac{\mathbf{1}}{R_b}+\frac{\mathbf{1}}{\boldsymbol{r}</em>{be}+\bigl(\boldsymbol{1}+\boldsymbol{\beta}\bigr)\bigl(R_e&#x2F;&#x2F;R_L\bigr)}\biggr]\<br>于是有\<br>{\boldsymbol{R}}</em>{i} &#x3D;R</em>{b}&#x2F;[{\boldsymbol{r}}</em>{be}+(1+\beta)(R</em>{e}&#x2F;&#x2F;R_{L})]<br>\approx[R_{b}&#x2F;\beta(R_{e}&#x2F;&#x2F;R_{L})] \<br>R_i一般在几十k\Omega\text{左右 },该值较大,好!<br>$$</p>
-</li>
-<li><p>$$<br>\begin{aligned}<br>&amp;\text{ 求输出电阻}R_o&#x3D;\frac{U_o}{I_o}\Bigg|<em>{\overset{\dot{U}<em>S&#x3D;0}{R_L&#x3D;\infty}} \<br>&amp;\dot{U}<em>o&#x3D;-\dot{I}<em>b\left(\boldsymbol{r}</em>{be}+R_\mathrm{s}&#x2F;&#x2F;R_b\right)\<br>&amp;得\dot{I}<em>b&#x3D;-\dot{U}<em>o&#x2F;\left[\boldsymbol{r}</em>{be}+R_\mathrm{S}&#x2F;&#x2F;R_b\right] \<br>&amp;\dot{I}</em>{o}+\dot{I}</em>{e}&#x3D;\dot{I}</em>{R</em>{e}}\<br>&amp;得\dot{I}<em>{o}&#x3D;\dot{I}</em>{R_{e}}-(1+\boldsymbol{\beta})\dot{I}<em>{b} \<br>&amp;\therefore\dot{I}</em>{s}&#x3D;\dot{U}<em>{o}\Biggl[\frac{1}{R</em>{s}}+\frac{1+\boldsymbol{\beta}}{\boldsymbol{r}<em>{bs}+R</em>{s}&#x2F;&#x2F;R_{b}}\Biggr]<br>\end{aligned}</p>
-<p>\<br>\<br>\<br>\begin{aligned}</p>
-<p>&amp;R_o&#x3D;R_e&#x2F;&#x2F;\left(\frac{r_{be}+R_{s}&#x2F;&#x2F;R_{b}}{1+\beta}\right)  \<br>&amp;\approx R_{e}&#x2F;\left(\frac{r_{be}+R_{s}&#x2F;&#x2F;R_{b}}{\beta}\right) \<br>&amp;\approx\frac{|\boldsymbol{r}<em>{b\boldsymbol{e}}+\boldsymbol{R}</em>{\boldsymbol{s}}|&#x2F;\boldsymbol{R}_{\boldsymbol{b}}|}\beta<br>\end{aligned}<br>$$</p>
-</li>
+<li><script type="math/tex; mode=display">
+\begin{aligned}\textbf{求电压增益 }&\dot{A}_u=\frac{\dot{U}_\theta}{\dot{U}_i}\\\dot{U}_1&=\dot{I}_\mathrm{b}r_\mathrm{be}+\dot{I}_e(R_e//R_\mathrm{L})=\dot{I}_\mathrm{b}r_\mathrm{be}+(1+\beta)\dot{I}_p(R_e//R_\mathrm{L})\\&=\dot{I}_\mathrm{b}[r_\mathrm{be}+(1+\beta)(R_\mathrm{e}//R_\mathrm{L})]\\\dot{U}_\mathrm{o}&=\dot{I}_s\big(R_s//R_L\big)=(\mathbf{1}+\beta)\dot{I}_\mathrm{b}(R_\mathrm{e}//R_\mathrm{L})\big)\end{aligned}\\
+
+\begin{aligned}
+\dot{A}_{u}=& \frac{\dot{U}_o}{\dot{U}_i}  \\
+&=\frac{(1+\beta)(R_e//R_L)}{r_{be}+(1+\beta)(R_e//R_L)} \\
+&\approx\frac{\beta(R_{\mathrm{e}}//R_{\mathrm{L}})}{r_{\mathrm{be}}+\beta(R_{\mathrm{e}}//R_{\mathrm{L}})} \\
+&\approx 1(\text{但小于}{1})
+\end{aligned}</script></li>
+</ol>
+<ol>
+<li><script type="math/tex; mode=display">
+求输入电阻
+R_i=\dot{U}_i/\dot{I}_i\\
+\dot { I }_{i}=\dot{I}_{R_{b}}+\dot{I}_{b}\\
+\dot{I}_{b}=\dot{U}_i/R_B\\
+\dot{I}_{\boldsymbol{b}}\boldsymbol{r}_{\boldsymbol{b}\boldsymbol{e}}+(1+\boldsymbol{\beta})\dot{I}_{\boldsymbol{b}}(\boldsymbol{R}_e//\boldsymbol{R}_L)=\dot{U}_i\\
+得\\
+\therefore\dot{I}_i=\dot{U}_i\biggl[\frac{\mathbf{1}}{R_b}+\frac{\mathbf{1}}{\boldsymbol{r}_{be}+\bigl(\boldsymbol{1}+\boldsymbol{\beta}\bigr)\bigl(R_e//R_L\bigr)}\biggr]\\
+于是有\\
+{\boldsymbol{R}}_{i} =R_{b}/[{\boldsymbol{r}}_{be}+(1+\beta)(R_{e}//R_{L})]
+\approx[R_{b}/\beta(R_{e}//R_{L})] \\
+R_i一般在几十k\Omega\text{左右 },该值较大,好!</script></li>
+<li><script type="math/tex; mode=display">
+\begin{aligned}
+&\text{ 求输出电阻}R_o=\frac{U_o}{I_o}\Bigg|_{\overset{\dot{U}_S=0}{R_L=\infty}} \\
+&\dot{U}_o=-\dot{I}_b\left(\boldsymbol{r}_{be}+R_\mathrm{s}//R_b\right)\\
+&得\dot{I}_b=-\dot{U}_o/\left[\boldsymbol{r}_{be}+R_\mathrm{S}//R_b\right] \\
+&\dot{I}_{o}+\dot{I}_{e}=\dot{I}_{R_{e}}\\
+&得\dot{I}_{o}=\dot{I}_{R_{e}}-(1+\boldsymbol{\beta})\dot{I}_{b} \\
+&\therefore\dot{I}_{s}=\dot{U}_{o}\Biggl[\frac{1}{R_{s}}+\frac{1+\boldsymbol{\beta}}{\boldsymbol{r}_{bs}+R_{s}//R_{b}}\Biggr]
+\end{aligned}
+
+\\
+\\
+\\
+\begin{aligned}
+
+&R_o=R_e//\left(\frac{r_{be}+R_{s}//R_{b}}{1+\beta}\right)  \\
+&\approx R_{e}/\left(\frac{r_{be}+R_{s}//R_{b}}{\beta}\right) \\
+&\approx\frac{|\boldsymbol{r}_{b\boldsymbol{e}}+\boldsymbol{R}_{\boldsymbol{s}}|/\boldsymbol{R}_{\boldsymbol{b}}|}\beta
+\end{aligned}</script></li>
 <li><p>特性：</p>
-<p><img src="https://vip.helloimg.com/images/2023/10/28/o93OL1.png"></p>
+<p><img src="https://vip.helloimg.com/images/2023/10/28/o93OL1.png" alt=""></p>
 </li>
 </ol>
 <p>s</p>

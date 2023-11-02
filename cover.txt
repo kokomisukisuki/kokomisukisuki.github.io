@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-10-04 13:16:14
  * @LastEditors: kokomisukisuki 3230267087@qq.com
- * @LastEditTime: 2023-10-25 21:42:55
+ * @LastEditTime: 2023-11-02 22:07:02
  * @FilePath: \hexo\source\cover.txt
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -158,9 +158,9 @@ algolia使用手册[![oH36e1.jpg](https://www.helloimg.com/images/2023/10/03/oH3
 复活[![oH1xER.jpg](https://www.helloimg.com/images/2023/10/03/oH1xER.jpg)](https://www.helloimg.com/image/oH1xER)
 【鲸博】超越永恒的爱情之死[![oH15hu.jpg](https://www.helloimg.com/images/2023/10/03/oH15hu.jpg)](https://www.helloimg.com/image/oH15hu)
  玉签报明[![oHau4Q.jpg](https://www.helloimg.com/images/2023/10/03/oHau4Q.jpg)](https://www.helloimg.com/image/oHau4Q)
-[![oHajGC.jpg](https://www.helloimg.com/images/2023/10/03/oHajGC.jpg)](https://www.helloimg.com/image/oHajGC)
-[![oHaVao.jpg](https://www.helloimg.com/images/2023/10/03/oHaVao.jpg)](https://www.helloimg.com/image/oHaVao)
-[![oHagWK.jpg](https://www.helloimg.com/images/2023/10/03/oHagWK.jpg)](https://www.helloimg.com/image/oHagWK)
-[![oHa8hT.jpg](https://www.helloimg.com/images/2023/10/03/oHa8hT.jpg)](https://www.helloimg.com/image/oHa8hT)
+selenium学习[![oHajGC.jpg](https://www.helloimg.com/images/2023/10/03/oHajGC.jpg)](https://www.helloimg.com/image/oHajGC)
+Windows桌面程序自动化控制uiautomation库解析[![oHaVao.jpg](https://www.helloimg.com/images/2023/10/03/oHaVao.jpg)](https://www.helloimg.com/image/oHaVao)
+cnocr库[![oHagWK.jpg](https://www.helloimg.com/images/2023/10/03/oHagWK.jpg)](https://www.helloimg.com/image/oHagWK)
+荨麻与骨头（nettle&bone）[![oHa8hT.jpg](https://www.helloimg.com/images/2023/10/03/oHa8hT.jpg)](https://www.helloimg.com/image/oHa8hT)
 [![oHaI4q.jpg](https://www.helloimg.com/images/2023/10/03/oHaI4q.jpg)](https://www.helloimg.com/image/oHaI4q)
 [![oHaDCc.jpg](https://www.helloimg.com/images/2023/10/03/oHaDCc.jpg)](https://www.helloimg.com/image/oHaDCc)

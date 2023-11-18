@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-10-04 13:14:33
  * @LastEditors: kokomisukisuki 3230267087@qq.com
- * @LastEditTime: 2023-10-28 13:31:35
+ * @LastEditTime: 2023-11-18 09:22:05
  * @FilePath: \hexo\source\顶端图top.txt
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -164,11 +164,11 @@ cnocr库[![oHERkn.jpg](https://www.helloimg.com/images/2023/10/03/oHERkn.jpg)](h
 荨麻与骨头（nettle&bone）[![oHEG96.jpg](https://www.helloimg.com/images/2023/10/03/oHEG96.jpg)](https://www.helloimg.com/image/oHEG96)
 blender初学问题[![oHECEP.jpg](https://www.helloimg.com/images/2023/10/03/oHECEP.jpg)](https://www.helloimg.com/image/oHECEP)
 blender快捷键[![oHE5jM.jpg](https://www.helloimg.com/images/2023/10/03/oHE5jM.jpg)](https://www.helloimg.com/image/oHE5jM)
-[![oHxuAX.jpg](https://www.helloimg.com/images/2023/10/03/oHxuAX.jpg)](https://www.helloimg.com/image/oHxuAX)
-[![oHxjG9.jpg](https://www.helloimg.com/images/2023/10/03/oHxjG9.jpg)](https://www.helloimg.com/image/oHxjG9)
-[![oHxfDY.jpg](https://www.helloimg.com/images/2023/10/03/oHxfDY.jpg)](https://www.helloimg.com/image/oHxfDY)
-[![oHxYbE.jpg](https://www.helloimg.com/images/2023/10/03/oHxYbE.jpg)](https://www.helloimg.com/image/oHxYbE)
-[![oHx2D5.jpg](https://www.helloimg.com/images/2023/10/03/oHx2D5.jpg)](https://www.helloimg.com/image/oHx2D5)
+transformer[![oHxuAX.jpg](https://www.helloimg.com/images/2023/10/03/oHxuAX.jpg)](https://www.helloimg.com/image/oHxuAX)
+Blender插件[![oHxjG9.jpg](https://www.helloimg.com/images/2023/10/03/oHxjG9.jpg)](https://www.helloimg.com/image/oHxjG9)
+生成对抗网络（GAN）[![oHxfDY.jpg](https://www.helloimg.com/images/2023/10/03/oHxfDY.jpg)](https://www.helloimg.com/image/oHxfDY)
+马尔可夫[![oHxYbE.jpg](https://www.helloimg.com/images/2023/10/03/oHxYbE.jpg)](https://www.helloimg.com/image/oHxYbE)
+DDPM扩散模型（stable diffusion）[![oHx2D5.jpg](https://www.helloimg.com/images/2023/10/03/oHx2D5.jpg)](https://www.helloimg.com/image/oHx2D5)
 [![oHxMHA.jpg](https://www.helloimg.com/images/2023/10/03/oHxMHA.jpg)](https://www.helloimg.com/image/oHxMHA)
 [![oHxlPz.jpg](https://www.helloimg.com/images/2023/10/03/oHxlPz.jpg)](https://www.helloimg.com/image/oHxlPz)
 [![oHxm79.jpg](https://www.helloimg.com/images/2023/10/03/oHxm79.jpg)](https://www.helloimg.com/image/oHxm79)

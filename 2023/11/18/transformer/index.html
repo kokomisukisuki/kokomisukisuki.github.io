@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>transformer | Hello</title><meta name="author" content="sagonimikakokomi"><meta name="copyright" content="sagonimikakokomi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="transformer主要内容转自The Illustrated Transformer – Jay Alammar – Visualizing machine learning one concept at a time 简易模型首先，让我们将模型视为一个黑匣子。在机器翻译应用程序中，它将采用一种语言的句子，然后输出另一种语言的翻译。  在黑匣子当中则是：  编码组件是一堆编码器（en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="transformer">
+<meta property="og:url" content="https://kokomisukisuki.github.io/2023/11/18/transformer/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="transformer主要内容转自The Illustrated Transformer – Jay Alammar – Visualizing machine learning one concept at a time 简易模型首先，让我们将模型视为一个黑匣子。在机器翻译应用程序中，它将采用一种语言的句子，然后输出另一种语言的翻译。  在黑匣子当中则是：  编码组件是一堆编码器（en">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.helloimg.com/images/2023/10/03/oHX5TE.jpg">
+<meta property="article:published_time" content="2023-11-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-18T01:24:40.111Z">
+<meta property="article:author" content="sagonimikakokomi">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2023/10/03/oHX5TE.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://kokomisukisuki.github.io/2023/11/18/transformer/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"UNK1PFAIM3","apiKey":"82e2706c98842df0554f4f4c562132c7","indexName":"kokomisuki","hits":{"per_page":20},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: sagonimikakokomi","link":"链接: ","source":"来源: Hello","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'transformer',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-18 09:24:40'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/color.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/css/diy.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.css"/><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ooo.0x0.ooo/2023/10/02/OnIWmL.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/images/2023/10/03/oHxuAX.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hello"><span class="site-name">Hello</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">transformer</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-17T16:00:00.000Z" title="发表于 2023-11-18 00:00:00">2023-11-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-18T01:24:40.111Z" title="更新于 2023-11-18 09:24:40">2023-11-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><meta name="referrer" content="no-referrer"/>
+
+
+
+
+<h1 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h1><p>主要内容转自<a target="_blank" rel="noopener" href="http://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer – Jay Alammar – Visualizing machine learning one concept at a time</a></p>
+<h2 id="简易模型"><a href="#简易模型" class="headerlink" title="简易模型"></a>简易模型</h2><p>首先，让我们将模型视为一个黑匣子。在机器翻译应用程序中，它将采用一种语言的句子，然后输出另一种语言的翻译。</p>
+<p><img src="http://jalammar.github.io/images/t/the_transformer_3.png" alt="img"></p>
+<p>在黑匣子当中则是：</p>
+<p><img src="http://jalammar.github.io/images/t/The_transformer_encoder_decoder_stack.png" alt="img"></p>
+<p>编码组件是一堆编码器（encoder）（论文把其中6个编码器叠在一起——数字6没有什么神奇之处，人们肯定可以尝试其他排列）。解码（decoder）器是具有相同数量的解码器的堆栈。</p>
+<p>编码器在结构上都是相同的（但它们不共享重量）。每个子层都分为<strong>两个子层</strong>：</p>
+<p><img src="http://jalammar.github.io/images/t/Transformer_encoder.png" alt="img"></p>
+<p>编码器的输入首先流经一个<strong>自注意层（self-attention）</strong>，该层可帮助编码器在对特定单词进行编码时查看输入句子中的其他单词。我们将在帖子的后面仔细研究自注意。</p>
+<p>自注意层的输出被馈送到前馈神经网络（feed-forward neural network）。完全相同的前馈网络独立应用于每个位置。解码器具有这两层，<strong>但它们之间有一个注意力层</strong>（attention），可帮助解码器专注于输入句子的相关部分。</p>
+<p><img src="http://jalammar.github.io/images/t/Transformer_decoder.png" alt="img"></p>
+<h2 id="原理张量"><a href="#原理张量" class="headerlink" title="原理张量"></a>原理张量</h2><p>现在我们已经了解了模型的主要组件，让我们开始看看各种向量/张量，以及它们如何在这些组件之间流动，以将训练模型的输入转换为输出。</p>
+<p>与一般的 NLP 应用程序一样，我们首先使用 <a target="_blank" rel="noopener" href="https://medium.com/deeper-learning/glossary-of-deep-learning-word-embedding-f90c3cec34ca">embedding algorithm</a>将每个输入词转换为向量。</p>
+<p><img src="http://jalammar.github.io/images/t/embeddings.png" alt="img"><br><em>每个单词都嵌入到大小为 512 的向量中。我们将用这些简单的框来表示这些向量。</em></p>
+<p>嵌入仅发生在最底部的编码器中。所有编码器共有的是，它们接收一个向量列表，每个向量的大小为 512 – 在底部编码器中，这将是单词嵌入，但在其他编码器中，它将是编码器的输出，直接在下方。这个列表的大小是我们可以设置的超参数——基本上它是我们训练数据集中最长句子的长度。</p>
+<p>将单词嵌入到输入序列中后，每个单词都会流经编码器的两层中的每一层。</p>
+<p><img src="http://jalammar.github.io/images/t/encoder_with_tensors.png" alt="img"></p>
+<p>在这里，我们开始看到 Transformer 的一个关键属性，即每个位置的单词在编码器中流经自己的路径。在自注意层中，这些路径之间存在依赖关系。但是，前馈层没有这些依赖关系，因此在流经前馈层时可以并行执行各种路径。</p>
+<p>接下来，我们将示例切换为一个较短的句子，我们将查看编码器的每个子层中发生的情况。</p>
+<h2 id="进入编码"><a href="#进入编码" class="headerlink" title="进入编码"></a>进入编码</h2><p>正如我们已经提到的，编码器接收一个向量列表作为输入。它通过将这些向量传递到“自注意”层，然后传递到前馈神经网络，然后将输出向上发送到下一个编码器来处理此列表。</p>
+<p><img src="http://jalammar.github.io/images/t/encoder_with_tensors_2.png" alt="img"><br><em>每个位置的单词都经过一个自注意的过程。然后，它们各自通过一个前馈神经网络 - 完全相同的网络，每个向量分别流过它。</em></p>
+<h2 id="高水平自注意"><a href="#高水平自注意" class="headerlink" title="高水平自注意"></a>高水平自注意</h2><p>假设以下句子是我们要翻译的输入句：</p>
+<p><code>The animal didn&#39;t cross the street because it was too tired</code></p>
+<p>这句话中的“it”指的是什么？它指的是街道还是动物？这对人类来说是一个简单的问题，但对算法来说却不那么简单。</p>
+<p>当模型处理单词“它”时，自注意允许它将“它”与“动物”联系起来。</p>
+<p>当模型处理每个单词（输入序列中的每个位置）时，自注意允许它查看输入序列中的其他位置，以寻找有助于为该单词提供更好编码的线索。</p>
+<p>如果您熟悉 RNN，请考虑如何保持隐藏状态允许 RNN 将其先前处理的单词/向量的表示与当前正在处理的单词/向量的表示合并。自注意是 Transformer 用来将对其他相关单词的“理解”烘焙到我们当前正在处理的单词中的方法。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_self-attention_visualization.png" alt="img"><br><em>当我们在编码器 #5（堆栈中的顶部编码器）中对单词“it”进行编码时，部分注意力机制集中在“The Animal”上，并将其部分表示烘焙到“it”的编码中。</em></p>
+<h2 id="自注意的细节"><a href="#自注意的细节" class="headerlink" title="自注意的细节"></a>自注意的细节</h2><p>让我们首先看看如何使用向量计算自注意，然后继续看看它实际上是如何实现的——使用矩阵。</p>
+<p>计算自注意<strong>的第一步</strong>是从编码器的每个输入向量（在本例中为每个单词的嵌入）创建三个向量。因此，对于每个单词，我们创建一个查询向量（query简称Q）、一个键向量（key简称K）和一个值向量（value简称V）。<strong>这些向量是通过将嵌入乘以我们在训练过程中训练的三个矩阵来创建的。</strong></p>
+<p>请注意，<strong>这些新向量的维度比嵌入向量小</strong>。它们的维数为 64，而嵌入和编码器输入/输出向量的维数为 512。它们不必更小，这是一种架构选择，可以使多注意（multiheaded attention）的计算（大部分）恒定。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_self_attention_vectors.png" alt="img"><br>将 x1 乘以 WQ 权重矩阵可得到 q1，即与该单词关联的“查询”向量。我们最终为输入句子中的每个单词创建“查询”、“键”和“值”投影。</p>
+<p>什么是“查询”、“键”和“值”向量？</p>
+<p>它们是用于计算和思考注意力的抽象概念。一旦你继续阅读下面如何计算注意力，你就会知道你需要知道的关于这些向量中的每一个所扮演的角色。</p>
+<p>计算自注意<strong>的第二步</strong>是计算分数。假设我们正在计算这个例子中第一个词“思考”的自注意。我们需要根据这个单词对输入句子的每个单词进行评分。分数决定了当我们在某个位置对单词进行编码时，对输入句子的其他部分的关注程度。</p>
+<p>通过取查询向量与我们正在评分的各个单词的关键向量的点积来计算分数。因此，如果我们处理位置 #1 中单词的自注意，第一个分数将是 q1 和 k1 的点积。第二个分数是 q1 和 k2 的点积。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_self_attention_score.png" alt="img"></p>
+<p><strong>第三步和第四步</strong>是将分数除以 8（论文中使用的关键向量维度的平方根 –64。这导致梯度更稳定。此处可能有其他可能的值，但这是默认值），然后通过 softmax 操作传递结果。Softmax 对分数进行归一化，使它们都是正数，加起来等于 1。</p>
+<p><img src="http://jalammar.github.io/images/t/self-attention_softmax.png" alt="img"></p>
+<p>这个 softmax 分数决定了每个单词在此位置的表达量。显然，这个位置的单词将具有最高的softmax分数，但有时关注与当前单词相关的另一个单词是有用的。</p>
+<p><strong>第五步</strong>是将每个值向量乘以 softmax 分数（准备对它们求和）。这里的直觉是保持我们想要关注的单词的值不变，并淹没不相关的单词（例如，将它们乘以 0.001 等微小数字）。</p>
+<p><strong>第六步</strong>是求和加权值向量。这在这个位置（对于第一个单词）产生自注意层的输出。</p>
+<p><img src="http://jalammar.github.io/images/t/self-attention-output.png" alt="img"></p>
+<p>自注意计算到此结束。生成的向量是我们可以发送到前馈神经网络的向量。然而，在实际实现中，这种计算是以矩阵形式完成的，以便更快地处理。因此，现在我们已经看到了单词级别计算的直觉，让我们看看这一点。</p>
+<h2 id="自注意矩阵计算"><a href="#自注意矩阵计算" class="headerlink" title="自注意矩阵计算"></a>自注意矩阵计算</h2><p><strong>第一步</strong>是计算 Query、Key 和 Value 矩阵。为此，我们将嵌入打包到矩阵 X 中，并将其乘以我们训练的权重矩阵（WQ、WK、WV）。</p>
+<p><img src="http://jalammar.github.io/images/t/self-attention-matrix-calculation.png" alt="img"><br><em>X 矩阵中的每一行都对应于输入句子中的一个单词。我们再次看到嵌入向量（图中的 512 个或 4 个框）和 q/k/v 向量（图中的 64 个或 3 个框）的大小差异</em></p>
+<p><strong>最后</strong>，由于我们处理的是矩阵，我们可以将步骤二到六浓缩在一个公式中，以计算自注意层的输出。</p>
+<p><img src="http://jalammar.github.io/images/t/self-attention-matrix-calculation-2.png" alt="img"></p>
+<h2 id="长着许多头的野兽"><a href="#长着许多头的野兽" class="headerlink" title="长着许多头的野兽"></a>长着许多头的野兽</h2><p>该论文通过添加一种称为“多头”注意力的机制进一步完善了自注意层。这可以通过两种方式提高注意力层的性能：</p>
+<ol>
+<li>它扩展了模型聚焦于不同位置的能力。是的，在上面的例子中，z1 包含了一点点其他编码，但它可能由实际的单词本身主导。如果我们翻译一个句子，比如“动物没有过马路，因为它太累了”，知道“它”指的是哪个词会很有用。</li>
+<li>它为注意力层提供了多个“表示子空间”。正如我们接下来将看到的，对于多头注意力，我们不仅有一组，而且有多组查询/键/值权重矩阵（Transformer 使用 8 个注意力头，因此我们最终为每个编码器/解码器提供 8 组注意力）。这些集合中的每一个都是随机初始化的。然后，在训练后，每个集合用于将输入嵌入（或来自较低编码器/解码器的向量）投影到不同的表示子空间中。</li>
+</ol>
+<p><img src="http://jalammar.github.io/images/t/transformer_attention_heads_qkv.png" alt="img"><br><em>通过多头注意力，我们为每个头维护单独的 Q/K/V 权重矩阵，从而产生不同的 Q/K/V 矩阵。和之前一样，我们将 X 乘以 WQ/WK/WV 矩阵以生成 Q/K/V 矩阵。</em></p>
+<p>如果我们进行与上面概述的相同的自注意计算，只需使用不同的权重矩阵进行八次不同的计算，我们最终会得到八个不同的 Z 矩阵</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_attention_heads_z.png" alt="img"></p>
+<p>这给我们带来了一些挑战。前馈层不需要八个矩阵，而是需要一个矩阵（每个单词一个向量）。因此，我们需要一种方法将这八个浓缩成一个矩阵。</p>
+<p>我们是怎么做到的？我们将矩阵连接起来，然后将它们乘以附加的权重矩阵 WO。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_attention_heads_weight_matrix_o.png" alt="img"></p>
+<p>这几乎就是多头自注意的全部内容。我意识到，这是相当多的矩阵。让我试着把它们都放在一个视觉对象中，这样我们就可以在一个地方看到它们</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_multi-headed_self-attention-recap.png" alt="img"></p>
+<p>现在我们已经触及了注意力头，让我们回顾一下之前的例子，看看当我们在例句中编码单词“it”时，不同的注意力头聚焦在哪里：</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_self-attention_visualization_2.png" alt="img"><br>当我们对“它”这个词进行编码时，一个注意力集中在“动物”上，而另一个注意力则集中在“累了”上——从某种意义上说，模型对“it”这个词的表示与“动物”和“累了的”的一些表示差不多。</p>
+<p>然而，如果我们把所有的注意力头都加到图片上，事情可能会更难解释：</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_self-attention_visualization_3.png" alt="img"></p>
+<h2 id="使用位置编码表示序列的顺序"><a href="#使用位置编码表示序列的顺序" class="headerlink" title="使用位置编码表示序列的顺序"></a>使用位置编码表示序列的顺序</h2><p>正如我们到目前为止所描述的那样，模型中缺少的一件事是解释输入序列中单词顺序的方法。</p>
+<p>为了解决这个问题，转换器在每个输入嵌入中添加一个向量。这些向量遵循模型学习的特定模式，这有助于它确定每个单词的位置，或序列中不同单词之间的距离。这里的直觉是，将这些值添加到嵌入中，一旦嵌入向量被投影到 Q/K/V 向量中，并且在点积注意力期间，它们之间就会提供有意义的距离。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_positional_encoding_vectors.png" alt="img"><br>为了让模型了解单词的顺序，我们添加了位置编码向量——其值遵循特定的模式。</p>
+<p>如果我们假设嵌入的维数为 4，则实际的位置编码将如下所示：</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_positional_encoding_example.png" alt="img"></p>
+<p>这种模式可能是什么样子的？</p>
+<p>在下图中，每一行对应一个向量的位置编码。因此，第一行是我们添加到输入序列中第一个单词嵌入的向量。每行包含 512 个值，每个值的值介于 1 和 -1 之间。我们对它们进行了颜色编码，因此图案是可见的。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_positional_encoding_large_example.png" alt="img"><br><em>嵌入大小为 512（列）的 20 个单词（行）的位置编码的真实示例。你可以看到它从中心分成两半。这是因为左半部分的值是由一个函数（使用正弦）生成的，而右半部分的值是由另一个函数（使用余弦）生成的。然后将它们连接起来形成每个位置编码向量。</em></p>
+<p>本文（第 3.5 节）描述了位置编码的公式。您可以在 <a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py"><code>get_timing_signal_1d（）</code></a> 中看到用于生成位置编码的代码。这不是唯一可能的位置编码方法。然而，它的优势在于能够扩展到看不见的序列长度（例如，如果我们的训练模型被要求翻译一个句子比我们训练集中的任何一个句子都长）。</p>
+<p><strong>2020年7月更新：</strong>上面显示的位置编码来自 Transformer 的 Tensor2Tensor 实现。论文中展示的方法略有不同，因为它不直接连接，而是将两个信号交织在一起。下图显示了它的外观。<a target="_blank" rel="noopener" href="https://github.com/jalammar/jalammar.github.io/blob/master/notebookes/transformer/transformer_positional_encoding_graph.ipynb">下面是生成它的代码</a>：</p>
+<p><img src="http://jalammar.github.io/images/t/attention-is-all-you-need-positional-encoding.png" alt="img"></p>
+<h2 id="残差"><a href="#残差" class="headerlink" title="残差"></a>残差</h2><p>在继续之前，我们需要在编码器架构中提到一个细节，即每个编码器中的每个子层（自注意，ffnn）都有一个残余连接，然后是<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1607.06450">层归一化</a>步骤。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm.png" alt="img"></p>
+<p>如果我们要可视化与自注意相关的向量和层范数操作，它看起来像这样：</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_2.png" alt="img"></p>
+<p>这也适用于解码器的子层。如果我们考虑一个由 2 个堆叠编码器和解码器组成的 Transformer，它看起来像这样：</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png" alt="img"></p>
+<h2 id="解码器端"><a href="#解码器端" class="headerlink" title="解码器端"></a>解码器端</h2><p>现在我们已经介绍了编码器方面的大多数概念，我们基本上也知道了解码器组件的工作原理。但是，让我们来看看它们是如何协同工作的。</p>
+<p>编码器首先处理输入序列。然后，顶部编码器的输出被转换为一组注意力向量 K 和 V。每个解码器在其“编码器-解码器注意”层中使用这些，这有助于解码器专注于输入序列中的适当位置：</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_decoding_1.gif" alt="img"><br>完成编码阶段后，我们开始解码阶段。解码阶段的每个步骤都会从输出序列中输出一个元素（在本例中为英文翻译句子）。</p>
+<p>以下步骤重复该过程，直到到达一个特殊符号，指示转换器解码器已完成其输出。每个步骤的输出在下一个时间步中被馈送到底部解码器，解码器像编码器一样冒出它们的解码结果。就像我们对编码器输入所做的那样，我们在这些解码器输入中嵌入并添加位置编码，以指示每个单词的位置。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_decoding_2.gif" alt="img"></p>
+<p>解码器中的自注意层的运行方式与编码器中的自注意层略有不同：</p>
+<p>在解码器中，只允许自注意层处理输出序列中较早的位置。这是通过在自注意计算中的softmax步骤之前屏蔽未来位置（将它们设置为-inf）来完成的。</p>
+<p>“编码器-解码器注意力”层的工作方式与多头自注意类似，不同之处在于它从其下方的层创建其查询矩阵，并从编码器堆栈的输出中获取键和值矩阵。</p>
+<h2 id="最终的线性层和-Softmax-层"><a href="#最终的线性层和-Softmax-层" class="headerlink" title="最终的线性层和 Softmax 层"></a>最终的线性层和 Softmax 层</h2><p>解码器堆栈输出浮点数向量。我们如何把它变成一个词？这是最后一个线性层的工作，然后是 Softmax 层。</p>
+<p>线性层是一个简单的全连接神经网络，它将解码器堆栈产生的向量投射到一个更大的向量中，称为对数向量。</p>
+<p>假设我们的模型知道 10,000 个独特的英语单词（我们模型的“输出词汇表”），这些单词是从其训练数据集中学习到的。这将使 logits 向量有 10,000 个单元格宽——每个单元格对应一个唯一单词的分数。这就是我们如何解释模型的输出，然后是线性层。</p>
+<p>然后，softmax 层将这些分数转换为概率（全部为正数，加起来为 1.0）。选择概率最高的单元格，并生成与其关联的单词作为此时间步的输出。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="img"><br>该图从底部开始，将向量作为解码器堆栈的输出生成。然后将其转换为输出词。</p>
+<h2 id="训练回顾"><a href="#训练回顾" class="headerlink" title="训练回顾"></a>训练回顾</h2><p>现在我们已经通过一个经过训练的 Transformer 介绍了整个前向传递过程，那么看一眼训练模型的直觉会很有用。</p>
+<p>在训练期间，未经训练的模型将经历完全相同的前向传递。但是，由于我们在标记的训练数据集上训练它，因此我们可以将其输出与实际正确的输出进行比较。</p>
+<p>为了形象化这一点，我们假设我们的输出词汇表只包含六个单词（“a”、“am”、“i”、“thanks”、“student”和“<eos>”（“句子结尾”的缩写））。</p>
+<p><img src="http://jalammar.github.io/images/t/vocabulary.png" alt="img"><br>我们模型的输出词汇表是在我们开始训练之前的预处理阶段创建的。</p>
+<p>一旦我们定义了输出词汇表，我们就可以使用相同宽度的向量来指示词汇表中的每个单词。这也称为独热编码。因此，例如，我们可以使用以下向量来表示单词“am”：</p>
+<p><img src="http://jalammar.github.io/images/t/one-hot-vocabulary-example.png" alt="img"><br>示例：输出词汇表的独热编码</p>
+<p>在此回顾之后，让我们讨论模型的损失函数——我们在训练阶段优化的指标，以产生一个经过训练且希望非常准确的模型。</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>假设我们正在训练我们的模型。假设这是我们在训练阶段的第一步，我们正在用一个简单的例子来训练它——将“merci（法语的感谢）”翻译成“thanks”。</p>
+<p>这意味着，我们希望输出是一个概率分布，指示“thanks”这个词。但由于这个模型还没有被训练，这还不太可能发生。</p>
+<p><img src="http://jalammar.github.io/images/t/transformer_logits_output_and_label.png" alt="img"><br>由于模型的参数（权重）都是随机初始化的，因此（未经训练的）模型会为每个单元格/单词生成具有任意值的概率分布。我们可以将其与实际输出进行比较，然后使用反向传播调整模型的所有权重，使输出更接近所需的输出。</p>
+<p>如何比较两种概率分布？我们只是从另一个中减去一个。有关更多详细信息，请查看<a target="_blank" rel="noopener" href="https://colah.github.io/posts/2015-09-Visual-Information/">交叉熵</a>和 <a target="_blank" rel="noopener" href="https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained">Kullback-Leibler 散度</a>。</p>
+<p>但请注意，这是一个过于简化的示例。更现实地说，我们将使用一个比一个单词更长的句子。例如，输入：“je suis étudiant”和预期输出：“i am a student”。这真正意味着，我们希望我们的模型连续输出概率分布，其中：</p>
+<ul>
+<li>每个概率分布都由宽度为 vocab_size 的向量表示（在我们的玩具示例中为 6，但更实际地说是 30,000 或 50,000 这样的数字）</li>
+<li>第一个概率分布在与单词“i”关联的单元格中具有最高概率</li>
+<li>第二个概率分布在与单词“am”关联的单元格中具有最高概率</li>
+<li>依此类推，直到第五个输出分布指示 ‘’ 符号，该符号也有一个来自 10,000 个元素词汇表的单元格与之关联。<code>&lt;end of sentence&gt;</code></li>
+</ul>
+<p><img src="http://jalammar.github.io/images/t/output_target_probability_distributions.png" alt="img"><br>我们将针对一个示例句子的训练示例中训练模型的目标概率分布。</p>
+<p>在足够大的数据集上训练模型足够长的时间后，我们希望生成的概率分布如下所示：</p>
+<p><img src="http://jalammar.github.io/images/t/output_trained_model_probability_distributions.png" alt="img"><br>希望在训练时，该模型将输出我们期望的正确翻译。当然，这并不是真正表明这句话是否是训练数据集的一部分（参见：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TIgfjmp-4BA">交叉验证</a>）。请注意，每个位置都会获得一点概率，即使它不太可能是该时间步的输出——这是 softmax 的一个非常有用的属性，有助于训练过程。</p>
+<p>现在，由于模型一次生成一个输出，我们可以假设模型从该概率分布中选择概率最高的单词，并丢弃其余的单词。这是一种方法（称为贪婪解码）。另一种方法是保留前两个单词（例如，“I”和“a”），然后在下一步中运行模型两次：一次假设第一个输出位置是单词“I”，另一个假设第一个输出位置是单词“a”，并且考虑到位置 #1 和 #2 产生的误差较小，将保留。我们对位置 #2 和 #3 重复此操作……等。这种方法称为“光束搜索”，在我们的示例中，beam_size是两个（这意味着在任何时候，两个部分假设（未完成的翻译）都保存在内存中），top_beams也是两个（意味着我们将返回两个翻译）。这些都是可以试验的超参数。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io">sagonimikakokomi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://kokomisukisuki.github.io/2023/11/18/transformer/">https://kokomisukisuki.github.io/2023/11/18/transformer/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://kokomisukisuki.github.io" target="_blank">Hello</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://www.helloimg.com/images/2023/10/03/oHX5TE.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/11/18/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%EF%BC%88stable%20diffusion%EF%BC%89/" title="DDPM扩散模型（stable diffusion）"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJc2r.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DDPM扩散模型（stable diffusion）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/11/18/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%EF%BC%88stable%20diffusion%EF%BC%89/" title="DDPM扩散模型（stable diffusion）"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oHJc2r.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-18</div><div class="title">DDPM扩散模型（stable diffusion）</div></div></a></div><div><a href="/2023/11/18/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%EF%BC%88GAN%EF%BC%89/" title="生成对抗网络（GAN）"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oH3BLh.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-18</div><div class="title">生成对抗网络（GAN）</div></div></a></div><div><a href="/2023/11/18/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB/" title="马尔可夫"><img class="cover" src="https://www.helloimg.com/images/2023/10/03/oH3yev.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-18</div><div class="title">马尔可夫</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#transformer"><span class="toc-text">transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E6%98%93%E6%A8%A1%E5%9E%8B"><span class="toc-text">简易模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%BC%A0%E9%87%8F"><span class="toc-text">原理张量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E7%BC%96%E7%A0%81"><span class="toc-text">进入编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%B0%B4%E5%B9%B3%E8%87%AA%E6%B3%A8%E6%84%8F"><span class="toc-text">高水平自注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-text">自注意的细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97"><span class="toc-text">自注意矩阵计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E7%9D%80%E8%AE%B8%E5%A4%9A%E5%A4%B4%E7%9A%84%E9%87%8E%E5%85%BD"><span class="toc-text">长着许多头的野兽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E8%A1%A8%E7%A4%BA%E5%BA%8F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="toc-text">使用位置编码表示序列的顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%8B%E5%B7%AE"><span class="toc-text">残差</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E7%A0%81%E5%99%A8%E7%AB%AF"><span class="toc-text">解码器端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E7%BA%BF%E6%80%A7%E5%B1%82%E5%92%8C-Softmax-%E5%B1%82"><span class="toc-text">最终的线性层和 Softmax 层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E5%9B%9E%E9%A1%BE"><span class="toc-text">训练回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By sagonimikakokomi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script async defer src='/js/diy.js'></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
